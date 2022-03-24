@@ -1,0 +1,1 @@
+// This script file will be used to operate index.html.
