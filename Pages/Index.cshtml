@@ -4,7 +4,108 @@
     ViewData["Title"] = "Login";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html>
+   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href = "stylesheet.css">
+        
+   </head>
+        <body>
+            
+            <div class="grid-container">
+                <header class="header">
+                    <div class="header__search">Search...</div>
+                    <div class="header__avatar">Your face</div>
+                </header>
+                
+                <div class="sidenav">
+                    <div class="sidenav a">
+                        <h2> MFA H </h2>
+                    </div>
+                    <div><button class="dropdown-btn"> <a href="index.html">Homepage</a> </button></div>
+                    <button class="dropdown-btn">Collections 
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-container">
+                        <a href="collectionsAdd.html">Add a piece</a>
+                        <a href="#">Edit a piece</a>
+                        <a href="#">Remove a piece</a>
+                        <a href="#">Find a piece</a>
+                    </div>
+                    <button class="dropdown-btn">Exhibitions 
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-container">
+                        <a href="#">Add an Exhibition</a>
+                        <a href="#">Edit an Exhhibtion</a>
+                        <a href="#">Remove an Exhibition</a>
+                        <a href="#">Find an Exhibition</a>
+                    </div>
+                    <button class="dropdown-btn">GiftShop 
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-container">
+                        <a href="#">Add a Giftshop item</a>
+                        <a href="#">Edit a Giftshop item</a>
+                        <a href="#">Remove an item</a>
+                        <a href="#">Find a Giftshop item</a>
+                    </div>
+                </div>   
+                <script>
+                    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+                    var dropdown = document.getElementsByClassName("dropdown-btn");
+                    var i;
+                    
+                    for (i = 0; i < dropdown.length; i++) {
+                    dropdown[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                    } else {
+                    dropdownContent.style.display = "block";
+                    }
+                    });
+                    }
+                </script> 
+            
+                <div class="main">
+                    <div class="main-header">
+                        <div class="main-header__heading">Hello, Shania Tran</div>
+                        <div class="main-header__updates">Recent Items</div>
+                    </div>
+                    <div class="main-overview">
+                        <div class="overviewcard">
+                        <div class="overviewcard__icon">Overview</div>
+                        <div class="overviewcard__info">Card</div>
+                        </div>
+                        <div class="overviewcard">
+                        <div class="overviewcard__icon">Overview</div>
+                        <div class="overviewcard__info">Dashborad</div>
+                        </div>
+                        <div class="overviewcard">
+                        <div class="overviewcard__icon">Overview</div>
+                        <div class="overviewcard__info">Card</div>
+                        </div>
+                        <div class="overviewcard">
+                        <div class="overviewcard__icon">Overview</div>
+                        <div class="overviewcard__info">Card</div>
+                        </div>
+                    </div>
+
+                    <div class="main-cards">
+                        <div class="card">This is the homepage of our website</div>
+                        <div class="card">Data , Images , and figures can go here</div>
+                        <div class="card">Data , Images , and figures can go here</div>
+                    </div>
+        
+            </div>
+                <footer class="footer">
+                    <div class="footer__copyright"> 3380 Database</div>
+                    <div class="footer__signature">Made with blood sweat & tears</div>
+                </footer>
+            </div>
+        </body>
+</html>

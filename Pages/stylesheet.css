@@ -1,0 +1,146 @@
+            /* Simple dashboard grid CSS */
+
+            /* Assign grid instructions to our parent grid container */
+            .grid-container {
+                display: grid;
+                grid-template-columns: 240px 1fr;
+                grid-template-rows: 50px 1fr 50px;
+                grid-template-areas:
+                    "sidenav header"
+                    "sidenav main"
+                    "sidenav footer";
+                height: 100vh;
+            }
+
+            /* Give every child element its grid name */
+            .header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding:0 16px;
+                grid-area: header;
+                background-color: #D4CCCC;
+                border-radius: 10px;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+            .sidenav {
+                display: flex;
+                flex-direction: column;
+                grid-area: sidenav;
+                background-color: #F0EDED;
+                border-radius: 20px;
+            }
+            /* Style the sidenav links and the dropdown button */
+            .sidenav a, .dropdown-btn {
+                padding: 6px 8px 6px 16px;
+                text-decoration: none;
+                font-size: 20px;
+                color: black;
+                display: block;
+                border: none;
+                background: none;
+                width: 100%;
+                text-align: left;
+                cursor: pointer;
+                outline: none;
+            }
+            /* On mouse-over */
+            .sidenav a:hover, .dropdown-btn:hover {
+                color: #D4CCCC;
+            }
+            /* Add an active class to the active dropdown button */
+            .active {
+                background-color: #818181;
+                border-radius: 10px;
+                color: white;
+            }
+            /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+            .dropdown-container {
+                display: none;
+                background-color: #e3e4e6;
+                border-radius: 10px;
+                padding-left: 8px;
+                text-align: center;
+                font-size: 10px;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+            /* Optional: Style the caret down icon */
+            .fa-caret-down {
+                float: right;
+                padding-right: 8px;
+            }
+            /* Some media queries for responsiveness */
+            @media screen and (max-height: 450px) {
+                .sidenav {padding-top: 15px;}
+                .sidenav a {font-size: 18px;}
+            }
+            .main {
+                grid-area: main;
+                background-color:white;
+            }
+            .main-cards {
+                column-count: 2;
+                column-gap: 20px;
+                margin: 20px;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+            .card {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                background-color: #e3e4e6 ;
+                margin-bottom: 20px;
+                -webkit-column-break-inside: avoid;
+                padding: 24px;
+                box-sizing: border-box;
+                border-radius: 20px;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+
+            /* Force varying heights to simulate dynamic content */
+            .card:first-child {
+                height: 485px;
+            }
+            .card:nth-child(2) {
+                height: 200px;
+            }
+            .card:nth-child(3) {
+                height: 265px;
+            }
+            .main-header {
+                display: flex;
+                justify-content: space-between;
+                margin: 20px;
+                padding: 20px;
+                height: 150px; /* Force our height since we don't have actual content yet */
+                background-color: #e3e4e6;
+                color: black;
+                border-radius: 20px;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+            .main-overview {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(265px, 1fr)); /* Where the magic happens */
+                grid-auto-rows: 94px;
+                grid-gap: 20px;
+                margin: 20px;
+            }
+            .overviewcard {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 20px;
+                background-color: #e3e4e6;
+                border-radius: 20px;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+            .footer {
+                grid-area: footer;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding:0 20px;
+                background-color: #D4CCCC;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
