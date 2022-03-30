@@ -1,0 +1,34 @@
+﻿@page
+@model ExhibitionsModel
+@{
+    ViewData["Title"] = "Exhibitions dashboard";
+}
+<h1>@ViewData["Title"]</h1>
+
+<body>
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3">
+
+            <div class="wrap">
+                <div class="search">
+                    <input type="text" class="searchTerm" placeholder="Search for exhibitions">
+                    <button type="submit" class="btn btn-secondary">Search</button>
+                </div>
+            </div>
+
+
+            <a asp-page="/AddExhibition" asp-area="" button type="button" class="btn btn-primary">New exhibition</a>
+
+
+            <br /><br />
+            <p>Add carousel, grid or whatever here to show all exhibitions.</p>
+            <p>Integrate edit/remove with entries.</p>
+
+            @* <div class="alert alert-warning fade">
+                <img src="http://entechprod.blob.core.windows.net/dotnetfiddle/morpheus.jpg"
+                style="max-width:100%;"/><br/><br/>
+                <strong><span class="alert-content"></span></strong>
+                </div> *@
+        </div>
+    </div>
+</body>
