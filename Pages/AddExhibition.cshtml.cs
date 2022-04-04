@@ -16,5 +16,26 @@ public class AddExhibitionModel : PageModel
     {
     }
 
-    public string Search { get; set; }
+    public string ExhibitionName { get; set; }
+    public string Description { get; set; }
+    public string PiecesIncluded { get; set; }
+    public string Arranger { get; set; }
+    public string Location { get; set; }
+    public string DatesOpen { get; set; }
+
+    [HttpPost] 
+    public ActionResult Exhibition_DE(Exhibition exhibition) {
+
+        string ExhibitionName = exhibition.ExhibitionName;
+        string Description = exhibition.Description;
+        string PiecesIncluded = exhibition.PiecesIncluded;
+        string Arranger = exhibition.Arranger;
+        string Location = exhibition.Location;
+        string DatesOpen = exhibition.DatesOpen;
+
+
+        return null;
+    }
+
+
 }

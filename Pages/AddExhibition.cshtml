@@ -7,10 +7,60 @@
 
 <body>
 
+@* https://qawithexperts.com/article/asp-net/form-submit-in-aspnet-mvc-c-htmlbeginform-example/314 *@
 
-<h4>
-A data entry form will be added here.
+@* https://docs.microsoft.com/en-us/aspnet/web-pages/overview/getting-started/introducing-aspnet-web-pages-2/entering-data *@
 
-</h4>
+
+@using (Html.BeginForm("Exhibition_DE", "AddExhibition", FormMethod.Post, new { id = "EXHIB_DE" }))
+{
+    <div class="row">
+        <div class="col-lg-2">Exhibition Name</div>
+        <div class="col-lg-10">
+            @Html.TextBoxFor(a => a.ExhibitionName, new { @class = "form-control" })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-2">Description</div>
+        <div class="col-lg-10">
+            @Html.TextBoxFor(a => a.Description, new { @class = "form-control" })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-2">Pieces in Exhibition</div>
+        <div class="col-lg-10">
+            @Html.TextBoxFor(a => a.PiecesIncluded, new { @class = "form-control" })
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-lg-2">Arranger</div>
+        <div class="col-lg-10">
+            @Html.TextBoxFor(a => a.Arranger, new { @class = "form-control" })
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-lg-2">Location</div>
+        <div class="col-lg-10">
+            @Html.TextBoxFor(a => a.Location, new { @class = "form-control" })
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-lg-2">Dates Open</div>
+        <div class="col-lg-10">
+            @Html.TextBoxFor(a => a.DatesOpen, new { @class = "form-control" })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-12"><input type="submit" value="Submit" class="btn btn-primary"></div>
+
+    </div>
+}
+
 
 </body>
