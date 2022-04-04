@@ -1,0 +1,25 @@
+@page
+@model AddMemberModel
+
+@{
+    ViewData["Title"] = "Add Member";
+}
+
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <form method = "post">
+            <legend>Member Information Form</legend>
+            <p><label for="firstName">First Name:</label>
+                <input type="text" name="firstName" />
+            </p>
+
+            <p><label for="lastName">Last Name:</label>
+                <input type="text" name="lastName" />
+            </p>
+
+            <p><input type="submit" name="buttonSubmit" value= "Add Member" /></p>
+        </form>
+    </body>
+</html>

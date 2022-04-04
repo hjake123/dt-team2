@@ -42,14 +42,13 @@
                         <a href="#">Remove an Exhibition</a>
                         <a href="#">Find an Exhibition</a>
                     </div>
-                    <button class="dropdown-btn">GiftShop 
+                    <button class="dropdown-btn">Transactions
                         <i class="fa fa-caret-down"></i>
                     </button>
-                    <div class="dropdown-container">
-                        <a href="#">Add a Giftshop item</a>
-                        <a href="#">Edit a Giftshop item</a>
-                        <a href="#">Remove an item</a>
-                        <a href="#">Find a Giftshop item</a>
+                    <div class="dropdown-container">                   
+                        <a asp-page="SellAnItem">Sell an Item</a>
+                        <a asp-page="SellATicket">Sell a Ticket</a>
+                        <a asp-page="AddMember">Add a Member</a>
                     </div>
                 </div>   
                 <script>
@@ -96,7 +95,10 @@
 
                     <div class="main-cards">
                         <div class="card">This is the homepage of our website</div>
-                        <div class="card">Data , Images , and figures can go here</div>
+                        <div class="card">
+                            <a asp-page="/DataReport" >Data Report</a>
+                                Data , Images , and figures can go here                                
+                        </div>
                         <div class="card">Data , Images , and figures can go here</div>
                     </div>
         

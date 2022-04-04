@@ -1,0 +1,30 @@
+@page
+@model SellAnItemModel
+
+@{
+    ViewData["Title"] = "Sell An Item";
+}
+
+<!DOCTYPE html>
+<html>
+    <body>
+        <form method = "post">
+            <legend>Sell an Item</legend>
+            <p><label for="item">Item:</label>
+                <input type="text" name="item">
+                <input type="button" class="btn btn-primary" value="Add an Item">
+                <input type="button" class="btn btn-primary" value="Remove an Item">
+            </p>
+
+            <p><label for="price">Price:</label>
+                <input type="text" name="price">
+            </p>
+
+            <p><label for="date">Date:</label>
+                <input type="date" id="start" name="trip-start">
+            </p>
+
+            <p><input type="submit" name="buttonSubmit" value="Complete Transaction" /></p>
+        </form>
+    </body>
+</html>
