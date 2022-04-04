@@ -16,5 +16,5 @@ public class ExhibitionsModel : PageModel
     {
     }
 
-    public string Search { get; set; }
+    public string Search { get; set; } = default!;
 }
