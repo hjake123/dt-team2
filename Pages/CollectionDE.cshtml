@@ -1,0 +1,48 @@
+@page
+@model CollectionDEModel
+
+@{
+    ViewData["Title"] = "Collection Data Entry";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="stylesheet.css">
+
+    <style type="text/css">
+        #desc {
+            height: 128px;
+            width: 327px;
+        }
+
+        #cname {
+            width: 324px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="grid-container">
+        <header class="header">
+            <div class="header__search">Search...</div>
+        </header>
+
+        <div class="sidenav">
+            <div class="sidenav a">
+                <h2> Enter Collection Data </h2>
+            </div>
+        </div>
+        <form>
+            <label for="cname">Collection name:</label><br>
+            <input type="text" id="cname" name="cname" value="Type collection name"><br>
+            <label for="desc">Description:</label><br>
+            <input type="text" id="desc" name="desc" value="Enter description of collection here">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
