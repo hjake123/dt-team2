@@ -5,8 +5,117 @@
     ViewData["Title"] = "Data Report";
 }
 
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+#ticketSalesDIV, #giftshopSalesDIV, #museumActivityDIV {
+  width: 100%;
+  padding: 10px 0px;
+  text-align: left;
+  background-color: lightblue;
+  margin-top: 0px;
+}
+
+</style>
+
+</head>
+
 <h1>@ViewData["Title"]</h1>
 
 <body>
-    <p>Show various data patterns of the musuem database that are pertinent to user.</p>
+    
+    <button onclick="ticketSalesFunction()">Ticket Sales Report</button>
+
+    <button onclick="giftshopSalesFunction()">Gift Shop Sales Report</button>
+
+    <button onclick="museumActivityFunction()">Museum Activity Report</button>
+    
+
+    <div id="ticketSalesDIV" style="display: none;">
+        <label>Ticket Sales Report:</label>
+
+        <p><label for="ticketType">Ticket Type:</label>
+            <div class="custom-select">
+                <select>
+                    <option value="0">Select Ticket Type</option>                                   
+                </select>
+            </div>
+        </p>    
+
+        <p><label for="accessType">Access Type:</label>
+            <div class="custom-select">
+                <select>
+                    <option value="0">Select Access Type</option>                                   
+                </select>
+            </div>
+        </p>    
+
+        <p><label for="date">Ticket Sales From:</label>
+                <input type="date" id="start" name="trip-start">
+
+            <label for="date">To:</label>
+                <input type="date" id="start" name="trip-start">      
+        </p>
+
+        <p><button type="submit" class="btn btn-secondary">Submit Request</button></p>     
+    </div>
+
+    <div id="giftshopSalesDIV" style="display: none;">
+        <label>Gift Shop Sales Report:</label>
+        <p><label for="date">Gift Shop Sales From:</label>
+                <input type="date" id="start" name="trip-start">
+
+            <label for="date">To:</label>
+                <input type="date" id="start" name="trip-start">      
+        </p>
+        
+        <p><button type="submit" class="btn btn-secondary">Submit Request</button></p>
+        
+    </div>
+
+    <div id="museumActivityDIV" style="display: none;">
+        <label>Museum Activity Report</label>
+        <p><label for="date">Museum Activity From:</label>
+                <input type="date" id="start" name="trip-start">
+
+            <label for="date">To:</label>
+                <input type="date" id="start" name="trip-start">      
+        </p>
+
+        <p><button type="submit" class="btn btn-secondary">Submit Request</button></p> 
+    </div>
+
 </body>
+
+
+<script>
+    function ticketSalesFunction(){
+        var x = document.getElementById("ticketSalesDIV");
+
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+
+    function giftshopSalesFunction(){
+        var x = document.getElementById("giftshopSalesDIV");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+
+    function museumActivityFunction(){
+        var x = document.getElementById("museumActivityDIV");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
+
