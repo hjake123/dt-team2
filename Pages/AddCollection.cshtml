@@ -1,0 +1,32 @@
+﻿@page
+@model AddCollectionModel
+@{
+    ViewData["Title"] = "Add Collection";
+}
+<h1>@ViewData["Title"]</h1>
+
+<body>
+
+@using (Html.BeginForm("Exhibition_DE", "AddExhibition", FormMethod.Post, new { id = "EXHIB_DE" }))
+{
+    <div class="row">
+        <div class="col-lg-2">Collection Name</div>
+        <div class="col-lg-10">
+            @Html.TextBoxFor(a => a.CollectionName, new { @class = "form-control" })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-2">Description</div>
+        <div class="col-lg-10">
+            @Html.TextBoxFor(a => a.Description, new { @class = "form-control" })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-12"><input type="submit" value="Submit" class="btn btn-primary"></div>
+
+    </div>
+}
+
+</body>

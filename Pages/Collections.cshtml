@@ -1,0 +1,27 @@
+﻿@page
+@model ExhibitionsModel
+@{
+    ViewData["Title"] = "Collections dashboard";
+}
+<h1>@ViewData["Title"]</h1>
+
+<body>
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3">
+
+            <div class="wrap">
+                <div class="search">
+                    <input type="text" class="searchTerm" placeholder="Search for collections">
+                    <button type="submit" class="btn btn-secondary">Search</button>
+                </div>
+            </div>
+
+            <a asp-page="/PieceAdd" asp-area="" button type="button" class="btn btn-primary">Add a piece to a collection</a>
+
+            <br /><br />
+            <p>Add carousel, grid or whatever here to show all collections.</p>
+            <p>Integrate edit/remove with entries.</p>
+
+        </div>
+    </div>
+</body>

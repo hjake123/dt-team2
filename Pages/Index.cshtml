@@ -1,7 +1,7 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Homepage";
 }
 
 <!DOCTYPE html>
@@ -23,15 +23,15 @@
                     <div class="sidenav a">
                         <h2> MFA Houston </h2>
                     </div>
-                    <div><button class="dropdown-btn"> <a href="Index.cshtml">Homepage</a> </button></div>
+                    <div><button class="dropdown-btn"> <a asp-page="Index">Homepage</a> </button></div>
                     <button class="dropdown-btn">Collections 
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-container">
-                        <a href="#">Add a piece</a>
-                        <a href="#">Edit a piece</a>
-                        <a href="#">Remove a piece</a>
-                        <a href="#">Find a piece</a>
+                        <a asp-page="/PieceAdd">Add a Piece</a>
+                        <a href="#">Find or Edit a Piece</a>
+                        <a asp-page="/AddCollection">Add a Collection</a>
+                        <a asp-page="/Collections">Find a Collection</a>
                     </div>
                     <button class="dropdown-btn">Exhibitions 
                         <i class="fa fa-caret-down"></i>
@@ -40,7 +40,7 @@
                         <a asp-page="/AddExhibition">Add an Exhibition</a>
                         <a href="#">Edit an Exhhibtion</a>
                         <a href="#">Remove an Exhibition</a>
-                        <a href="#">Find an Exhibition</a>
+                        <a asp-page="/Exhibitions">Find an Exhibition</a>
                     </div>
                     <button class="dropdown-btn">Transactions
                         <i class="fa fa-caret-down"></i>
@@ -71,10 +71,10 @@
             
                 <div class="main">
                     <div class="main-header">
-                        <div class="main-header__heading">Hello, Shania Tran</div>
+                        <div class="main-header__heading">Hello, (username)</div>
                         <div class="main-header__updates">Recent Items</div>
                     </div>
-                    <div class="main-overview">
+                    <!--<div class="main-overview">
                         <div class="overviewcard">
                         <div class="overviewcard__icon">Overview</div>
                         <div class="overviewcard__info">Card</div>
@@ -90,8 +90,8 @@
                         <div class="overviewcard">
                         <div class="overviewcard__icon">Overview</div>
                         <div class="overviewcard__info">Card</div>
-                        </div>
-                    </div>
+                        </div> 
+                    </div>-->
 
                     <div class="main-cards">
                         <div class="card">This is the homepage of our website</div>
