@@ -1,0 +1,52 @@
+@page
+@model PageAddModel
+
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href = "stylesheet.css">
+        
+    </head>
+    <body>
+        <div class="container">
+        <section>
+            <h1 class="center">Edit Profile</h1>
+
+            <form action="#", method="PUT">
+                <label for="title" class="required">Title:</label>
+                <input id="title" name="title" type="text", maxlength="200" required></input> 
+
+                <label for="creator" class="required">Creator:</label>
+                <input id="creator" name="creator" type="text", maxlength="50" required></input> 
+
+                <label for="desc">Description:</label>
+                <input id="desc" name="desc" type="text", maxlength="400" required></input>
+
+                <label for="dim">Dimensions:</label>
+                <input id="dim" name="dim" type="text" maxlength="50" required></input> 
+
+                <label for="origin">Place of Origin:</label>
+                <input id="origin" name="origin" type="text" maxlength="50" required></input> 
+
+                <label for="makedate">Date Created:</label>
+                <input id="makedate" name="makedate" type="date" required></input> 
+
+                <label for="getdate">Date Acquired:</label>
+                <input id="getdate" name="getdate" type="date" required></input> 
+
+                <label for="source">Source:</label>
+                <input id="source" name="source" type="text" maxlength="300" required></input> 
+
+                <label for="medium" class="required">Medium:</label>
+                <select id="medium" name="medium" required>
+                    <option value="" selected disabled hidden>-- Select --</option>
+                    <!-- Populate from Lookup_Medium table! -->
+                </select> 
+                <input type="submit" value="Save Changes">
+            </form>
+        </section>
+    </div>
+    </body>
+</html>
