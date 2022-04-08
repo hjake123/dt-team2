@@ -1,3 +1,29 @@
+using System.Data.SqlClient;
+using dt_team2;
+
+// Database connection test
+// Always store connection strings securely. 
+string connectionString = CSHolder.GetConnectionString();
+
+// Best practice is to scope the SqlConnection to a "using" block
+using (SqlConnection conn = new SqlConnection(connectionString))
+{
+    // Connect to the database
+    conn.Open();
+
+    // Read rows
+    SqlCommand selectCommand = new SqlCommand("SELECT * FROM [dbo].[ArtPieces]", conn);
+    SqlDataReader results = selectCommand.ExecuteReader();
+    
+    // Enumerate over the rows
+    while(results.Read())
+    {
+        Console.WriteLine("Column 0: {0}", results[0]);
+    }
+
+    conn.Close();
+}
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
