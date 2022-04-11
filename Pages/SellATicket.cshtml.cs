@@ -10,12 +10,7 @@ public class SellATicketModel : PageModel
     public SellATicketModel(ILogger<SellATicketModel> logger)
     {
         _logger = logger;
-    }
+    } 
 
-    public void OnGet()
-    {
-    }
-
-    //public string Search { get; set; }
 }
 

@@ -5,41 +5,39 @@
     ViewData["Title"] = "Sell An Item";
 }
 
-<!DOCTYPE html>
-<html>
-    <body>
-        <form method = "post">
-            <legend>Sell a Ticket</legend>
-                <p><label for="ticketType">Ticket Type:</label>
-                    <div class="custom-select">
-                        <select>
-                            <option value="0">Select Ticket Type</option>                                   
-                        </select>
-                        <input type="button" class="btn btn-primary" value="Add Ticket Type">
-                        <input type="button" class="btn btn-primary" value="Remove Ticket Type">
-                    </div>
-                </p>
 
-                <p><label for="accessType">Access Type:</label>
-                    <div class="custom-select">
-                        <select>
-                            <option value="0">Select Access Type</option>                                   
-                        </select>
-                        <input type="button" class="btn btn-primary" value="Add Access Type">
-                        <input type="button" class="btn btn-primary" value="Remove Access Type">
-                    </div>
-                </p>
+<body>
+    <form method = "post">
+        <legend>Sell a Ticket</legend>
+            <p><label for="ticketType">Ticket Type:</label>
+                <div class="custom-select">
+                    <select>
+                        <option value="0">Select Ticket Type</option>                                   
+                    </select>
+                    <input type="button" class="btn btn-primary" value="Add Ticket Type">
+                    <input type="button" class="btn btn-primary" value="Remove Ticket Type">
+                </div>
+            </p>
 
-                <p><label for="price">Price:</label>
-                    <input type="text" name="price">
-                </p>
+            <p><label for="accessType">Access Type:</label>
+                <div class="custom-select">
+                    <select>
+                        <option value="0">Select Access Type</option>                                   
+                    </select>
+                    <input type="button" class="btn btn-primary" value="Add Access Type">
+                    <input type="button" class="btn btn-primary" value="Remove Access Type">
+                </div>
+            </p>
 
-                <p><label for="Type">Date:</label>
-                    <input type="date" id="start" name="trip-start">
-                </p>
+            <p><label for="price">Price:</label>
+                <input type="text" name="price">
+            </p>
 
-                <p><input type="submit" name="buttonSubmit" value="Complete Transaction" /></p>
+            <p><label for="Type">Date:</label>
+                <input type="date" id="start" name="trip-start">
+            </p>
 
-        </form>
-    </body>
-</html>
+            <p><input type="submit" name="buttonSubmit" value="Complete Transaction" /></p>
+
+    </form>
+</body>
