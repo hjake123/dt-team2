@@ -34,8 +34,8 @@ public class Transactions{
     //TicketTransactions Entitiy attributes
     public DateTime expirationDate{get; set;} = default!;
     //convert to lists
-    public List<AccessType> accessTypes{get; set;} = default!; 
-    public List<TicketType> ticketType{get; set;} = default!;
+    public string accessTypeChosen{get; set;} = default!; 
+    public string ticketTypeChosen{get; set;} = default!;
 }
 
 
