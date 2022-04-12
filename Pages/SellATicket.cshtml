@@ -2,33 +2,28 @@
 @model SellATicketModel
 
 @{
-    ViewData["Title"] = "Sell An Item";
+    ViewData["Title"] = "Sell A Ticket";
 }
 
-@using (Html.BeginForm("Ticket_DE", "SellATicket", FormMethod.Post, new {id = "TICKET_DE"}))
-{
+
 <body>
-    <form method = "post">
+    <form asp-controller="Home" asp-action="Index" method="post">
+        <p><label for="accesstype">Select Access Type:</label></p>
+        <select asp-for="access" asp-items="Model.access"></select> 
 
-        <legend>Sell a Ticket</legend>
-            <p><label for="ticketType">Ticket Type:</label>
+        <p><label for="accesstype">Select Access Type:</label></p>
+        <select asp-for="ticket" asp-items="Model.ticket"></select> 
 
-            </p>
+        <p><label for="item">Price:</label>
+            @Html.TextBoxFor(t => t.price, new { @class = "form-control" })
+        </p>
 
-            <p><label for="accessType">Access Type:</label>
+        <p><label for="expirationdate">Ticket Expiration Date:</label>
+            @Html.TextBoxFor(t => t.expirationDate, new { @class = "form-control" })     
+        </p>
 
-            </p>
-
-            <p><label for="price">Price:</label>
-                @Html.TextBoxFor(t => t.price, new { @class = "form-control" })
-            </p>
-
-            <p><label for="Type">Expiration Date:</label>
-                @Html.TextBoxFor(t => t.expirationDate, new { @class = "form-control" })
-            </p>
-
-            <p><input type="submit" name="buttonSubmit" value="Complete Transaction" /></p>
-
+        <br /><button type="submit">Submit</button>
     </form>
+
 </body>
-}
+

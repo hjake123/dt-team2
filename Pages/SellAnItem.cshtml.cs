@@ -15,7 +15,6 @@ public class SellAnItemModel : PageModel
     public string itemName{get; set;} = default!;
     public float price{get; set;} = default!;
     public DateTime date{get; set;} = default!;
-    public bool IsTicket{get; set;} = false;
 
     public ActionResult Item_DE(Transactions item){
         itemName = item.itemName;

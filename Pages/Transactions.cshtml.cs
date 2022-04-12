@@ -15,27 +15,19 @@ public class TransactionsModel : PageModel
     public string Search { get; set; }
 }
 
-public class TicketType{
-    public int id{get; set;} = default!;
-    public string name{get; set;} = default!;
-}
-
-public class AccessType{
-    public int id{get; set;} = default!;
-    public string name{get; set;} = default!;
-}
-
 public class Transactions{
     //Transactions Enitity Attributes
     public string itemName{get; set;} = default!;
     public DateTime date{get; set;} = default!;
     public float price{get; set;} = default!;
-    public bool IsTicket{get; set;} = default!;
+}
+
+public class TicketTransactions{
     //TicketTransactions Entitiy attributes
+    public string selectedAccess{get; set;} = default!; 
+    public string selecetedTicket{get; set;} = default!;
+    public float price{get; set;} = default!;
     public DateTime expirationDate{get; set;} = default!;
-    //convert to lists
-    public string accessTypeChosen{get; set;} = default!; 
-    public string ticketTypeChosen{get; set;} = default!;
 }
 
 
