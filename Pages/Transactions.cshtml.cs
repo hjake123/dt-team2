@@ -24,8 +24,8 @@ public class Transactions{
 
 public class TicketTransactions{
     //TicketTransactions Entitiy attributes
-    public string selectedAccess{get; set;} = default!; 
-    public string selecetedTicket{get; set;} = default!;
+    public int selectedAccess{get; set;} = default!; 
+    public int selecetedTicket{get; set;} = default!;
     public float price{get; set;} = default!;
     public DateTime expirationDate{get; set;} = default!;
 }

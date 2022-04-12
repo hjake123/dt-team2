@@ -8,11 +8,15 @@
 
 <body>
     <form asp-controller="Home" asp-action="Index" method="post">
-        <p><label for="accesstype">Select Access Type:</label></p>
-        <select asp-for="access" asp-items="Model.access"></select> 
+        <p><label for="accesstype">Select an Access Type:</label>
+            @Html.DropDownListFor(t => Model.selectedAccess, new SelectList(Model.access, "Value", "Text"), 
+            htmlAttributes: new { @class = "form-control", @id = "AccessType" })
+        </p>
 
-        <p><label for="accesstype">Select Access Type:</label></p>
-        <select asp-for="ticket" asp-items="Model.ticket"></select> 
+        <p><label for="accesstype">Select a Ticket Type:</label>
+            @Html.DropDownListFor(t => Model.selectedTicket, new SelectList(Model.ticket, "Value", "Text"), 
+            htmlAttributes: new { @class = "form-control", @id = "TicketType" })
+        </p>        
 
         <p><label for="item">Price:</label>
             @Html.TextBoxFor(t => t.price, new { @class = "form-control" })
@@ -22,7 +26,7 @@
             @Html.TextBoxFor(t => t.expirationDate, new { @class = "form-control" })     
         </p>
 
-        <br /><button type="submit">Submit</button>
+        <button type="submit">Submit</button>
     </form>
 
 </body>
