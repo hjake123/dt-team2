@@ -37,11 +37,13 @@ public class SellATicketModel : PageModel
         price = tick.price;
         expirationDate = tick.expirationDate;
 
+//testing stuff
+/*
         Console.WriteLine(selectedAccess);
         Console.WriteLine(selectedTicket);
         Console.WriteLine(price);
         Console.WriteLine(expirationDate);
-        
+*/        
         return null;
     }
     private List<SelectListItem> GetAccess(){
@@ -49,9 +51,7 @@ public class SellATicketModel : PageModel
 
         tempAccess.Add(new SelectListItem{Value = "0", Text ="Select Access Type"});
         //connect to database
-
-
-
+        
         return tempAccess;
     }
     private List<SelectListItem> GetTicket(){

@@ -2,6 +2,13 @@
 @model TransactionsModel
 @{
     ViewData["Title"] = "All Transactions";
+    string[] TableHeaders = new string[]{"Transaction ID",
+        "Item",
+        "Date",
+        "Price",
+        "Is Ticket",
+        "Ticket ID"
+    };
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -22,5 +29,27 @@
             <a asp-page="/AddMember" asp-area="" button type="button" class="btn btn-primary">Add a Member</a>
 
         </div>
+    </div>
+
+    <div class = "table">
+        <table class ="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    @{
+                        foreach(var head in TableHeaders)
+                        {
+                            <th>
+                                @head
+                            </th>
+                        }    
+                    }
+                </tr>
+            </thead>
+            <tr>
+                <td>
+                    
+                </td>
+            </tr>
+        </table>
     </div>
 </body>

@@ -10,7 +10,7 @@
 <body>
     <form method = "post">
         <legend>Sell an Item</legend>
-        <p><label for="item">Item:</label>
+        <p><label for="item">Item Name:</label>
             @Html.TextBoxFor(i => i.itemName, new { @class = "form-control" })
         </p>
 
@@ -22,7 +22,7 @@
             @Html.TextBoxFor(i => i.date, new { @class = "form-control" })
         </p>
 
-        <p><input type="submit" name="buttonSubmit" value="Complete Transaction" /></p>
+        <button type="submit">Complete Transaction</button>
     </form>
 </body>
 }

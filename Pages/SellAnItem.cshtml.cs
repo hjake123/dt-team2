@@ -28,5 +28,7 @@ public class SellAnItemModel : PageModel
         itemName = item.itemName;
         price = item.price;
         date = item.date;
+
+        //connect to database
     }
 }
