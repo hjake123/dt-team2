@@ -12,9 +12,23 @@ public class SellAnItemModel : PageModel
         _logger = logger;
     }
 
-    public void OnGet()
-    {
+    public string itemName{get; set;} = default!;
+    public float price{get; set;} = default!;
+    public DateTime date{get; set;} = default!;
+
+    public ActionResult Item_DE(Transactions item){
+        itemName = item.itemName;
+        price = item.price;
+        date = item.date;
+
+        return null;
     }
 
- //   public string Search { get; set; }
+    public void OnPost(Transactions item) {
+        itemName = item.itemName;
+        price = item.price;
+        date = item.date;
+
+        //connect to database
+    }
 }

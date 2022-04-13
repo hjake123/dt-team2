@@ -5,6 +5,7 @@ using dt_team2;
 // Always store connection strings securely. 
 string connectionString = CSHolder.GetConnectionString();
 
+/*
 // Best practice is to scope the SqlConnection to a "using" block
 using (SqlConnection conn = new SqlConnection(connectionString))
 {
@@ -23,7 +24,7 @@ using (SqlConnection conn = new SqlConnection(connectionString))
 
     conn.Close();
 }
-
+*/
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

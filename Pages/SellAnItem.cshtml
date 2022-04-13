@@ -5,26 +5,24 @@
     ViewData["Title"] = "Sell An Item";
 }
 
-<!DOCTYPE html>
-<html>
-    <body>
-        <form method = "post">
-            <legend>Sell an Item</legend>
-            <p><label for="item">Item:</label>
-                <input type="text" name="item">
-                <input type="button" class="btn btn-primary" value="Add an Item">
-                <input type="button" class="btn btn-primary" value="Remove an Item">
-            </p>
+@using (Html.BeginForm("Item_DE", "SellAnItem", FormMethod.Post, new { id = "ITEM_DE" }))
+{
+<body>
+    <form method = "post">
+        <legend>Sell an Item</legend>
+        <p><label for="item">Item Name:</label>
+            @Html.TextBoxFor(i => i.itemName, new { @class = "form-control" })
+        </p>
 
-            <p><label for="price">Price:</label>
-                <input type="text" name="price">
-            </p>
+        <p><label for="price">Price:</label>
+            @Html.TextBoxFor(i => i.price, new { @class = "form-control" })
+        </p>
 
-            <p><label for="date">Date:</label>
-                <input type="date" id="start" name="trip-start">
-            </p>
+        <p><label for="date">Date:</label>
+            @Html.TextBoxFor(i => i.date, new { @class = "form-control" })
+        </p>
 
-            <p><input type="submit" name="buttonSubmit" value="Complete Transaction" /></p>
-        </form>
-    </body>
-</html>
+        <button type="submit">Complete Transaction</button>
+    </form>
+</body>
+}
