@@ -1,0 +1,20 @@
+@page
+@model TicketTypeRemoveModel
+@{
+    ViewData["Title"] = "Remove a Ticket Type";
+}
+
+@using (Html.BeginForm("TicketTypeRemove_DE", "TicketTypeRemove", FormMethod.Post, new { id = "TICKETTYPEREMOVE_DE" }))
+{
+<body>
+    <form method = "post">
+        <legend>@ViewData["Title"]</legend>
+        <p><label for="item">Select Ticket Type Needed to be Removed:</label>
+            @Html.DropDownListFor(t => Model.ticketTypeID, new SelectList(Model.tickets, "Value", "Text"), 
+            htmlAttributes: new { @class = "form-control", @id = "TicketType" })        
+        </p>
+
+        <button type="submit">Remove Selected Ticket Type</button>
+    </form>
+</body>
+}

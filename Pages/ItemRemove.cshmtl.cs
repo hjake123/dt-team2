@@ -24,7 +24,7 @@ public class ItemRemoveModel : PageModel
     public void OnPost(Lookup_Item itemRemove) {
         itemID = itemRemove.itemID;
 
-        Console.WriteLine(itemID);
+        Console.WriteLine("Attemp to Remove Item ID: " + itemID);
 
         //remove query database
     }

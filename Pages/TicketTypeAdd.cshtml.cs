@@ -29,7 +29,6 @@ public class TicketTypeAddModel : PageModel
         Console.WriteLine(ticketTypeID);
         Console.WriteLine(ticketTypeLabel);
 
-        
         //connect to database
         string connectionString = CSHolder.GetConnectionString();
         using(SqlConnection conn = new SqlConnection(connectionString)){

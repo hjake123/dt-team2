@@ -1,0 +1,20 @@
+@page
+@model AccessTypeRemoveModel
+@{
+    ViewData["Title"] = "Remove an Access Type";
+}
+
+@using (Html.BeginForm("AccessTypeRemove_DE", "AccessTypeRemove", FormMethod.Post, new { id = "ACCESSTYPEREMOVE_DE" }))
+{
+<body>
+    <form method = "post">
+        <legend>@ViewData["Title"]</legend>
+        <p><label for="item">Select Access Type Needed to be Removed:</label>
+            @Html.DropDownListFor(t => Model.accessTypeID, new SelectList(Model.access, "Value", "Text"), 
+            htmlAttributes: new { @class = "form-control", @id = "accessType" })        
+        </p>
+
+        <button type="submit">Remove Selected Access Type</button>
+    </form>
+</body>
+}

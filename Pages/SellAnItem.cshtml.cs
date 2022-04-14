@@ -37,18 +37,15 @@ public class SellAnItemModel : PageModel
         Console.WriteLine(price);
         Console.WriteLine(date);             
         //connect to database and insert query
-        try{
-            /*
-            using(SqlConnection conn = new SqlConnection(connectionString)){
-                conn.Open();
-                SqlCommand selectCommand = new SqlCommand("INSERT INTO [dbo].[Transactions](Item, Date, Price, IsTicket) Value( " + itemID + ", " + date + ", " + price + ", False)", conn);      
-                
-                conn.Close();
-            }*/
-        }
-        catch(Exception ex1){
-            throw ex1;
-        }
+
+        /*
+        using(SqlConnection conn = new SqlConnection(connectionString)){
+            conn.Open();
+            SqlCommand selectCommand = new SqlCommand("INSERT INTO [dbo].[Transactions](Item, Date, Price, IsTicket) Value( " + itemID + ", " + date + ", " + price + ", False)", conn);      
+            
+            conn.Close();
+        }*/
+        Console.WriteLine("Item Sold!");
     }
     private List<SelectListItem> GetItems(){
         List<SelectListItem> tempItems = new List<SelectListItem>();

@@ -10,7 +10,7 @@ namespace dt_team2.Pages;
 public class SellATicketModel : PageModel
 {
     private readonly ILogger<SellATicketModel> _logger;
-    private string connectionString = CSHolder.GetConnectionString();
+
     public SellATicketModel(ILogger<SellATicketModel> logger)
     {
         _logger = logger;
@@ -42,7 +42,9 @@ public class SellATicketModel : PageModel
         expirationDate = tick.expirationDate;
 
         //connect insert into database
-      
+        
+
+        Console.WriteLine("Ticket Sold!");
         return null;
     }
     private List<SelectListItem> GetAccess(){
@@ -50,6 +52,7 @@ public class SellATicketModel : PageModel
 
         tempAccess.Add(new SelectListItem{Value = "0", Text ="Select Access Type"});
         //connect to database
+        string connectionString = CSHolder.GetConnectionString();
 
         using(SqlConnection conn = new SqlConnection(connectionString)){
             conn.Open();
@@ -65,11 +68,13 @@ public class SellATicketModel : PageModel
         }
         return tempAccess;
     }
+    
     private List<SelectListItem> GetTicket(){
         List<SelectListItem> tempTicket = new List<SelectListItem>();
 
         tempTicket.Add(new SelectListItem{Value = "0", Text ="Select Ticket Type"});
         //connect to database
+        string connectionString = CSHolder.GetConnectionString();
 
         using(SqlConnection conn = new SqlConnection(connectionString)){
             conn.Open();
