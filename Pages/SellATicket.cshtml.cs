@@ -1,12 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Data.SqlClient;
 
 namespace dt_team2.Pages;
 
 public class SellATicketModel : PageModel
 {
     private readonly ILogger<SellATicketModel> _logger;
+    private string connectionString = CSHolder.GetConnectionString();
     public SellATicketModel(ILogger<SellATicketModel> logger)
     {
         _logger = logger;
@@ -37,21 +40,28 @@ public class SellATicketModel : PageModel
         price = tick.price;
         expirationDate = tick.expirationDate;
 
-//testing stuff
-/*
-        Console.WriteLine(selectedAccess);
-        Console.WriteLine(selectedTicket);
-        Console.WriteLine(price);
-        Console.WriteLine(expirationDate);
-*/        
+        //connect insert into database
+      
         return null;
     }
     private List<SelectListItem> GetAccess(){
         List<SelectListItem> tempAccess = new List<SelectListItem>();
 
-        tempAccess.Add(new SelectListItem{Value = "0", Text ="Select Access Type"});
+        tempAccess.Add(new SelectListItem{Value = "0", Text ="Select Item"});
         //connect to database
-        
+
+        using(SqlConnection conn = new SqlConnection(connectionString)){
+            conn.Open();
+            SqlCommand selectCommand = new SqlCommand("SELECT * FROM [dbo].[LookUp_AccessType]", conn);
+            SqlDataReader results = selectCommand.ExecuteReader();                
+
+            while(results.Read()){
+                tempAccess.Add(new SelectListItem{Value = results["AccessType"].ToString(), 
+                    Text = results["AccessTypeLabel"].ToString()});                
+            }
+            
+            conn.Close();
+        }
         return tempAccess;
     }
     private List<SelectListItem> GetTicket(){
@@ -60,7 +70,18 @@ public class SellATicketModel : PageModel
         tempTicket.Add(new SelectListItem{Value = "0", Text ="Select Ticket Type"});
         //connect to database
 
+        using(SqlConnection conn = new SqlConnection(connectionString)){
+            conn.Open();
+            SqlCommand selectCommand = new SqlCommand("SELECT * FROM [dbo].[LookUp_TicketType]", conn);
+            SqlDataReader results = selectCommand.ExecuteReader();                
 
+            while(results.Read()){
+                tempTicket.Add(new SelectListItem{Value = results["TicketType"].ToString(), 
+                    Text = results["TicketTypeLabel"].ToString()});                
+            }
+            conn.Close();
+        }
+        
         return tempTicket;
     }
 }

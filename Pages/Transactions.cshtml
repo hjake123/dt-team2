@@ -3,11 +3,15 @@
 @{
     ViewData["Title"] = "All Transactions";
     string[] TableHeaders = new string[]{"Transaction ID",
-        "Item",
+        "Item ID",
+        "Item Label",
         "Date",
         "Price",
         "Is Ticket",
-        "Ticket ID"
+        "Ticket ID",
+        "Expiration Date",
+        "Access Type",
+        "Ticket Type"
     };
 }
 
@@ -45,11 +49,28 @@
                     }
                 </tr>
             </thead>
-            <tr>
-                <td>
-                    
-                </td>
-            </tr>
+            <tbody>
+            @{
+                if (Model != null)
+                {
+                    foreach(TransactionsOutput Data in TransactionsModel.tr_output)
+                    {
+                        <tr>
+                            <td>@Data.TransactionID</td>
+                            <td>@Data.itemID</td>
+                            <td>@Data.itemLabel</td>
+                            <td>@Data.date</td>
+                            <td>@Data.price</td>
+                            <td>@Data.IsTicket</td>
+                            <td>@Data.TicketID</td>
+                            <td>@Data.expirationDate</td>
+                            <td>@Data.accessType</td>
+                            <td>@Data.ticketType</td>                               
+                        </tr>
+                    }
+                }
+            }
+            </tbody>
         </table>
     </div>
 </body>

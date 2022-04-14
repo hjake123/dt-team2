@@ -10,8 +10,9 @@
 <body>
     <form method = "post">
         <legend>Sell an Item</legend>
-        <p><label for="item">Item Name:</label>
-            @Html.TextBoxFor(i => i.itemName, new { @class = "form-control" })
+        <p><label for="item">Item:</label>
+            @Html.DropDownListFor(t => Model.itemID, new SelectList(Model.items, "Value", "Text"), 
+            htmlAttributes: new { @class = "form-control", @id = "Item" })
         </p>
 
         <p><label for="price">Price:</label>
