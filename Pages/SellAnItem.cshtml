@@ -13,6 +13,8 @@
         <p><label for="item">Item:</label>
             @Html.DropDownListFor(t => Model.itemID, new SelectList(Model.items, "Value", "Text"), 
             htmlAttributes: new { @class = "form-control", @id = "Item" })
+            <a asp-page="/ItemAdd" asp-area="" button type="button" class="btn btn-primary">Add an Item</a>
+            <a asp-page="/ItemRemove" asp-area="" button type="button" class="btn btn-primary">Remove an Item</a>
         </p>
 
         <p><label for="price">Price:</label>

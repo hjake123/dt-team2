@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 
 namespace dt_team2.Pages;
 
+
 public class SellATicketModel : PageModel
 {
     private readonly ILogger<SellATicketModel> _logger;
@@ -47,7 +48,7 @@ public class SellATicketModel : PageModel
     private List<SelectListItem> GetAccess(){
         List<SelectListItem> tempAccess = new List<SelectListItem>();
 
-        tempAccess.Add(new SelectListItem{Value = "0", Text ="Select Item"});
+        tempAccess.Add(new SelectListItem{Value = "0", Text ="Select Access Type"});
         //connect to database
 
         using(SqlConnection conn = new SqlConnection(connectionString)){
@@ -57,7 +58,7 @@ public class SellATicketModel : PageModel
 
             while(results.Read()){
                 tempAccess.Add(new SelectListItem{Value = results["AccessType"].ToString(), 
-                    Text = results["AccessTypeLabel"].ToString()});                
+                    Text = results["AccessTypeLabel"].ToString() + " // Access Type ID: " + results["AccessType"].ToString()});                
             }
             
             conn.Close();
@@ -77,7 +78,7 @@ public class SellATicketModel : PageModel
 
             while(results.Read()){
                 tempTicket.Add(new SelectListItem{Value = results["TicketType"].ToString(), 
-                    Text = results["TicketTypeLabel"].ToString()});                
+                    Text = results["TicketTypeLabel"].ToString() + " // Ticket Type ID: " + results["TicketType"].ToString()});                
             }
             conn.Close();
         }

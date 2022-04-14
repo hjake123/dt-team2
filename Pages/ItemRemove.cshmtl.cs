@@ -5,51 +5,30 @@ using System.Data.SqlClient;
 using Microsoft.AspNetCore.Mvc.Rendering;
 namespace dt_team2.Pages;
 
-public class SellAnItemModel : PageModel
+public class ItemRemoveModel : PageModel
 {
-    private readonly ILogger<SellAnItemModel> _logger;
-    public SellAnItemModel(ILogger<SellAnItemModel> logger)
+    private readonly ILogger<ItemRemoveModel> _logger;
+    public ItemRemoveModel(ILogger<ItemRemoveModel> logger)
     {
         _logger = logger;
         items = GetItems();
     }
-    
-    public int itemID{get; set;} = default!;
     public List<SelectListItem> items{get; set;} = new List<SelectListItem>();
-    public float price{get; set;} = default!;
-    public DateTime date{get; set;} = default!;
+    public int itemID = default!;
 
+    public ActionResult ItemRemove_DE(Lookup_Item itemRemove){
+        itemID = itemRemove.itemID;
 
-    public ActionResult Item_DE(Transactions item){
-        itemID = item.itemID;
-        price = item.price;
-        date = item.date;
-    
         return null;
     }
-
-    public void OnPost(Transactions item) {
-        itemID = item.itemID;
-        price = item.price;
-        date = item.date;
+    public void OnPost(Lookup_Item itemRemove) {
+        itemID = itemRemove.itemID;
 
         Console.WriteLine(itemID);
-        Console.WriteLine(price);
-        Console.WriteLine(date);             
-        //connect to database and insert query
-        try{
-            /*
-            using(SqlConnection conn = new SqlConnection(connectionString)){
-                conn.Open();
-                SqlCommand selectCommand = new SqlCommand("INSERT INTO [dbo].[Transactions](Item, Date, Price, IsTicket) Value( " + itemID + ", " + date + ", " + price + ", False)", conn);      
-                
-                conn.Close();
-            }*/
-        }
-        catch(Exception ex1){
-            throw ex1;
-        }
+
+        //remove query database
     }
+
     private List<SelectListItem> GetItems(){
         List<SelectListItem> tempItems = new List<SelectListItem>();
 
@@ -71,7 +50,4 @@ public class SellAnItemModel : PageModel
         }
         return tempItems;        
     }
-
 }
-
-

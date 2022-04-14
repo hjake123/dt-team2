@@ -1,0 +1,23 @@
+@page
+@model AccessTypeAddModel
+@{
+    ViewData["Title"] = "Add an Access Type";
+}
+
+@using (Html.BeginForm("AccessTypeAdd_DE", "AccessTypeAdd", FormMethod.Post, new { id = "ACESSTYPEADD_DE" }))
+{
+<body>
+    <form method = "post">
+        <legend>@ViewData["Title"]</legend>
+        <p><label for="item">Enter New Access Type ID:</label>
+            @Html.TextBoxFor(a => a.accessTypeID, new { @class = "form-control" })        
+        </p>       
+
+        <p><label for="item">Enter New Access Type Label:</label>
+            @Html.TextBoxFor(a => a.accessTypeLabel, new { @class = "form-control" })        
+        </p>   
+
+        <button type="submit">Add New Access Type</button>        
+    </form>
+</body>
+}

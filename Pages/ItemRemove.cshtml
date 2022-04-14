@@ -1,0 +1,20 @@
+@page
+@model ItemRemoveModel
+@{
+    ViewData["Title"] = "Remove an Item";
+}
+
+@using (Html.BeginForm("ItemRemove_DE", "ItemRemove", FormMethod.Post, new { id = "ITEMREMOVE_DE" }))
+{
+<body>
+    <form method = "post">
+        <legend>Remove an Item</legend>
+        <p><label for="item">Select Item Needed to be Removed:</label>
+            @Html.DropDownListFor(r => Model.itemID, new SelectList(Model.items, "Value", "Text"), 
+            htmlAttributes: new { @class = "form-control", @id = "Item" })        
+        </p>
+
+        <button type="submit">Remove Selected Item</button>
+    </form>
+</body>
+}
