@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-using System;
 using System.Data.SqlClient;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace dt_team2.Pages;
 
@@ -42,10 +42,11 @@ public class TicketTransactions{
     public DateTime expirationDate{get; set;} = default!;
 }
 
+
 public class TransactionsModel : PageModel
 {
     private readonly ILogger<TransactionsModel> _logger;
-    private string connectionString = CSHolder.GetConnectionString();
+
     public static List<TransactionsOutput> tr_output = new List<TransactionsOutput>();
 
     public TransactionsModel(ILogger<TransactionsModel> logger)
@@ -57,84 +58,82 @@ public class TransactionsModel : PageModel
     public void OnGet()
     {
         GetTransactions();
-//        Console.WriteLine("Database close");
     }
 
     private void SearchTransactions(){
         //set up sql query to change based on search variable
     }
-    //needs to be tested
+
     private void GetTransactions()
     {
         //default query (nothing searched)
         if(tr_output.Count > 0){
             tr_output.Clear();
         }
+
         //Connect to database
-        try{
-            using(SqlConnection conn = new SqlConnection(connectionString)){
-                conn.Open();
-    //            Console.WriteLine("Database open");
-                SqlCommand selectCommand = new SqlCommand("SELECT * FROM [dbo].[Transactions]", conn);
-                SqlDataReader results = selectCommand.ExecuteReader();
+        string connectionString = CSHolder.GetConnectionString();
 
-                List<TransactionsOutput> temp_tr = new List<TransactionsOutput>();
+        //NOTE: PROBABLY NOT THE BEST WAY TO DO THIS, USING 2 QUERIES. PROBABLY COULD CONDENSE
+        using(SqlConnection conn = new SqlConnection(connectionString)){
+            conn.Open();
+//            Console.WriteLine("Database open");
+            SqlCommand selectCommand = new SqlCommand("SELECT * FROM [dbo].[Transactions]", conn);
+            SqlDataReader results = selectCommand.ExecuteReader();
 
-                //Get Main Transaction entity Info
+            List<TransactionsOutput> temp_tr = new List<TransactionsOutput>();
+
+            //Get Main Transaction entity Info
+            while(results.Read()){
+                temp_tr.Add(new TransactionsOutput{TransactionID = results["TransactionID"].ToString(),
+                itemID = results["Item"].ToString(),
+                date = results["Date"].ToString(),
+                price = results["Price"].ToString(),
+                IsTicket = results["IsTicket"].ToString(),
+                TicketID = results["TicketID"].ToString()});
+            }
+
+            //loop through transactions again to get all info needed
+            for(int i = 0; i < temp_tr.Count; i++)
+            {
+                //Get Item Label
+                int temp_itemID = Convert.ToInt32(temp_tr[i].itemID); 
+                selectCommand = new SqlCommand("SELECT itemLabel FROM [dbo].[Lookup_Item] WHERE item = " + temp_itemID, conn);
+                results = selectCommand.ExecuteReader();   
                 while(results.Read()){
-                    temp_tr.Add(new TransactionsOutput{TransactionID = results["TransactionID"].ToString(),
-                    itemID = results["Item"].ToString(),
-                    date = results["Date"].ToString(),
-                    price = results["Price"].ToString(),
-                    IsTicket = results["IsTicket"].ToString(),
-                    TicketID = results["TicketID"].ToString()});
+                    temp_tr[i].itemLabel = results["itemLabel"].ToString();              
                 }
 
-                //loop through transactions again to get all info needed
-                for(int i = 0; i < temp_tr.Count; i++)
-                {
-                    //Get Item Label
-                    int temp_itemID = Convert.ToInt32(temp_tr[i].itemID); 
-                    selectCommand = new SqlCommand("SELECT itemLabel FROM [dbo].[Lookup_Item] WHERE item = " + temp_itemID, conn);
+                //Get Ticket Transactions entity info
+                if(Convert.ToBoolean(temp_tr[i].IsTicket) == false){
+                    temp_tr[i].expirationDate = "NOT A TICKET";
+                    temp_tr[i].TicketID = "NOT A TICKET";
+                    temp_tr[i].accessType = "NOT A TICKET";
+                    temp_tr[i].ticketType = "NOT A TICKET";                
+                }
+                else if(Convert.ToBoolean(temp_tr[i].IsTicket) == true){
+
+                    //select from accesstable and tickettable
+                    selectCommand = new SqlCommand("SELECT * FROM [dbo].[TransactionsTicket] " , conn);
                     results = selectCommand.ExecuteReader();   
+
                     while(results.Read()){
-                        temp_tr[i].itemLabel = results["itemLabel"].ToString();              
-                    }
+                        temp_tr[i].expirationDate = results["ExpirationDate"].ToString();                        
+                        temp_tr[i].accessType = results["AccessType"].ToString();
+                        temp_tr[i].ticketType = results["TicketType"].ToString();               
+                    }                 
+                    //get TicketLabel
+                    /*
+                    selectCommand = new SqlCommand("SELECT * FROM [dbo].[Lookup_TicketType],[dbo].[Lookup_TicketType] " , conn);
+                    results = selectCommand.ExecuteReader();
+                    */
+                }         
+            }
+    
+            tr_output = temp_tr;
 
-                    //Get Ticket Transactions entity info
-                    if(Convert.ToBoolean(temp_tr[i].IsTicket) == false){
-                        temp_tr[i].expirationDate = "NOT A TICKET";
-                        temp_tr[i].TicketID = "NOT A TICKET";
-                        temp_tr[i].accessType = "NOT A TICKET";
-                        temp_tr[i].ticketType = "NOT A TICKET";                
-                    }
-                    else if(Convert.ToBoolean(temp_tr[i].IsTicket) == true){
-                        temp_tr[i].itemLabel = "NOT AN ITEM";
-                        //select from accesstable and tickettable
-                        selectCommand = new SqlCommand("SELECT * FROM [dbo].[TransactionsTicket] " , conn);
-                        results = selectCommand.ExecuteReader();   
-
-                        while(results.Read()){
-                            temp_tr[i].expirationDate = results["ExpirationDate"].ToString();                        
-                            temp_tr[i].accessType = results["AccessType"].ToString();
-                            temp_tr[i].ticketType = results["TicketType"].ToString();               
-                        }                 
-                        //get TicketLabel
-                        /*
-                        selectCommand = new SqlCommand("SELECT * FROM [dbo].[Lookup_TicketType],[dbo].[Lookup_TicketType] " , conn);
-                        results = selectCommand.ExecuteReader();
-                        */
-                    }         
-                }
-        
-                tr_output = temp_tr;
-
-                conn.Close();
-            };            
-        }
-        catch(Exception ex){
-            throw ex;
-        }
+            conn.Close();
+        };            
     }
 }
 

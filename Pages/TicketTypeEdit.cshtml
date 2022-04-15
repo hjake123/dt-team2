@@ -1,0 +1,84 @@
+@page
+@model TicketTypeEditModel
+@{
+    ViewData["Title"] = "Edit an Ticket Type";
+    string[] TableHeaders = {"Ticket Type ID", "Ticket Type Label"};
+
+}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    #ItemIdDIV, #ItemLabelDIV {
+        background-color: yellow;
+    }
+    </style>
+</head>
+
+<body>
+    <legend>@ViewData["Title"]</legend>
+    
+    <p><label for="item">Select which Variables to Edit:</label></p>
+
+    <p>
+        <button onclick="ticketTypeLabelFunction()">Ticket Type Label</button>
+    </p>
+    <form name = "TicketTypeEdit" method = "post">
+
+        <p><label for="ticket">Enter ID for Access Type to Edit:</label>
+            @Html.TextBoxFor(t => t.ticketTypeID, new { @class = "form-control" })        
+        </p>
+
+        <div id="TicketTypeLabelDIV" style= "display: none;">
+            <p><label for="ticket">Change Ticket Type Label to:</label>
+                @Html.TextBoxFor(t => t.ticketTypeLabel, new { @class = "form-control" })        
+            </p>
+        </div>
+
+        <button type="submit">Submit Ticket Edit</button> 
+    </form>
+
+
+    <div class = "table">
+        <table class ="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    @{
+                        foreach(var head in TableHeaders)
+                        {
+                            <th>
+                                @head
+                            </th>
+                        }    
+                    }
+                </tr>
+            </thead>
+            <tbody>
+            @{
+                if (Model != null)
+                {
+                    foreach(SelectListItem Data in TicketTypeEditModel.tickets)
+                    {
+                        <tr>
+                            <td>@Data.Value</td>
+                            <td>@Data.Text</td>
+                        </tr>
+                    }
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function ticketTypeLabelFunction(){
+            var x = document.getElementById("TicketTypeLabelDIV");
+
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+</body>

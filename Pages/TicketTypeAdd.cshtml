@@ -1,0 +1,23 @@
+@page
+@model TicketTypeAddModel
+@{
+    ViewData["Title"] = "Add a Ticket Type";
+}
+
+@using (Html.BeginForm("TicketTypeAdd_DE", "TicketTypeAdd", FormMethod.Post, new { id = "TICKETTPYEADD_DE" }))
+{
+<body>
+    <form method = "post">
+        <legend>@ViewData["Title"]</legend>
+        <p><label for="item">Enter New Ticket Type ID:</label>
+            @Html.TextBoxFor(a => a.ticketTypeID, new { @class = "form-control" })        
+        </p>       
+
+        <p><label for="item">Enter New Ticket Type Label:</label>
+            @Html.TextBoxFor(a => a.ticketTypeLabel, new { @class = "form-control" })        
+        </p>   
+
+        <button type="submit">Add New Ticket Type</button>        
+    </form>
+</body>
+}

@@ -1,0 +1,24 @@
+@page
+@model ItemAddModel
+@{
+    ViewData["Title"] = "Add an Item";
+}
+
+@using (Html.BeginForm("ItemAdd_DE", "ItemAdd", FormMethod.Post, new { id = "ITEMADD_DE" }))
+{
+<body>
+    <form method = "post">
+        <legend>Add a New Item</legend>
+        <p><label for="item">Enter New Item ID:</label>
+            @Html.TextBoxFor(a => a.itemID, new { @class = "form-control" })        
+        </p>
+
+        <p><label for="price">Enter New Item Name:</label>
+            @Html.TextBoxFor(a => a.itemLabel, new { @class = "form-control" })        
+        </p>
+
+        <button type="submit">Add New Item</button>
+    </form>
+
+</body>
+}

@@ -6,10 +6,11 @@ using System.Data.SqlClient;
 
 namespace dt_team2.Pages;
 
+
 public class SellATicketModel : PageModel
 {
     private readonly ILogger<SellATicketModel> _logger;
-    private string connectionString = CSHolder.GetConnectionString();
+
     public SellATicketModel(ILogger<SellATicketModel> logger)
     {
         _logger = logger;
@@ -27,28 +28,23 @@ public class SellATicketModel : PageModel
     public DateTime expirationDate{get; set;} = default!;
 
     //Functions------------------------------------------------------------
-    public IActionResult Ticket_DE(TicketTransactions tick){
-        selectedAccess = tick.selectedAccess;
-        selectedTicket = tick.selecetedTicket;
-        price = tick.price;
-        expirationDate = tick.expirationDate;        
-        return null;
-    }
-    public ActionResult OnPost(TicketTransactions tick){
+    public void OnPost(TicketTransactions tick){
         selectedAccess = tick.selectedAccess;
         selectedTicket = tick.selecetedTicket;
         price = tick.price;
         expirationDate = tick.expirationDate;
 
         //connect insert into database
-      
-        return null;
+        
+
+        Console.WriteLine("Ticket Sold!");
     }
     private List<SelectListItem> GetAccess(){
         List<SelectListItem> tempAccess = new List<SelectListItem>();
 
-        tempAccess.Add(new SelectListItem{Value = "0", Text ="Select Item"});
+        tempAccess.Add(new SelectListItem{Value = "0", Text ="Select Access Type"});
         //connect to database
+        string connectionString = CSHolder.GetConnectionString();
 
         using(SqlConnection conn = new SqlConnection(connectionString)){
             conn.Open();
@@ -57,18 +53,20 @@ public class SellATicketModel : PageModel
 
             while(results.Read()){
                 tempAccess.Add(new SelectListItem{Value = results["AccessType"].ToString(), 
-                    Text = results["AccessTypeLabel"].ToString()});                
+                    Text = results["AccessTypeLabel"].ToString() + " // Access Type ID: " + results["AccessType"].ToString()});                
             }
             
             conn.Close();
         }
         return tempAccess;
     }
+
     private List<SelectListItem> GetTicket(){
         List<SelectListItem> tempTicket = new List<SelectListItem>();
 
         tempTicket.Add(new SelectListItem{Value = "0", Text ="Select Ticket Type"});
         //connect to database
+        string connectionString = CSHolder.GetConnectionString();
 
         using(SqlConnection conn = new SqlConnection(connectionString)){
             conn.Open();
@@ -77,7 +75,7 @@ public class SellATicketModel : PageModel
 
             while(results.Read()){
                 tempTicket.Add(new SelectListItem{Value = results["TicketType"].ToString(), 
-                    Text = results["TicketTypeLabel"].ToString()});                
+                    Text = results["TicketTypeLabel"].ToString() + " // Ticket Type ID: " + results["TicketType"].ToString()});                
             }
             conn.Close();
         }

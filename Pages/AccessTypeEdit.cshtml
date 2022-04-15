@@ -1,0 +1,84 @@
+@page
+@model AccessTypeEditModel
+@{
+    ViewData["Title"] = "Edit an Access Type";
+    string[] TableHeaders = {"Access Type ID", "Access Type Label"};
+
+}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    #ItemIdDIV, #ItemLabelDIV {
+        background-color: yellow;
+    }
+    </style>
+</head>
+
+<body>
+    <legend>@ViewData["Title"]</legend>
+    
+    <p><label for="item">Select which Variables to Edit:</label></p>
+
+    <p>
+        <button onclick="accessTypeLabelFunction()">Access Type Label</button>
+    </p>
+    <form name = "AccessTypeEdit" method = "post">
+
+        <p><label for="access">Enter ID for Access Type to Edit:</label>
+            @Html.TextBoxFor(a => a.accessTypeID, new { @class = "form-control" })        
+        </p>
+
+        <div id="AccessTypeLabelDIV" style= "display: none;">
+            <p><label for="access">Change Access Type Label to:</label>
+                @Html.TextBoxFor(a => a.accessTypeLabel, new { @class = "form-control" })        
+            </p>
+        </div>
+
+        <button type="submit">Edit Item</button> 
+    </form>
+
+
+    <div class = "table">
+        <table class ="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    @{
+                        foreach(var head in TableHeaders)
+                        {
+                            <th>
+                                @head
+                            </th>
+                        }    
+                    }
+                </tr>
+            </thead>
+            <tbody>
+            @{
+                if (Model != null)
+                {
+                    foreach(SelectListItem Data in AccessTypeEditModel.access)
+                    {
+                        <tr>
+                            <td>@Data.Value</td>
+                            <td>@Data.Text</td>
+                        </tr>
+                    }
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function accessTypeLabelFunction(){
+            var x = document.getElementById("AccessTypeLabelDIV");
+
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+</body>

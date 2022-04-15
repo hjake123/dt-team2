@@ -1,0 +1,51 @@
+@page
+@model AccessTypeRemoveModel
+@{
+    ViewData["Title"] = "Remove an Access Type";
+    string[] TableHeaders = {"Access Type ID", "Access Type"};
+}
+
+@using (Html.BeginForm("AccessTypeRemove_DE", "AccessTypeRemove", FormMethod.Post, new { id = "ACCESSTYPEREMOVE_DE" }))
+{
+<body>
+    <form method = "post">
+        <legend>@ViewData["Title"]</legend>
+        <p><label for="item">Enter ID of Access Type to delete:</label>
+             @Html.TextBoxFor(t => t.accessTypeID, new { @class = "form-control" })    
+        </p>
+
+        <button type="submit">Remove Selected Access Type</button>
+    </form>
+
+    <div class = "table">
+        <table class ="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    @{
+                        foreach(var head in TableHeaders)
+                        {
+                            <th>
+                                @head
+                            </th>
+                        }    
+                    }
+                </tr>
+            </thead>
+            <tbody>
+            @{
+                if (Model != null)
+                {
+                    foreach(SelectListItem Data in AccessTypeRemoveModel.access)
+                    {
+                        <tr>
+                            <td>@Data.Value</td>
+                            <td>@Data.Text</td>
+                        </tr>
+                    }
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+</body>
+}
