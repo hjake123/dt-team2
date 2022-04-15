@@ -12,11 +12,11 @@ public class LookUp_TicketType{
 public class LookUp_AccessType{
     public int accessTypeID{get; set;} = default!;    
     public string accessTypeLabel{get; set;} = default!;
-
 }
 
 public class Lookup_Item{
     public int itemID{get; set;} = default!;    
     public string itemLabel{get; set;} = default!;
+    public string newItemLabel{get; set;} = default!;
 
 }

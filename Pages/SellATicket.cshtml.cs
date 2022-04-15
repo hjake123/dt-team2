@@ -28,14 +28,7 @@ public class SellATicketModel : PageModel
     public DateTime expirationDate{get; set;} = default!;
 
     //Functions------------------------------------------------------------
-    public IActionResult Ticket_DE(TicketTransactions tick){
-        selectedAccess = tick.selectedAccess;
-        selectedTicket = tick.selecetedTicket;
-        price = tick.price;
-        expirationDate = tick.expirationDate;        
-        return null;
-    }
-    public ActionResult OnPost(TicketTransactions tick){
+    public void OnPost(TicketTransactions tick){
         selectedAccess = tick.selectedAccess;
         selectedTicket = tick.selecetedTicket;
         price = tick.price;
@@ -45,7 +38,6 @@ public class SellATicketModel : PageModel
         
 
         Console.WriteLine("Ticket Sold!");
-        return null;
     }
     private List<SelectListItem> GetAccess(){
         List<SelectListItem> tempAccess = new List<SelectListItem>();
@@ -68,7 +60,7 @@ public class SellATicketModel : PageModel
         }
         return tempAccess;
     }
-    
+
     private List<SelectListItem> GetTicket(){
         List<SelectListItem> tempTicket = new List<SelectListItem>();
 

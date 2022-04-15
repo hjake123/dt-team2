@@ -19,15 +19,6 @@ public class SellAnItemModel : PageModel
     public float price{get; set;} = default!;
     public DateTime date{get; set;} = default!;
 
-
-    public ActionResult Item_DE(Transactions item){
-        itemID = item.itemID;
-        price = item.price;
-        date = item.date;
-    
-        return null;
-    }
-
     public void OnPost(Transactions item) {
         itemID = item.itemID;
         price = item.price;

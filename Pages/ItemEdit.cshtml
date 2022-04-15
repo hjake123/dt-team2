@@ -1,0 +1,93 @@
+@page
+@model ItemEditModel
+@{
+    ViewData["Title"] = "Edit an Item";
+    string[] TableHeaders = {"Item ID", "Item Label"};
+
+}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    #ItemIdDIV, #ItemLabelDIV {
+        background-color: yellow;
+    }
+    </style>
+</head>
+
+<body>
+    <legend>@ViewData["Title"]</legend>
+    
+    <p><label for="item">Select which Variables to Edit:</label></p>
+
+    <p>
+        <button onclick="itemLabelFunction()">Item Label</button>
+    </p>
+    <form name = "ItemEdit" method = "post">
+
+        <p><label for="item">Enter Item ID to Edit:</label>
+            @Html.TextBoxFor(a => a.itemID, new { @class = "form-control" })        
+        </p>
+
+        <div id="ItemLabelDIV" style= "display: none;">
+            <p><label for="item">Change Item Label to:</label>
+                @Html.TextBoxFor(a => a.newItemLabel, new { @class = "form-control" })        
+            </p>
+        </div>
+
+        <button type="submit">Edit Item</button> 
+    </form>
+
+
+    <div class = "table">
+        <table class ="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    @{
+                        foreach(var head in TableHeaders)
+                        {
+                            <th>
+                                @head
+                            </th>
+                        }    
+                    }
+                </tr>
+            </thead>
+            <tbody>
+            @{
+                if (Model != null)
+                {
+                    foreach(SelectListItem Data in ItemEditModel.items)
+                    {
+                        <tr>
+                            <td>@Data.Value</td>
+                            <td>@Data.Text</td>
+                        </tr>
+                    }
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function itemLabelFunction(){
+            var x = document.getElementById("ItemLabelDIV");
+
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+        function itemIdFunction(){
+            var x = document.getElementById("ItemIdDIV");
+
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+</body>

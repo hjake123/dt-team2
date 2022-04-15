@@ -2,6 +2,7 @@
 @model TicketTypeRemoveModel
 @{
     ViewData["Title"] = "Remove a Ticket Type";
+    string[] TableHeaders = {"Ticket Type ID", "Ticket Type Label"};
 }
 
 @using (Html.BeginForm("TicketTypeRemove_DE", "TicketTypeRemove", FormMethod.Post, new { id = "TICKETTYPEREMOVE_DE" }))
@@ -9,12 +10,42 @@
 <body>
     <form method = "post">
         <legend>@ViewData["Title"]</legend>
-        <p><label for="item">Select Ticket Type Needed to be Removed:</label>
-            @Html.DropDownListFor(t => Model.ticketTypeID, new SelectList(Model.tickets, "Value", "Text"), 
-            htmlAttributes: new { @class = "form-control", @id = "TicketType" })        
+        <p><label for="item">Enter ID of Ticket Type to be Deleted:</label>
+            @Html.TextBoxFor(t => t.ticketTypeID, new { @class = "form-control" })       
         </p>
 
         <button type="submit">Remove Selected Ticket Type</button>
     </form>
+
+    <div class = "table">
+        <table class ="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    @{
+                        foreach(var head in TableHeaders)
+                        {
+                            <th>
+                                @head
+                            </th>
+                        }    
+                    }
+                </tr>
+            </thead>
+            <tbody>
+            @{
+                if (Model != null)
+                {
+                    foreach(SelectListItem Data in TicketTypeRemoveModel.tickets)
+                    {
+                        <tr>
+                            <td>@Data.Value</td>
+                            <td>@Data.Text</td>
+                        </tr>
+                    }
+                }
+            }
+            </tbody>
+        </table>
+    </div>
 </body>
 }

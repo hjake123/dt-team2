@@ -16,25 +16,24 @@ public class ItemAddModel : PageModel
     public int itemID = default!;
     public string itemLabel = default!;
 
-    public ActionResult ItemAdd_DE(Lookup_Item itemAdd){
-        itemID = itemAdd.itemID;
-        itemLabel = itemAdd.itemLabel;
-        
-        return null;
-    }
-
     public void OnPost(Lookup_Item itemAdd) {
         itemID = itemAdd.itemID;
         itemLabel = itemAdd.itemLabel;
 
         //connect to database
-        string connectionString = CSHolder.GetConnectionString();
-        using(SqlConnection conn = new SqlConnection(connectionString)){
-            conn.Open();
-            SqlCommand selectCommand = new SqlCommand("INSERT INTO dbo.Lookup_Item(Item, ItemLabel) VALUES ('" + itemID + "', '" + itemLabel + "')", conn);      
-            selectCommand.ExecuteNonQuery();
-            conn.Close();
+        if(itemID != 0){ // REMEMBER: && ALREADY EXISTS FUNCTION (Create function that checks database against existing values)
+            string connectionString = CSHolder.GetConnectionString();
+            using(SqlConnection conn = new SqlConnection(connectionString)){
+                conn.Open();
+                SqlCommand selectCommand = new SqlCommand("INSERT INTO dbo.Lookup_Item(Item, ItemLabel) VALUES ('" + itemID + "', '" + itemLabel + "')", conn);      
+                selectCommand.ExecuteNonQuery();
+                conn.Close();
+            }
+            Console.WriteLine("Item Added");
         }
-        Console.WriteLine("Item Added");
+        else{
+            Console.WriteLine("Invalid Item ID:" + itemID);
+        }
+
     }
 }

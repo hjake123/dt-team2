@@ -16,29 +16,25 @@ public class TicketTypeAddModel : PageModel
 
     public int ticketTypeID = default!;
     public string ticketTypeLabel = default!;
-    public ActionResult AccessTypeAdd_DE(LookUp_TicketType ticketAdd){
-        ticketTypeID = ticketAdd.ticketTypeID;
-        ticketTypeLabel =  ticketAdd.ticketTypeLabel;
-
-        return null;
-    }
 
     public void OnPost(LookUp_TicketType ticketAdd) {
         ticketTypeID = ticketAdd.ticketTypeID;
-       ticketTypeLabel = ticketAdd.ticketTypeLabel;
-        Console.WriteLine(ticketTypeID);
-        Console.WriteLine(ticketTypeLabel);
+        ticketTypeLabel = ticketAdd.ticketTypeLabel;
 
         //connect to database
-        string connectionString = CSHolder.GetConnectionString();
-        using(SqlConnection conn = new SqlConnection(connectionString)){
-            conn.Open();
-            SqlCommand selectCommand = new SqlCommand("INSERT INTO dbo.Lookup_TicketType(TicketType, TicketTypeLabel) VALUES ('" + ticketTypeID + "', '" + ticketTypeLabel + "')", conn);      
-            selectCommand.ExecuteNonQuery();
-            conn.Close();
+        if(ticketTypeID != 0)
+        {
+            string connectionString = CSHolder.GetConnectionString();
+            using(SqlConnection conn = new SqlConnection(connectionString)){
+                conn.Open();
+                SqlCommand selectCommand = new SqlCommand("INSERT INTO dbo.Lookup_TicketType(TicketType, TicketTypeLabel) VALUES ('" + ticketTypeID + "', '" + ticketTypeLabel + "')", conn);      
+                selectCommand.ExecuteNonQuery();
+                conn.Close();
+            }
+            Console.WriteLine("Ticket Type Added");
         }
-        Console.WriteLine("Ticket Type Added");
-        
+        else{
+            Console.WriteLine("Invalid Ticket Type ID:" + ticketTypeID);
+        }
     }
-      
 }

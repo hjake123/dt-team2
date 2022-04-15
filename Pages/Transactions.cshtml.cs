@@ -74,7 +74,7 @@ public class TransactionsModel : PageModel
         //Connect to database
         string connectionString = CSHolder.GetConnectionString();
 
-        //NOTE: PROBABLY NOT THE BEST WAY TO DO THIS, USING 2 QUERIES. PROBABLY COULD CONDENSE IT TO ONE
+        //NOTE: PROBABLY NOT THE BEST WAY TO DO THIS, USING 2 QUERIES. PROBABLY COULD CONDENSE
         using(SqlConnection conn = new SqlConnection(connectionString)){
             conn.Open();
 //            Console.WriteLine("Database open");

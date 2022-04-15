@@ -13,14 +13,9 @@ public class TicketTypeRemoveModel : PageModel
         _logger = logger;
         tickets = GetTicket();
     }
-    public List<SelectListItem> tickets{get; set;} = new List<SelectListItem>();
+    public static List<SelectListItem> tickets{get; set;} = new List<SelectListItem>();
     public int ticketTypeID = default!;
 
-    public ActionResult TicketRemove_DE(LookUp_TicketType ticketTypeRemove){
-        ticketTypeID  = ticketTypeRemove.ticketTypeID;
-
-        return null;
-    }
     public void OnPost(LookUp_TicketType ticketTypeRemove) {
         ticketTypeID = ticketTypeRemove.ticketTypeID;
 
@@ -32,7 +27,6 @@ public class TicketTypeRemoveModel : PageModel
     private List<SelectListItem> GetTicket(){
         List<SelectListItem> tempTicket = new List<SelectListItem>();
 
-        tempTicket.Add(new SelectListItem{Value = "0", Text ="Select Ticket Type"});
         //connect to database
         string connectionString = CSHolder.GetConnectionString();
         
@@ -43,7 +37,7 @@ public class TicketTypeRemoveModel : PageModel
 
             while(results.Read()){
                 tempTicket.Add(new SelectListItem{Value = results["TicketType"].ToString(), 
-                    Text = results["TicketTypeLabel"].ToString() + " // Ticket Type ID: " + results["TicketType"].ToString()});                
+                    Text = results["TicketTypeLabel"].ToString()});                
             }
             conn.Close();
         }

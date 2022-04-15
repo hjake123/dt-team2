@@ -13,13 +13,8 @@ public class AccessTypeRemoveModel : PageModel
         _logger = logger;
         access = GetAccess();
     }
-    public List<SelectListItem> access{get; set;} = new List<SelectListItem>();
+    public static List<SelectListItem> access{get; set;} = new List<SelectListItem>();
     public int accessTypeID = default!;
-    public ActionResult AccessTypeRemove_DE(LookUp_AccessType accessTypeRemove){
-        accessTypeID  = accessTypeRemove.accessTypeID;
-
-        return null;
-    }
     public void OnPost(LookUp_AccessType accessTypeRemove) {
         accessTypeID = accessTypeRemove.accessTypeID;
         Console.WriteLine("Attemp to Remove Access Type ID: " + accessTypeID);
@@ -30,8 +25,7 @@ public class AccessTypeRemoveModel : PageModel
 
     private List<SelectListItem> GetAccess(){
         List<SelectListItem> tempAccess = new List<SelectListItem>();
-
-        tempAccess.Add(new SelectListItem{Value = "0", Text ="Select Access Type"});
+        
         //connect to database
         string connectionString = CSHolder.GetConnectionString();
 
@@ -42,7 +36,7 @@ public class AccessTypeRemoveModel : PageModel
 
             while(results.Read()){
                 tempAccess.Add(new SelectListItem{Value = results["AccessType"].ToString(), 
-                    Text = results["AccessTypeLabel"].ToString() + " // Access Type ID: " + results["AccessType"].ToString()});                
+                    Text = results["AccessTypeLabel"].ToString()});                
             }
             
             conn.Close();
