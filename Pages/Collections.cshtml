@@ -1,7 +1,10 @@
 ﻿@page
-@model ExhibitionsModel
+@model CollectionsModel
 @{
-    ViewData["Title"] = "Collections dashboard";
+    ViewData["Title"] = "Collections Table";
+    string[] TableHeaders = new string[]{"Collection Name",
+        "Description"
+    };
 }
 <h1>@ViewData["Title"]</h1>
 
@@ -16,12 +19,38 @@
                 </div>
             </div>
 
-            <a asp-page="/PieceAdd" asp-area="" button type="button" class="btn btn-primary">Add a piece to a collection</a>
-
-            <br /><br />
-            <p>Add carousel, grid or whatever here to show all collections.</p>
-            <p>Integrate edit/remove with entries.</p>
+            <a asp-page="/AddCollection" asp-area="" button type="button" class="btn btn-primary">Add a collection</a>
 
         </div>
+    </div>
+    <div class = "table">
+        <table class ="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    @{
+                        foreach(var head in TableHeaders)
+                        {
+                            <th>
+                                @head
+                            </th>
+                        }    
+                    }
+                </tr>
+            </thead>
+            <tbody>
+            @{
+                if (Model != null)
+                {
+                    foreach(CollectionsOutput Data in CollectionsModel.col_output)
+                    {
+                        <tr>
+                            <td>@Data.CollectionName</td>
+                            <td>@Data.Description</td>                             
+                        </tr>
+                    }
+                }
+            }
+            </tbody>
+        </table>
     </div>
 </body>
