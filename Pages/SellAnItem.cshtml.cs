@@ -19,24 +19,63 @@ public class SellAnItemModel : PageModel
     public float price{get; set;} = default!;
     public DateTime date{get; set;} = default!;
 
+    private bool DoesIDExist(int T_ID){
+        string connectionString = CSHolder.GetConnectionString();
+        
+        using(SqlConnection conn = new SqlConnection(connectionString)){
+            conn.Open();
+            SqlCommand selectCommand = new SqlCommand("SELECT TransactionID FROM dbo.Transactions WHERE TransactionID = " + T_ID, conn); 
+            SqlDataReader results = selectCommand.ExecuteReader();  
+
+            while(results.Read()){
+                if(results["TransactionID"].ToString() == T_ID.ToString()){
+                    return true; 
+                }
+            }            
+  
+            conn.Close();
+        }
+        return false;
+    }
+    private int GenerateID(){
+        Random rnd = new Random();
+        int T_ID = rnd.Next();
+        
+        Console.WriteLine("Generating ID.....");
+        //if T_ID already exists rnd.next(); constantyl check
+        while(DoesIDExist(T_ID) == true){
+            Console.WriteLine("There exists one ID for " + T_ID);
+            T_ID = rnd.Next();
+            Console.WriteLine("Generating New ID....");                
+        }
+
+        Console.WriteLine("Success Generating ID " + T_ID);    
+        return T_ID;
+    }
+
     public void OnPost(Transactions item) {
         itemID = item.itemID;
         price = item.price;
         date = item.date;
-
         Console.WriteLine(itemID);
-        Console.WriteLine(price);
-        Console.WriteLine(date);             
         //connect to database and insert query
-
-        /*
-        using(SqlConnection conn = new SqlConnection(connectionString)){
-            conn.Open();
-            SqlCommand selectCommand = new SqlCommand("INSERT INTO [dbo].[Transactions](Item, Date, Price, IsTicket) Value( " + itemID + ", " + date + ", " + price + ", False)", conn);      
+        if(itemID != 0){ 
+            string connectionString = CSHolder.GetConnectionString();
             
-            conn.Close();
-        }*/
-        Console.WriteLine("Item Sold!");
+            int tmp_transactionID = GenerateID();
+        
+            using(SqlConnection conn = new SqlConnection(connectionString)){
+                conn.Open();
+                SqlCommand selectCommand = new SqlCommand("INSERT INTO dbo.Transactions(TransactionID, Item, Date, Price, IsTicket) VALUES (" + tmp_transactionID + ", '" + itemID + "', '" + date + "' , '" + price + "', 'FALSE')", conn);      
+                selectCommand.ExecuteNonQuery();
+                conn.Close();
+            }
+            Console.WriteLine("Item Sold!");
+        }
+        else{
+            Console.WriteLine("Invalid Item ID:" + itemID);
+        }
+
     }
     private List<SelectListItem> GetItems(){
         List<SelectListItem> tempItems = new List<SelectListItem>();

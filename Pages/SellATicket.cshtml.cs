@@ -26,18 +26,28 @@ public class SellATicketModel : PageModel
     //Other-----------------------------------------------------------------
     public float price{get; set;} = default!;
     public DateTime expirationDate{get; set;} = default!;
-
+    public DateTime date{get; set;} = default!;
     //Functions------------------------------------------------------------
     public void OnPost(TicketTransactions tick){
         selectedAccess = tick.selectedAccess;
-        selectedTicket = tick.selecetedTicket;
+        selectedTicket = tick.selectedTicket;
         price = tick.price;
         expirationDate = tick.expirationDate;
+        date = tick.date;
 
+    
         //connect insert into database
-        
+        if(selectedAccess != 0 && selectedTicket != 0){
+            string connectionString = CSHolder.GetConnectionString();
+            using(SqlConnection conn = new SqlConnection(connectionString)){
+                conn.Open();
+ 
+                //Insert first into Ticket Transactions
 
-        Console.WriteLine("Ticket Sold!");
+                conn.Close();
+            }
+            Console.WriteLine("Ticket Sold!");
+        }
     }
     private List<SelectListItem> GetAccess(){
         List<SelectListItem> tempAccess = new List<SelectListItem>();

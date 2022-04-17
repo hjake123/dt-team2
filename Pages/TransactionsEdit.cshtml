@@ -1,0 +1,184 @@
+@page
+@model TransactionsEditModel
+@{
+    ViewData["Title"] = "Edit a Transaction";
+    string[] TableHeaders = new string[]{"Transaction ID",
+        "Item ID",
+        "Item Label",
+        "Date",
+        "Price",
+        "Is Ticket",
+        "Ticket ID",
+        "Expiration Date",
+        "Access Type",
+        "Ticket Type"
+    };
+
+}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    #ItemIDDIV, #DateDIV, #PriceDIV, #ExpirationDateDIV, #AccessTypeDIV, #TicketTypeDIV{
+        background-color: yellow;
+    }
+    </style>
+</head>
+
+<body>
+    <legend>@ViewData["Title"]</legend>
+    
+    <p><label for="item">Select which Variables to Edit:</label></p>
+
+    <p>
+        <button onclick="ItemIDFunction()">Item ID & Item Label</button>
+        <button onclick="DateFunction()">Date</button>
+        <button onclick="PriceFunction()">Price</button>
+        <button onclick="ExpirationDateFunction()">Expiration Date</button>
+        <button onclick="AccessTypeFunction()">Access Type</button>
+        <button onclick="TicketTypeFunction()">Ticket Type</button>
+    </p>
+    <form name = "ItemEdit" method = "post">
+
+        <p><label for="item">Enter Transaction ID to Edit:</label> 
+            @Html.TextBoxFor(t => t.transactionID, new { @class = "form-control" })              
+        </p>
+
+        <div id="ItemIDDIV" style= "display: none;">
+            <p><label for="item">Change Item ID & Item Label to:</label> 
+                @Html.DropDownListFor(t => Model.itemID, new SelectList(Model.items, "Value", "Text"), 
+                htmlAttributes: new { @class = "form-control", @id = "Item" })
+            </p>
+        </div>
+
+        <div id="DateDIV" style= "display: none;">
+            <p><label for="item">Change Date to:</label>
+                @Html.TextBoxFor(t => t.date, new { @class = "form-control" })                
+            </p>
+        </div>
+
+        <div id="PriceDIV" style= "display: none;">
+            <p><label for="item">Change Price to:</label>  
+                @Html.TextBoxFor(t => t.price, new { @class = "form-control" })     
+            </p>
+        </div>
+        
+        <div id="ExpirationDateDIV" style= "display: none;">
+            <p><label for="item">Change Expiration Date to:</label> 
+                @Html.TextBoxFor(t => t.expirationDate, new { @class = "form-control" })
+            </p>
+        </div>
+
+        <div id="AccessTypeDIV" style= "display: none;">
+            <p><label for="item">Change Access Type to:</label>
+                @Html.DropDownListFor(t => Model.selectedAccess, new SelectList(Model.access, "Value", "Text"), 
+                htmlAttributes: new { @class = "form-control", @id = "AccessType" })
+            </p>
+        </div>
+
+        <div id="TicketTypeDIV" style= "display: none;">
+            <p><label for="item">Change Ticket Type to:</label>
+                @Html.DropDownListFor(t => Model.selectedTicket, new SelectList(Model.ticket, "Value", "Text"), 
+                htmlAttributes: new { @class = "form-control", @id = "AccessType" })
+            </p>
+        </div>
+
+        <button type="submit">Edit Item</button> 
+    </form>
+
+    <div class = "table">
+        <table class ="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    @{
+                        foreach(var head in TableHeaders)
+                        {
+                            <th>
+                                @head
+                            </th>
+                        }    
+                    }
+                </tr>
+            </thead>
+            <tbody>
+            @{
+                if (Model != null)
+                {
+                    foreach(TransactionsOutput Data in TransactionsModel.tr_output)
+                    {
+                        <tr>
+                            <td>@Data.TransactionID</td>
+                            <td>@Data.itemID</td>
+                            <td>@Data.itemLabel</td>
+                            <td>@Data.date</td>
+                            <td>@Data.price</td>
+                            <td>@Data.IsTicket</td>
+                            <td>@Data.TicketID</td>
+                            <td>@Data.expirationDate</td>
+                            <td>@Data.accessType</td>
+                            <td>@Data.ticketType</td>                               
+                        </tr>
+                    }
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function ItemIDFunction(){
+            var x = document.getElementById("ItemIDDIV");
+
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+        function DateFunction(){
+            var x = document.getElementById("DateDIV");
+
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+        function PriceFunction(){
+            var x = document.getElementById("PriceDIV");
+
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+        function ExpirationDateFunction(){
+            var x = document.getElementById("ExpirationDateDIV");
+
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+        function AccessTypeFunction(){
+            var x = document.getElementById("AccessTypeDIV");
+
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+        function TicketTypeFunction(){
+            var x = document.getElementById("TicketTypeDIV");
+
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+</body>

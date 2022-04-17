@@ -17,21 +17,21 @@ public class ItemEditModel : PageModel
     }
     public static List<SelectListItem> items{get; set;} = new List<SelectListItem>();
     public int itemID = default!;
-    public string newItemLabel = default!;
+    public string itemLabel = default!;
 
     public void OnPost(Lookup_Item ItemEdit) {
         itemID = ItemEdit.itemID;
-        newItemLabel = ItemEdit.newItemLabel;
+        itemLabel = ItemEdit.itemLabel;
 
         if(itemID != 0){  // REMEMBER: && ALREADY EXISTS FUNCTION (Create function that checks database against existing values)
-            Console.WriteLine("Attempt to Edit Item Label: " + itemID + " To " + newItemLabel);
+            Console.WriteLine("Attempt to Edit Item Label: " + itemID + " To " + itemLabel);
 
             //edit query database
             string connectionString = CSHolder.GetConnectionString();
             
             using(SqlConnection conn = new SqlConnection(connectionString)){
                 conn.Open();
-                SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Lookup_Item SET ItemLabel = '" + newItemLabel + "' WHERE Item = " + itemID, conn);
+                SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Lookup_Item SET ItemLabel = '" + itemLabel + "' WHERE Item = " + itemID, conn);
                 SqlDataReader results = selectCommand.ExecuteReader();                
                 conn.Close();
             }

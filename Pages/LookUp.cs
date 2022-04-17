@@ -17,6 +17,5 @@ public class LookUp_AccessType{
 public class Lookup_Item{
     public int itemID{get; set;} = default!;    
     public string itemLabel{get; set;} = default!;
-    public string newItemLabel{get; set;} = default!;
 
 }
