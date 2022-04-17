@@ -46,30 +46,75 @@ public class TransactionsEditModel : PageModel
         selectedAccess = tick.selectedAccess;
         selectedTicket = tick.selectedTicket;
 
+
         if(transactionID != 0){
             Console.WriteLine("Editing Transaction ID: " + transactionID + ".....");
+            string connectionString = CSHolder.GetConnectionString();  
             if(itemID != 0){
-                //connect to database
-                Console.WriteLine("CHANGE ITEM ID: " + itemID);
+                //connect to database 
+                using(SqlConnection conn = new SqlConnection(connectionString)){
+                    conn.Open();
+                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Transactions SET Item = " + itemID + " WHERE TransactionID = " + transactionID, conn);
+                    selectCommand.ExecuteNonQuery();
+
+                    conn.Close();
+                }
+
+                Console.WriteLine("CHANGE ITEM ID: " + itemID);                
             }
             if(date != default!){
                 //connect to database
+                using(SqlConnection conn = new SqlConnection(connectionString)){
+                    conn.Open();
+                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Transactions SET Date = '" + date + "' WHERE TransactionID = " + transactionID, conn);
+                    selectCommand.ExecuteNonQuery();
+
+                    conn.Close();
+                }
                 Console.WriteLine("CHANGE Date: " + date);
             }
             if(price != default!){
                 //connect to database
+                using(SqlConnection conn = new SqlConnection(connectionString)){
+                    conn.Open();
+                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Transactions SET Price = " + price + " WHERE TransactionID = " + transactionID, conn);
+                    selectCommand.ExecuteNonQuery();
+
+                    conn.Close();
+                }
                 Console.WriteLine("CHANGE Price: " + price);
             }
             if(expirationDate != default!){
                 //connect to database
+                using(SqlConnection conn = new SqlConnection(connectionString)){
+                    conn.Open();
+                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.TransactionsTicket SET ExpirationDate = '" + expirationDate + "' WHERE TransactionID = " + transactionID, conn);
+                    selectCommand.ExecuteNonQuery();
+
+                    conn.Close();
+                }
                 Console.WriteLine("CHANGE ExpirationDate: " + expirationDate);
             }
             if(selectedAccess != 0){
                 //connect to database
+                using(SqlConnection conn = new SqlConnection(connectionString)){
+                    conn.Open();
+                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.TransactionsTicket SET AccessType = " + selectedAccess + " WHERE TransactionID = " + transactionID, conn);
+                    selectCommand.ExecuteNonQuery();
+
+                    conn.Close();
+                }
                 Console.WriteLine("CHANGE AccessType: " + selectedAccess);
             }
             if(selectedTicket != 0){
                 //connect to database
+                using(SqlConnection conn = new SqlConnection(connectionString)){
+                    conn.Open();
+                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.TransactionsTicket SET TicketType = " + selectedTicket + " WHERE TransactionID = " + transactionID, conn);
+                    selectCommand.ExecuteNonQuery();
+
+                    conn.Close();
+                }
                 Console.WriteLine("CHANGE TicketType: " + selectedTicket);
             } 
         }
@@ -148,7 +193,7 @@ public class TransactionsEditModel : PageModel
         //Connect to database
         string connectionString = CSHolder.GetConnectionString();
 
-        //NOTE: PROBABLY NOT THE BEST WAY TO DO THIS, USING 2 QUERIES. PROBABLY COULD CONDENSE
+        //NOTE: PROBABLY NOT THE BEST WAY TO DO THIS, USING 2 QUERIES. CONDENSE IF TIME PERMITS
         using(SqlConnection conn = new SqlConnection(connectionString)){
             conn.Open();
 //            Console.WriteLine("Database open");
@@ -196,11 +241,6 @@ public class TransactionsEditModel : PageModel
                         temp_tr[i].accessType = results["AccessType"].ToString();
                         temp_tr[i].ticketType = results["TicketType"].ToString();               
                     }                 
-                    //get TicketLabel
-                    /*
-                    selectCommand = new SqlCommand("SELECT * FROM [dbo].[Lookup_TicketType],[dbo].[Lookup_TicketType] " , conn);
-                    results = selectCommand.ExecuteReader();
-                    */
                 }         
             }
     
