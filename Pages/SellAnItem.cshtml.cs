@@ -22,21 +22,23 @@ public class SellAnItemModel : PageModel
     public void OnPost(Transactions item) {
         itemID = item.itemID;
         price = item.price;
-        date = item.date;
-
-        Console.WriteLine(itemID);
-        Console.WriteLine(price);
-        Console.WriteLine(date);             
+        date = item.date;          
         //connect to database and insert query
 
-        /*
-        using(SqlConnection conn = new SqlConnection(connectionString)){
-            conn.Open();
-            SqlCommand selectCommand = new SqlCommand("INSERT INTO [dbo].[Transactions](Item, Date, Price, IsTicket) Value( " + itemID + ", " + date + ", " + price + ", False)", conn);      
-            
-            conn.Close();
-        }*/
-        Console.WriteLine("Item Sold!");
+        if(itemID != 0){ 
+            string connectionString = CSHolder.GetConnectionString();
+            using(SqlConnection conn = new SqlConnection(connectionString)){
+                conn.Open();
+                SqlCommand selectCommand = new SqlCommand("INSERT INTO dbo.Transactions(Item, Date, Price, IsTicket) VALUES ('" + itemID + "', '" + date + "' , '" + price + "', 'FALSE')", conn);      
+                selectCommand.ExecuteNonQuery();
+                conn.Close();
+            }
+            Console.WriteLine("Item Sold!");
+        }
+        else{
+            Console.WriteLine("Invalid Item ID:" + itemID);
+        }
+
     }
     private List<SelectListItem> GetItems(){
         List<SelectListItem> tempItems = new List<SelectListItem>();

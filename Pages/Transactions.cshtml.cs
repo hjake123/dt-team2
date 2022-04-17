@@ -27,6 +27,7 @@ public class TransactionsOutput{
 
 public class Transactions{
     //Transactions Enitity Attributes
+    public int transactionID{get; set;} = default!;
     public int itemID{get; set;} = default!;
     public DateTime date{get; set;} = default!;
     public float price{get; set;} = default!;
@@ -37,9 +38,11 @@ public class Transactions{
 public class TicketTransactions{
     //TicketTransactions Entitiy attributes
     public int selectedAccess{get; set;} = default!; 
-    public int selecetedTicket{get; set;} = default!;
+    public int selectedTicket{get; set;} = default!;
     public float price{get; set;} = default!;
     public DateTime expirationDate{get; set;} = default!;
+    //For Transactions Table
+    public DateTime date{get; set;} = default!;
 }
 
 
@@ -58,10 +61,6 @@ public class TransactionsModel : PageModel
     public void OnGet()
     {
         GetTransactions();
-    }
-
-    private void SearchTransactions(){
-        //set up sql query to change based on search variable
     }
 
     private void GetTransactions()
