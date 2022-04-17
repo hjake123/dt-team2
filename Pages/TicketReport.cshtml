@@ -1,0 +1,44 @@
+@page
+@model dt_team2.Pages.TicketReportModel
+@{
+    ViewData["Title"] = "Report Result";
+    string[] TableHeaders = new string[]{"Transaction ID",
+        "Date", "Item", "Price"
+    };
+}
+<h1>@ViewData["Title"]</h1>
+
+<body>
+    <div class = "table">
+        <table class ="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    @{
+                        foreach(var head in TableHeaders)
+                        {
+                            <th>
+                                @head
+                            </th>
+                        }    
+                    }
+                </tr>
+            </thead>
+            <tbody>
+            @{
+                if (Model != null)
+                {
+                    foreach(TicketReportOutput Data in TicketReportModel.ticket_output)
+                    {
+                        <tr>
+                            <td>@Data.TicketID</td>
+                            <td>@Data.TransID</td>
+                            <td>@Data.TicketType</td>
+                            <td>@Data.AccessType</td>
+                        </tr>
+                    }
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+</body>
