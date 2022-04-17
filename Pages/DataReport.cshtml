@@ -1,7 +1,9 @@
 @page
-@model DataReportModel
+@model dt_team2.Pages.DataReportModel
 
 @{
+    string[] TableHeaders = new string[]{"TransactionID",
+        "Date", "ItemLabel", "Price"};
     ViewData["Title"] = "Data Report";
 }
 
@@ -62,16 +64,62 @@
     </div>
 
     <div id="giftshopSalesDIV" style="display: none;">
-        <label>Gift Shop Sales Report:</label>
-        <p><label for="date">Gift Shop Sales From:</label>
-                <input type="date" id="start" name="trip-start">
+        @using (Html.BeginForm("GetReport", "DataReport", FormMethod.Post, new { id = "GETREPORT" }))
+        {
+            <form method = "post">
+            <label>Gift Shop Sales Report:</label>
+            <p><label for="Item">Item:</label>
+                @Html.TextBoxFor(c => c.Item, new { @class = "form-control" })
+                @*<input type="number" id="start" name="trip-start">*@    
+            </p>
+            <p><label for="DateFrom">Gift Shop Sales From:</label>
+                @Html.TextBoxFor(c => c.DateFrom, new { @class = "form-control" })
+                @*<input type="date" id="start" name="trip-start">*@
 
-            <label for="date">To:</label>
-                <input type="date" id="start" name="trip-start">      
-        </p>
+            <label for="DateTo">To:</label>
+                @Html.TextBoxFor(c => c.DateTo, new { @class = "form-control" })
+                @*<input type="date" id="start" name="trip-start">*@
+            </p>
         
-        <p><button type="submit" class="btn btn-secondary">Submit Request</button></p>
-        
+            <button onclick="ShopReport()">Gift Shop Report</button>
+            @*<a asp-page="/ShopReport" asp-area="" button type="submit" class="btn btn-primary">Submit Request</a>*@
+            @*<p><button type="submit" class="btn btn-secondary">Submit Request</button></p>*@
+            </form>
+        }
+    </div>
+
+    <div id="shopReportDIV" style="display: none;">
+        <label>Report Result:</label>
+        <table class ="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    @{
+                        foreach(var head in TableHeaders)
+                        {
+                            <th>
+                                @head
+                            </th>
+                        }    
+                    }
+                </tr>
+            </thead>
+            <tbody>
+            @{
+                if (Model != null)
+                {
+                    foreach(ReportOutput Data in DataReportModel.col_output)
+                    {
+                        <tr>
+                            <td>@Data.TransactionID</td>
+                            <td>@Data.Date</td>
+                            <td>@Data.ItemLabel</td>
+                            <td>@Data.Price</td>
+                        </tr>
+                    }
+                }
+            }
+            </tbody>
+        </table>
     </div>
 
     <div id="museumActivityDIV" style="display: none;">
@@ -116,6 +164,16 @@
         } else {
             x.style.display = "none";
         }
+    }
+
+    function ShopReport(){
+        var x = document.getElementById("shopReportDIV");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        }
+        /*else {
+            x.style.display = "none";
+        }*/
     }
 </script>
 

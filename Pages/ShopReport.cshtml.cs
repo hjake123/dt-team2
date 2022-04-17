@@ -1,46 +1,42 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
+
 using System.Data.SqlClient;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace dt_team2.Pages;
 
-public class CollectionsOutput
+public class ShopReportOutput
 {
     //Transactions Enitity Attributes
-    public string CollectionName { get; set; } = default!;
-    public string Description { get; set; } = default!;
+    public string TransactionID { get; set; } = default!;
+    public DateTime Date { get; set; } = default!;
+    public string Item { get; set; } = default!;
+    public int Price { get; set; } = default!;
 }
 
-public class Collections
+public class ShopReportModel : PageModel
 {
-    //Transactions Enitity Attributes
-    public string CollectionName { get; set; } = default!;
-    public string Description { get; set; } = default!;
-}
-
-public class CollectionsModel : PageModel
-{
-    private readonly ILogger<CollectionsModel> _logger;
+    private readonly ILogger<ShopReportModel> _logger;
     private string connectionString = CSHolder.GetConnectionString();
-    public static List<CollectionsOutput> col_output = new List<CollectionsOutput>();
+    public static List<ShopReportOutput> shop_output = new List<ShopReportOutput>();
 
-    public CollectionsModel(ILogger<CollectionsModel> logger)
+    public ShopReportModel(ILogger<ShopReportModel> logger)
     {
         _logger = logger;
     }
 
     public void OnGet()
     {
-        GetCollections();
+        GetShopReport();
     }
 
-    private void GetCollections()
+    private void GetShopReport()
     {
         //default query (nothing searched)
-        if (col_output.Count > 0)
+        if (shop_output.Count > 0)
         {
-            col_output.Clear();
+            shop_output.Clear();
         }
         //Connect to database
         try
@@ -49,18 +45,20 @@ public class CollectionsModel : PageModel
             {
                 conn.Open();
                 //            Console.WriteLine("Database open");
-                SqlCommand selectCommand = new SqlCommand("SELECT * FROM [dbo].[Collections]", conn);
+                SqlCommand selectCommand = new SqlCommand("SELECT * FROM [dbo].[Transactions]", conn);
                 SqlDataReader results = selectCommand.ExecuteReader();
 
-                List<CollectionsOutput> temp_tr = new List<CollectionsOutput>();
+                List<ShopReportOutput> temp_tr = new List<ShopReportOutput>();
 
                 //Get Main Transaction entity Info
                 while (results.Read())
                 {
-                    temp_tr.Add(new CollectionsOutput
+                    temp_tr.Add(new ShopReportOutput
                     {
-                        CollectionName = results["CollectionName"].ToString(),
-                        Description = results["Description"].ToString(),
+                        TransactionID = results["TransactionID"].ToString(),
+                        //Date = results["Date"].ToString(),
+                        Item = results["Item"].ToString(),
+                        //Price = results["Price"],
                     });
                 }
 
@@ -77,7 +75,7 @@ public class CollectionsModel : PageModel
                     }
                 }*/
 
-                col_output = temp_tr;
+                shop_output = temp_tr;
 
                 conn.Close();
             };
@@ -87,5 +85,5 @@ public class CollectionsModel : PageModel
             throw ex;
         }
     }
-    public string Search { get; set; } = default!;
 }
+
