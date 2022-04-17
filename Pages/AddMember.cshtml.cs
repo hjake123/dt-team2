@@ -7,13 +7,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace dt_team2.Pages;
 
-
-public class Members{
-    public string firstName = default!;
-    public string lastName = default!;
-    public int cardNumber = default!;
-    public DateTime lastVisit = default!;    
-}
 public class AddMemberModel : PageModel
 {
     private readonly ILogger<AddMemberModel> _logger;
@@ -69,9 +62,14 @@ public class AddMemberModel : PageModel
         lastVisit = m.lastVisit;
         
         //connect to database
-        
+        Console.WriteLine(firstName);
+        Console.WriteLine(lastName);
+        Console.WriteLine(cardNumber);
+        Console.WriteLine(lastVisit);  
+
+        /*
         // REMEMBER: && ALREADY EXISTS FUNCTION (Create function that checks database against existing values)
-        if(firstName != default! && lastName != default! && cardNumber != 0 && lastVisit != default!)
+        if(firstName != "" && lastName != "" && cardNumber != 0 && lastVisit != default!)
         {
             string connectionString = CSHolder.GetConnectionString();
             using(SqlConnection conn = new SqlConnection(connectionString)){
@@ -85,6 +83,8 @@ public class AddMemberModel : PageModel
             }
             Console.WriteLine("Member Added");
         }
+        */
     }
+
  //   public string Search { get; set; }
 }

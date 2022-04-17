@@ -1,0 +1,45 @@
+@page
+@model MembersModel
+@{
+    ViewData["Title"] = "See All Members";
+    string[] TableHeaders = {"Member ID", "First Name", "Last Name", "Card Number", "Last Visit"};
+
+}
+
+<body>
+    <legend>@ViewData["Title"]</legend>
+
+    <div class = "table">
+        <table class ="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    @{
+                        foreach(var head in TableHeaders)
+                        {
+                            <th>
+                                @head
+                            </th>
+                        }    
+                    }
+                </tr>
+            </thead>
+            <tbody>
+            @{
+                if (Model != null)
+                {
+                    foreach(MembersOutput Data in MembersModel.members_output)
+                    {
+                        <tr>
+                            <td>@Data.memberID</td>
+                            <td>@Data.firstName</td>
+                            <td>@Data.lastName</td>
+                            <td>@Data.cardNumber</td>
+                            <td>@Data.lastVisit</td>
+                        </tr>
+                    }
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+</body>

@@ -5,29 +5,28 @@
     ViewData["Title"] = "Add Member";
 }
 
-<!DOCTYPE html>
-<html>
-    <head></head>
-    <body>
-        <form method = "post">
-            <legend>Member Information Form</legend>
-            <p><label for="firstName">First Name:</label>
-                @Html.TextBoxFor(m=> m.firstName, new { @class = "form-control" })       
-            </p>
 
-            <p><label for="lastName">Last Name:</label>
-                @Html.TextBoxFor(m=> m.lastName, new { @class = "form-control" })  
-            </p>
+<body>
+    <form method = "post">
+        <legend>Member Information Form</legend>
+        <p><label for="firstName">First Name:</label>
+            @Html.TextBoxFor(m=> m.firstName, new { @class = "form-control" })       
+        </p>
 
-            <p><label for="cardNumber">Card Number:</label>
-                @Html.TextBoxFor(m=> m.cardNumber, new { @class = "form-control" })  
-            </p>
-            
-            <p><label for="lastVisit">Last Visit:</label>
-                @Html.TextBoxFor(m=> m.lastVisit, new { @class = "form-control" })  
-            </p>
+        <p><label for="lastName">Last Name:</label>
+            @Html.TextBoxFor(m=> m.lastName, new { @class = "form-control" })  
+        </p>
 
-            <p><input type="submit" name="buttonSubmit" value= "Add Member" /></p>
-        </form>
-    </body>
-</html>
+        <p><label for="cardNumber">Card Number:</label>
+            @Html.TextBoxFor(m=> m.cardNumber, new { @class = "form-control" })  
+        </p>
+        
+        <p><label for="lastVisit">Last Visit:</label>
+            @Html.TextBoxFor(m=> m.lastVisit, new { @class = "form-control" })  
+        </p>
+
+        <p><button type="submit">Add Member</button>
+        
+        </p>
+    </form>
+</body>
