@@ -5,21 +5,27 @@
     ViewData["Title"] = "Add Member";
 }
 
-<!DOCTYPE html>
 <html>
-    <head></head>
     <body>
         <form method = "post">
-            <legend>Member Information Form</legend>
-            <p><label for="firstName">First Name:</label>
-                <input type="text" name="firstName" />
+            <legend>@ViewData["Title"]</legend>
+            <p><label>First Name:</label>
+                @Html.TextBoxFor(m => m.firstName, new { @class = "form-control" })        
+            </p>       
+
+            <p><label>Last Name:</label>
+                @Html.TextBoxFor(m => m.lastName, new { @class = "form-control" })        
             </p>
 
-            <p><label for="lastName">Last Name:</label>
-                <input type="text" name="lastName" />
+            <p><label>Card Number:</label>
+                @Html.TextBoxFor(m => m.cardNumber, new { @class = "form-control" })        
             </p>
 
-            <p><input type="submit" name="buttonSubmit" value= "Add Member" /></p>
+            <p><label>Last Visit:</label>
+                @Html.TextBoxFor(m => m.lastVisit, new { @class = "form-control" })        
+            </p>            
+
+            <button type="submit">Add Member</button>              
         </form>
     </body>
 </html>

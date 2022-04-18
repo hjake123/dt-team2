@@ -8,10 +8,11 @@ using System.ComponentModel.DataAnnotations;
 namespace dt_team2.Pages;
 
 public class Members{
-    public string firstName = default!;
-    public string lastName = default!;
-    public int cardNumber = default!;
-    public DateTime lastVisit = default!;    
+    public int memberID{get; set;} = default!;
+    public string firstName{get; set;} = default!;
+    public string lastName{get; set;} = default!;
+    public int cardNumber{get; set;} = default!;
+    public DateTime lastVisit{get; set;} = default!;
 }
 
 public class MembersOutput{
