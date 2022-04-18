@@ -5,33 +5,122 @@
 }
 
 <!DOCTYPE html>
-  <html>
+<html>
     <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="styles" href="styles.css"> 
-      <title> MFA Houston Employee Login </title>
-    </head>
-<body>
-  <body>
-    <div class="login-page">
-      <div class="form">
-        <div class="login">
-          <div class="login-header">
-            <h3>MFA H Employee Login</h3>
-          </div>
-        </div class= "login-form">
-          <form name = "Login" method = "post">
+      <style>
+        header .header{
+          background-color: #fff;
+          height: 45px;
+          text-align: center;
+        }
+        header a img{
+          width: 134px;
+          margin-top: 4px;
+        }
 
-          <p><label for="userName">Username</label>
-              @Html.TextBoxFor(t => t.userName, new { @class = "form-control" })        
-          </p>
-          <p><label for="password">Password</label>
-              @Html.PasswordFor(m => .password, new { @class = "form-control" })        
-          </p>
-          <button type="submit">Login</button> 
-        </form>
-      </div>
-    </div>
-</body>
-</body>
+        .login-header{
+          text-align: center;
+          font-weight: bold;
+        }
+        .login-page {
+          width: 450px;
+          padding: 8% 0 0;
+          margin: auto;
+        }
+        .login-page .form .login{
+          margin-top: -31px;
+          margin-bottom: 26px;
+          
+        }
+        .form {
+          position: relative;
+          border-radius: 20px;
+          z-index: 1;
+          background: #FFFFFF;
+          max-width: 600px;
+          margin: 0 auto 100px;
+          padding: 45px;
+          text-align: left;
+          /*box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);*/
+        }
+        .form input {
+          font-family: "Roboto", sans-serif;
+          outline: 0;
+          background: #f2f2f2;
+          width: 100%;
+          border: 0;
+          margin: 0 0 15px;
+          padding: 15px;
+          box-sizing: border-box;
+          font-size: 14px;
+          border-radius: 10px;
+        }
+        .form button {
+          font-family: "Roboto", sans-serif;
+          text-transform: uppercase;
+          outline: 0;
+          background-color: #A98787;
+          border-radius: 15px;
+          
+          width: 100%;
+          border: 0;
+          padding: 15px;
+          color: #FFFFFF;
+          font-size: 14px;
+          -webkit-transition: all 0.3 ease;
+          transition: all 0.3 ease;
+          cursor: pointer;
+        }
+        .form .message {
+          margin: 15px 0 0;
+          color: black;
+          font-size: 12px;
+        }
+        .form .message a {
+          color: #a4857b;
+          text-decoration: none;
+        }
+
+        .container {
+          position: relative;
+          z-index: 1;
+          
+        }
+
+        body {
+          background-color: #D4CCCC;
+          font-family: Verdana, Geneva, Tahoma, sans-serif;
+          /*background-image: linear-gradient(90deg,#a4857b,#D4CCCC);*/
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          
+        }
+      </style>
+      
+      <title> MFA Houston Employee Login </title>
+
+    </head>
+    <body>
+      <body>
+        <div class="login-page">
+          <div class="form">
+            <div class="login">
+              <div class="login-header">
+                <h3>MFA H Employee Login</h3>
+              </div>
+            </div class= "login-form">
+              <form name = "Login" method = "post">
+
+              <p><label for="userName">Username</label>
+                  @Html.TextBoxFor(t => t.userName, new { @class = "login-form" })        
+              </p>
+              <p><label for="password">Password</label>
+                  @Html.PasswordFor(m => m.password, new { @class = "login-form" })        
+              </p>
+              <button type="submit">Login</button> 
+            </form>
+          </div>
+        </div>
+      </body>
+    </body>
 </html>
