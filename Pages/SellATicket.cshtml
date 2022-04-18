@@ -13,7 +13,6 @@
             htmlAttributes: new { @class = "form-control", @id = "AccessType" })
             <a asp-page="/AccessTypeAdd" asp-area="" button type="button" class="btn btn-primary">Add an Access Type</a>
             <a asp-page="/AccessTypeEdit" asp-area="" button type="button" class="btn btn-primary">Edit an Access Type</a>
-            <a asp-page="/AccessTypeRemove" asp-area="" button type="button" class="btn btn-primary">Remove an Access Type (Admin)</a>
         </p>
 
         <p><label for="accesstype">Select a Ticket Type:</label>
@@ -21,7 +20,6 @@
             htmlAttributes: new { @class = "form-control", @id = "TicketType" })
             <a asp-page="/TicketTypeAdd" asp-area="" button type="button" class="btn btn-primary">Add a Ticket Type</a>
             <a asp-page="/TicketTypeEdit" asp-area="" button type="button" class="btn btn-primary">Edit a Ticket Type</a>
-            <a asp-page="/TicketTypeRemove" asp-area="" button type="button" class="btn btn-primary">Remove a Ticket Type (Admin)</a>
         </p>        
 
         <p><label for="item">Price:</label>
@@ -32,6 +30,9 @@
             @Html.TextBoxFor(t => t.expirationDate, new { @class = "form-control" })     
         </p>
 
+        <p><label for="expirationdate">Sale Date:</label>
+            @Html.TextBoxFor(t => t.date, new { @class = "form-control" })     
+        </p>
         <button type="submit">Complete Transaction</button>
     </form>
 

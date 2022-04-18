@@ -26,17 +26,85 @@ public class SellATicketModel : PageModel
     //Other-----------------------------------------------------------------
     public float price{get; set;} = default!;
     public DateTime expirationDate{get; set;} = default!;
+    public DateTime date{get; set;} = default!;
 
     //Functions------------------------------------------------------------
-    public void OnPost(TicketTransactions tick){
+    private bool DoesIDExist(int T_ID){
+        string connectionString = CSHolder.GetConnectionString();
+
+        using(SqlConnection conn = new SqlConnection(connectionString)){
+            conn.Open();
+            SqlCommand selectCommand = new SqlCommand("SELECT TransactionID FROM dbo.Transactions WHERE TransactionID = " + T_ID, conn); 
+            SqlDataReader results = selectCommand.ExecuteReader();  
+
+            while(results.Read()){
+                if(results["TransactionID"].ToString() == T_ID.ToString()){
+                    return true; 
+                }
+            }            
+
+            conn.Close();
+        }
+        return false;
+    }
+    private int GenerateID(){
+        Random rnd = new Random();
+        int T_ID = rnd.Next();
+
+        Console.WriteLine("Generating ID.....");
+        //if T_ID already exists rnd.next(); constantyl check
+        while(DoesIDExist(T_ID) == true){
+            Console.WriteLine("There exists one ID for " + T_ID);
+            T_ID = rnd.Next();
+            Console.WriteLine("Generating New ID....");                
+        }
+
+        Console.WriteLine("Success Generating ID " + T_ID);    
+        return T_ID;
+    }
+
+    public void OnPost(Transactions tr, TicketTransactions tick){
         selectedAccess = tick.selectedAccess;
         selectedTicket = tick.selectedTicket;
         price = tick.price;
         expirationDate = tick.expirationDate;
 
+        date = tr.date;
         //connect insert into database
-        
+        string connectionString = CSHolder.GetConnectionString();
 
+        int temp_transactionID = GenerateID();
+
+        
+        using(SqlConnection conn = new SqlConnection(connectionString)){
+            conn.Open();
+
+
+            //insert into transaction
+            SqlCommand selectCommand = new SqlCommand("INSERT INTO dbo.Transactions (TransactionID, Item, Date, Price, IsTicket) VALUES(" + temp_transactionID + ", 1, '" + date + "', " + price + ", 'TRUE')", conn); 
+            selectCommand.ExecuteNonQuery();
+
+            //insert into Transactions Ticket
+            selectCommand = new SqlCommand("INSERT INTO dbo.TransactionsTicket (ExpirationDate, AccessType, TicketType, TransactionID) VALUES('" + expirationDate + "', " + selectedAccess + ", " + selectedTicket + ", " + temp_transactionID + ")", conn); 
+            selectCommand.ExecuteNonQuery();
+
+            //get ticket ID for insertion into transactionsTicket
+            selectCommand = new SqlCommand("SELECT TicketID FROM dbo.TransactionsTicket WHERE TransactionID = " + temp_transactionID, conn); 
+            SqlDataReader results = selectCommand.ExecuteReader();    
+
+            string tmp_ticketID = default!;
+
+            while(results.Read()){
+                tmp_ticketID = results["TicketID"].ToString()!;
+            }
+            
+            //update transaction
+            selectCommand = new SqlCommand("UPDATE dbo.Transactions SET TicketID = " + tmp_ticketID + "WHERE TransactionID = " + temp_transactionID, conn);             
+            selectCommand.ExecuteNonQuery();            
+
+            conn.Close();
+        }
+                
         Console.WriteLine("Ticket Sold!");
     }
     private List<SelectListItem> GetAccess(){

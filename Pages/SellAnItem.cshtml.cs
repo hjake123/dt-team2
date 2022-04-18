@@ -66,7 +66,7 @@ public class SellAnItemModel : PageModel
 
             using(SqlConnection conn = new SqlConnection(connectionString)){
                 conn.Open();   
-                SqlCommand selectCommand = new SqlCommand("INSERT INTO dbo.Transactions(TransactionID, Item, Date, Price, IsTicket) VALUES (" + tmp_transactionID + ", '" + itemID + "', '" + date + "' , '" + price + "', 'FALSE')", conn);      
+                SqlCommand selectCommand = new SqlCommand("INSERT INTO dbo.Transactions(TransactionID, Item, Date, Price, IsTicket) VALUES ('" + tmp_transactionID + "', '" + itemID + "', '" + date + "' , '" + price + "', 'FALSE')", conn);      
                 selectCommand.ExecuteNonQuery();
                 conn.Close();
             }

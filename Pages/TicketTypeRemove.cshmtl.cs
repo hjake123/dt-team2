@@ -22,6 +22,7 @@ public class TicketTypeRemoveModel : PageModel
         Console.WriteLine("Attempt to Remove Ticket Type ID: " + ticketTypeID);
 
         //remove query database
+        
     }
 
     private List<SelectListItem> GetTicket(){
