@@ -54,7 +54,7 @@ public class ShopReportModel : PageModel
                 SqlCommand selectCommand = new SqlCommand(
                     "SELECT a.TransactionID, a.Date, b.ItemLabel, a.Price " +
                     "FROM [dbo].[Transactions] AS a, [dbo].[Lookup_Item] AS b " +
-                    "WHERE a.Date >= Convert(datetime, '" + DateFrom + "') AND a.Date <= Convert(datetime, '" + DateTo + "') AND b.Item=2", conn);
+                    "WHERE a.Date >= Convert(datetime, '2015-01-01') AND a.Date <= Convert(datetime, '2022-04-15') AND b.Item=2", conn);
                 SqlDataReader results = selectCommand.ExecuteReader();
                 List<ShopReportOutput> temp_tr = new List<ShopReportOutput>();
                 while (results.Read())

@@ -26,7 +26,7 @@
               @Html.TextBoxFor(t => t.userName, new { @class = "form-control" })        
           </p>
           <p><label for="password">Password</label>
-              @Html.PasswordFor(t => t.password, new { @class = "form-control" })        
+              @Html.PasswordFor(m => m.password, new { @class = "form-control" })        
           </p>
           <button type="submit">Login</button> 
         </form>
