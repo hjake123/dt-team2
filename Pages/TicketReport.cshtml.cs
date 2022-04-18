@@ -56,10 +56,10 @@ public class TicketReportModel : PageModel
                 {
                     temp_tr.Add(new TicketReportOutput
                     {
-                        TicketID = int.Parse(results["TicketID"].ToString()),
-                        AccessType = int.Parse(results["AccessType"].ToString()),
-                        TicketType = int.Parse(results["TicketType"].ToString()),
-                        TransID = int.Parse(results["TransactionID"].ToString())
+                        TicketID = int.Parse(results["TicketID"].ToString()!),
+                        AccessType = int.Parse(results["AccessType"].ToString()!),
+                        TicketType = int.Parse(results["TicketType"].ToString()!),
+                        TransID = int.Parse(results["TransactionID"].ToString()!)
                     });
                 }
 
@@ -81,11 +81,10 @@ public class TicketReportModel : PageModel
                 conn.Close();
             };
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             Console.WriteLine("No, that's wrong!");
-            throw ex;
+            throw;
         }
     }
 }
-

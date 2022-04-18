@@ -25,7 +25,7 @@ public class AddExhibitionModel : PageModel
     public DateTime DateEnd { get; set; } = default!;
 
     // [HttpPost] 
-    public ActionResult Exhibition_DE(Exhibition exhibition) {
+    public void Exhibition_DE(Exhibition exhibition) {
 
         string ExhibitionName = exhibition.ExhibitionName;
         string Description = exhibition.Description;
@@ -34,7 +34,6 @@ public class AddExhibitionModel : PageModel
         string Location = exhibition.Location;
         string DateEnd = exhibition.DateEnd.ToString("m y");
 
-        return null;
     }
 
     // submit form to OnPost

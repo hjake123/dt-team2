@@ -26,7 +26,7 @@ public class AddCollectionModel : PageModel
         string CollectionName = c.CollectionName;
         string Description = c.Description;
 
-        return null;
+        return new EmptyResult();
     }
 
     // submit form to OnPost

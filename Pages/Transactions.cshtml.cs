@@ -89,12 +89,12 @@ public class TransactionsModel : PageModel
 
             //Get Main Transaction entity Info
             while(results.Read()){
-                temp_tr.Add(new TransactionsOutput{TransactionID = results["TransactionID"].ToString(),
-                itemID = results["Item"].ToString(),
-                date = results["Date"].ToString(),
-                price = results["Price"].ToString(),
-                IsTicket = results["IsTicket"].ToString(),
-                TicketID = results["TicketID"].ToString()});
+                temp_tr.Add(new TransactionsOutput{TransactionID = results["TransactionID"].ToString()!,
+                itemID = results["Item"].ToString()!,
+                date = results["Date"].ToString()!,
+                price = results["Price"].ToString()!,
+                IsTicket = results["IsTicket"].ToString()!,
+                TicketID = results["TicketID"].ToString()!});
             }
 
             //loop through transactions again to get all info needed
@@ -105,7 +105,7 @@ public class TransactionsModel : PageModel
                 selectCommand = new SqlCommand("SELECT itemLabel FROM [dbo].[Lookup_Item] WHERE item = " + temp_itemID, conn);
                 results = selectCommand.ExecuteReader();   
                 while(results.Read()){
-                    temp_tr[i].itemLabel = results["itemLabel"].ToString();              
+                    temp_tr[i].itemLabel = results["itemLabel"].ToString()!;              
                 }
 
                 //Get Ticket Transactions entity info
@@ -122,9 +122,9 @@ public class TransactionsModel : PageModel
                     results = selectCommand.ExecuteReader();   
 
                     while(results.Read()){
-                        temp_tr[i].expirationDate = results["ExpirationDate"].ToString();                        
-                        temp_tr[i].accessType = results["AccessType"].ToString();
-                        temp_tr[i].ticketType = results["TicketType"].ToString();               
+                        temp_tr[i].expirationDate = results["ExpirationDate"].ToString()!;                        
+                        temp_tr[i].accessType = results["AccessType"].ToString()!;
+                        temp_tr[i].ticketType = results["TicketType"].ToString()!;               
                     }                 
                     //get TicketLabel
                     /*
@@ -140,8 +140,3 @@ public class TransactionsModel : PageModel
         };            
     }
 }
-
-
-
-
-

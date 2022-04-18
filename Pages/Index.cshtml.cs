@@ -7,7 +7,7 @@ public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
 
-    public string username;
+    public string username = default!;
 
     public IndexModel(ILogger<IndexModel> logger)
     {
@@ -20,7 +20,7 @@ public class IndexModel : PageModel
             // Then no session cookie exists and they're not logged in! Get 'em out of here!
             Response.Redirect("Login");
         }else{
-            username = Request.Cookies["session_user"];
+            username = Request.Cookies["session_user"]!;
         }
     }
 }

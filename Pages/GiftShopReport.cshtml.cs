@@ -1,3 +1,4 @@
+#nullable enable
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data.SqlClient;
@@ -60,10 +61,10 @@ public class ShopReportModel : PageModel
                 {
                     temp_tr.Add(new ShopReportOutput
                     {
-                        TransactionID = results["TransactionID"].ToString(),
-                        Date = results["Date"].ToString(),
-                        ItemLabel = results["ItemLabel"].ToString(),
-                        Price = results["Price"].ToString(),
+                        TransactionID = results["TransactionID"].ToString()!,
+                        Date = results["Date"].ToString()!,
+                        ItemLabel = results["ItemLabel"].ToString()!,
+                        Price = results["Price"].ToString()!,
                     });
                 }
                 col_output = temp_tr;

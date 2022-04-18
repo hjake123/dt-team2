@@ -26,11 +26,11 @@ public class ExhibitionsModel : PageModel {
 
                 while (data.Read()) {
                     list.Add(new Exhibition {
-                        ExhibitionName = data["ExhibitionName"].ToString(),
-                        Description = data["Description"].ToString(),
-                        ListOfPieces = data["ListOfPieces"].ToString(),
-                        Arranger = data["Arranger"].ToString(),
-                        Location = data["Location"].ToString(),
+                        ExhibitionName = data["ExhibitionName"].ToString()!,
+                        Description = data["Description"].ToString()!,
+                        ListOfPieces = data["ListOfPieces"].ToString()!,
+                        Arranger = data["Arranger"].ToString()!,
+                        Location = data["Location"].ToString()!,
                         DateEnd = (DateTime)data["DateEnd"],
                     });
                 }
@@ -39,7 +39,7 @@ public class ExhibitionsModel : PageModel {
                 connection.Close();
             };
         }
-        catch (Exception e) { throw e; }
+        catch (Exception) { throw; }
     }
 
     public void OnGet() {

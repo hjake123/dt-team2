@@ -46,8 +46,8 @@ public class MembersModel : PageModel
             SqlDataReader results = selectCommand.ExecuteReader();                
 
             while(results.Read()){
-                tmp_members.Add(new MembersOutput{memberID = results["MemberID"].ToString(), firstName = results["FirstName"].ToString(), 
-                lastName = results["LastName"].ToString(), cardNumber = results["CardNumber"].ToString(), lastVisit =results["LastVisit"].ToString()});  
+                tmp_members.Add(new MembersOutput{memberID = results["MemberID"].ToString()!, firstName = results["FirstName"].ToString()!, 
+                lastName = results["LastName"].ToString()!, cardNumber = results["CardNumber"].ToString()!, lastVisit =results["LastVisit"].ToString()!});  
             }
             
             conn.Close();
