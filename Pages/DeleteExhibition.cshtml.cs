@@ -22,6 +22,7 @@ public class DeleteExhibitionModel : PageModel {
 	// submit form to OnPost
 	public IActionResult OnPost(Exhibition exhibition) {
 		ExhibitionName = exhibition.ExhibitionName;
+		
 		using (SqlConnection connection = new SqlConnection(CSHolder.GetConnectionString())) {
 			connection.Open();
 			SqlCommand select = new SqlCommand("DELETE FROM dbo.Exhibitions WHERE ExhibitionName='" + ExhibitionName + "'", connection);
