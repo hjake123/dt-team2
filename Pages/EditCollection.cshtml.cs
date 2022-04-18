@@ -13,7 +13,6 @@ public class EditCollectionModel : PageModel {
 
 	public void OnGet(string id) {
 		OrigCollectionName = id;
-
 		// sql fetch, populate fields
 		
     // POPULATE HERE

@@ -10,7 +10,7 @@
 
 @using (Html.BeginForm("OnPost", "EditExhibition", FormMethod.Post, new { id = "EXHIB_DE" }))
 {
-    <input type="hidden" name="OrigExhibitionName" value=@Model.OrigExhibitionName />
+    <input type="hidden" name="OrigExhibitionName" value="@Model.OrigExhibitionName" />
     <div class="row">
         <div class="col-lg-2">Exhibition Name</div>
         <div class="col-lg-10">

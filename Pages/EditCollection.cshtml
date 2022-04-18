@@ -10,7 +10,7 @@
 
 @using (Html.BeginForm("OnPost", "EditCollection", FormMethod.Post, new { id = "COLL_DE" }))
 {
-    <input type="hidden" name="OrigCollectionName" value=@Model.OrigCollectionName />
+    <input type="hidden" name="OrigCollectionName" value="@Model.OrigCollectionName" />
     <div class="row">
         <div class="col-lg-2">Collection Name</div>
         <div class="col-lg-10">
