@@ -11,9 +11,25 @@ public class AddMemberModel : PageModel
     {
         _logger = logger;
     }
+    public int memberID{get; set;} = default!;
+    public string firstName{get; set;} = default!;
+    public string lastName{get; set;} = default!;
+    public int cardNumber{get; set;} = default!;
+    public DateTime lastVisit{get; set;} = default!;    
 
-    public void OnGet()
-    {
+    public void OnPost(Members m){
+        memberID = m.memberID;
+        firstName = m.firstName;
+        lastName = m.lastName;
+        cardNumber = m.cardNumber;
+        lastVisit = m.lastVisit;
+
+        Console.WriteLine("FIRST NAME: " + firstName);
+        Console.WriteLine("LAST NAME: " + lastName);
+        Console.WriteLine("CARD NUMBER: " + cardNumber);
+        Console.WriteLine("LAST VISIT: " + lastVisit);
+
+        
     }
- //   public string Search { get; set; }
+
 }
