@@ -1,14 +1,26 @@
 @page
-@model dt_team2.Pages.TicketReportModel
+@model TicketReportModel
 @{
-    ViewData["Title"] = "Ticket Report";
-    string[] TableHeaders = new string[]{"Transaction ID",
-        "Date", "Item", "Price"
-    };
+    ViewData["Title"] = "Ticket  Sales Report";
+    string[] TableHeaders = new string[]{"Date From", "Date To" , "AccessType", "Total Sales", "Total Revenue"};
 }
-<h1>@ViewData["Title"]</h1>
 
+<h1>@ViewData["Title"]</h1>
 <body>
+    <form method = "post">
+        <p><label for="item">Compare Date From:</label>
+            @Html.TextBoxFor(m => m.DateFrom, new { @class = "form-control" })        
+        </p>
+        <p><label for="item">To:</label>
+            @Html.TextBoxFor(m => m.DateTo, new { @class = "form-control" })        
+        </p>
+        <p><label for="item">For Sales with Access Type:</label>
+            @Html.DropDownListFor(t => Model.AccessType, new SelectList(Model.access, "Value", "Text"), 
+            htmlAttributes: new { @class = "form-control", @id = "AccessType" })       
+        </p>
+
+        <button type="submit">Request Report</button>
+    </form>
     <div class = "table">
         <table class ="table table-bordered table-hover">
             <thead>
@@ -30,10 +42,11 @@
                     foreach(TicketReportOutput Data in TicketReportModel.ticket_output)
                     {
                         <tr>
-                            <td>@Data.TicketID</td>
-                            <td>@Data.TransID</td>
-                            <td>@Data.TicketType</td>
+                            <td>@Data.DateFrom</td>
+                            <td>@Data.DateTo</td>
                             <td>@Data.AccessType</td>
+                            <td>@Data.TotalSales</td>
+                            <td>@Data.TotalRevenue</td>
                         </tr>
                     }
                 }
