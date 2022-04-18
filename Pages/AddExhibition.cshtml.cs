@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Data.SqlClient;
 
 namespace dt_team2.Pages;
 
@@ -19,33 +20,36 @@ public class AddExhibitionModel : PageModel
 
     public string ExhibitionName { get; set; } = default!;
     public string Description { get; set; } = default!;
-    public string ListOfPieces { get; set; } = default!;
+    // public string ListOfPieces { get; set; } = default!;
     public string Arranger { get; set; } = default!;
     public string Location { get; set; } = default!;
     public DateTime DateEnd { get; set; } = default!;
 
-    // [HttpPost] 
-    public void Exhibition_DE(Exhibition exhibition) {
-
-        string ExhibitionName = exhibition.ExhibitionName;
-        string Description = exhibition.Description;
-        string ListOfPieces = exhibition.ListOfPieces;
-        string Arranger = exhibition.Arranger;
-        string Location = exhibition.Location;
-        string DateEnd = exhibition.DateEnd.ToString("m y");
-
-    }
+    string d = "', '";
 
     // submit form to OnPost
-    public void OnPost(Exhibition exhibition) {
-
-        string ExhibitionName = exhibition.ExhibitionName;
-        string Description = exhibition.Description;
-        string ListOfPieces = exhibition.ListOfPieces;
-        string Arranger = exhibition.Arranger;
-        string Location = exhibition.Location;
-        string DateEnd = exhibition.DateEnd.ToString("m y");
+    public IActionResult OnPost(Exhibition exhibition) {
+	    ExhibitionName = exhibition.ExhibitionName;
+	    Description = exhibition.Description;
+	    // ListOfPieces = exhibition.ListOfPieces;
+	    Arranger = exhibition.Arranger;
+	    Location = exhibition.Location;
+	    DateEnd = exhibition.DateEnd;
+	    String[] fields = {ExhibitionName, Description, Arranger, Location};
+	    if (DateEnd == new DateTime(1,1,1)) {
+		    ModelState.AddModelError("DateEnd", "Please set a date for the exhibition to end!");
+	    }
+	    else if ((new String[] {ExhibitionName, Description, Arranger, Location}.All(field => !String.IsNullOrEmpty(field)))) {
+		    using (SqlConnection connection = new SqlConnection(CSHolder.GetConnectionString())) {
+			    connection.Open();
+			    SqlCommand select = new SqlCommand("INSERT INTO dbo.Exhibitions(ExhibitionName, Description, Arranger, Location, DateEnd) VALUES('" + ExhibitionName + d + Description + d + Arranger + d + Location + d + DateEnd + "')", connection);
+			    int rows_added = select.ExecuteNonQuery();
+			    connection.Close();
+			    Console.WriteLine(rows_added + " Exhibition added");
+		    }
+		    return RedirectToPage("/Exhibitions");
+	    }
+	    return Page();
     }
-
 
 }

@@ -1,0 +1,132 @@
+@page
+@model MemberEditModel
+
+@{
+    ViewData["Title"] = "Edit a Member";
+    string[] TableHeaders = {"Member ID", "First Name", "Last Name", "Card Number", "Last Visit"};
+}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #FirstNameDIV, #LastNameDIV, #CardNumberDIV, #LastVisitDIV{
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <legend>@ViewData["Title"]</legend>
+    <p><label for="member">Select which Variables to Edit:</label></p>     
+
+    <p><button onclick="FirstNameFunction()">Change First Name to:</button>
+        <button onclick="LastNameFunction()">Change Last Name to:</button>
+        <button onclick="CardNumberFunction()">Change Card Number to:</button>
+        <button onclick="LastVisitFunction()">Change Last Visit to:</button>
+    </p>
+    <form form name = "MemberEdit" method = "post">
+
+        <p><label>Enter Member ID to Edit:</label>
+            @Html.TextBoxFor(m => m.memberID, new { @class = "form-control" })        
+        </p> 
+        <div id="FirstNameDIV" style= "display: none;">
+            <p><label>Change First Name to:</label>
+                @Html.TextBoxFor(m => m.firstName, new { @class = "form-control" })        
+            </p>      
+        </div>
+
+        <div id="LastNameDIV" style= "display: none;">
+            <p><label>Change Last Name to:</label>
+                @Html.TextBoxFor(m => m.lastName, new { @class = "form-control" })        
+            </p>  
+        </div>
+
+        <div id="CardNumberDIV" style= "display: none;">
+            <p><label>Change Card Number to:</label>
+                @Html.TextBoxFor(m => m.cardNumber, new { @class = "form-control" })        
+            </p>
+        </div>
+
+        <div id="LastVisitDIV" style= "display: none;">
+            <p><label>Change Last Visit to:</label>
+                @Html.TextBoxFor(m => m.lastVisit, new { @class = "form-control" })        
+            </p>    
+        </div>
+
+        <button type="submit">Edit Member</button>
+        <p><a asp-page="/Members" asp-area="" button type="button" class="btn btn-primary">See all Members</a></p>           
+    </form>
+
+    <div class = "table">
+        <table class ="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    @{
+                        foreach(var head in TableHeaders)
+                        {
+                            <th>
+                                @head
+                            </th>
+                        }    
+                    }
+                </tr>
+            </thead>
+            <tbody>
+            @{
+                if (Model != null)
+                {
+                    foreach(MembersOutput Data in MembersModel.members_output)
+                    {
+                        <tr>
+                            <td>@Data.memberID</td>
+                            <td>@Data.firstName</td>
+                            <td>@Data.lastName</td>
+                            <td>@Data.cardNumber</td>
+                            <td>@Data.lastVisit</td>
+                        </tr>
+                    }
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+</body>
+
+<script>
+    function FirstNameFunction(){
+        var x = document.getElementById("FirstNameDIV");
+
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+    function LastNameFunction(){
+        var x = document.getElementById("LastNameDIV");
+
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+    function CardNumberFunction(){
+        var x = document.getElementById("CardNumberDIV");
+
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+    function LastVisitFunction(){
+        var x = document.getElementById("LastVisitDIV");
+
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>

@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace dt_team2.Pages;
 
-public class ExhibitionsModel : PageModel {
+public class ExhibitionsModel : PageModel 
+{
     private readonly ILogger<ExhibitionsModel> _logger;
     public static List<Exhibition> exhibitions = new List<Exhibition>();
     private string c_string = CSHolder.GetConnectionString();
@@ -28,7 +29,7 @@ public class ExhibitionsModel : PageModel {
                     list.Add(new Exhibition {
                         ExhibitionName = data["ExhibitionName"].ToString()!,
                         Description = data["Description"].ToString()!,
-                        ListOfPieces = data["ListOfPieces"].ToString()!,
+                        // ListOfPieces = data["ListOfPieces"].ToString()!,
                         Arranger = data["Arranger"].ToString()!,
                         Location = data["Location"].ToString()!,
                         DateEnd = (DateTime)data["DateEnd"],

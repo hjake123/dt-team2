@@ -12,42 +12,53 @@
     <body>
         <div class="container">
         <section>
-            <h1 class="center">Edit Profile</h1>
+            <h1 class="center">Add a Piece</h1>
 
-            <!-- TODO: REPLACE WITH .NET FORM -->
+            <form name = "AddPieceForm" method = "post">
 
-            <form action="#", method="PUT">
-                <label for="title" class="required">Title:</label>
-                <input id="title" name="title" type="text", maxlength="200" required></input> 
-                <br><br>
-                <label for="creator" class="required">Creator:</label>
-                <input id="creator" name="creator" type="text", maxlength="50" required></input> 
-                <br><br>
-                <label for="desc">Description:</label>
-                <input id="desc" name="desc" type="text", maxlength="400" required></input>
-                <br><br>
-                <label for="dim">Dimensions:</label>
-                <input id="dim" name="dim" type="text" maxlength="50" required></input> 
-                <br><br>
-                <label for="origin">Place of Origin:</label>
-                <input id="origin" name="origin" type="text" maxlength="50" required></input> 
-                <br><br>
-                <label for="makedate">Date Created:</label>
-                <input id="makedate" name="makedate" type="date" required></input> 
-                <br><br>
-                <label for="getdate">Date Acquired:</label>
-                <input id="getdate" name="getdate" type="date" required></input> 
-                <br><br>
-                <label for="source">Source:</label>
-                <input id="source" name="source" type="text" maxlength="300" required></input> 
-                <br><br>
-                <label for="medium" class="required">Medium:</label>
-                <select id="medium" name="medium" required>
-                    <option value="" selected disabled hidden>-- Select --</option>
-                    <!-- TODO: Populate from Lookup_Medium table! -->
-                </select> 
-                <br><br>
-                <input type="submit" value="Save Changes" class="btn btn-primary">
+                <p><label for="title">Title:</label>
+                    @Html.TextBoxFor(t => t.title, new { @class = "form-control" })        
+                </p>
+
+                <p><label for="creator">Creator:</label>
+                    @Html.TextBoxFor(t => t.creator, new { @class = "form-control" })        
+                </p>
+
+                <p><label for="desc">Description:</label>
+                    @Html.TextBoxFor(t => t.desc, new { @class = "form-control" })        
+                </p>
+
+                <p><label for="dim">Dimensions:</label>
+                    @Html.TextBoxFor(t => t.dim, new { @class = "form-control" })        
+                </p>
+
+                <p><label for="origin">Place of Origin:</label>
+                    @Html.TextBoxFor(t => t.origin, new { @class = "form-control" })        
+                </p>
+
+                <p><label for="source">Source:</label>
+                    @Html.TextBoxFor(t => t.source, new { @class = "form-control"})        
+                </p>
+
+                <p><label for="medium">Medium:</label>
+                    @Html.DropDownListFor(t => t.medium, new SelectList(Model.media, "Value", "Text"), 
+            htmlAttributes: new { @class = "form-control", @id = "MediumLabel" })       
+                </p>
+
+                <p><label for="datemade">Date Created:</label>
+                    @Html.TextBoxFor(t => t.makedate, new { @class = "form-control", @TextMode = "DateTime"})        
+                </p>
+
+                <p><label for="dateget">Date Acquired:</label>
+                    @Html.TextBoxFor(t => t.getdate, new { @class = "form-control", @TextMode = "DateTime"})        
+                </p>
+
+               <p><label for="collection">Collection:</label>
+                    @Html.DropDownListFor(t => t.collections, new SelectList(Model.collections, "Value", "Text"), 
+            htmlAttributes: new { @class = "form-control", @id = "CollectionName" })       
+                </p>
+
+                <button type="submit">Submit New Art Piece</button> 
             </form>
         </section>
     </div>
