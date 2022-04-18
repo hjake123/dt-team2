@@ -2,10 +2,11 @@
 @model TicketReportModel
 @{
     ViewData["Title"] = "Ticket  Sales Report";
-    string[] TableHeaders = new string[]{"Date From", "Date To" , "AccessType", "Total Sales", "Total Revenue"};
+    string[] TableHeaders = new string[]{"Date From", "Date To" , "Access Type", "Ticket Type", "Total Sales", "Total Revenue"};
 }
 
 <h1>@ViewData["Title"]</h1>
+
 <body>
     <form method = "post">
         <p><label for="item">Compare Date From:</label>
@@ -14,8 +15,15 @@
         <p><label for="item">To:</label>
             @Html.TextBoxFor(m => m.DateTo, new { @class = "form-control" })        
         </p>
-        <p><label for="item">For Sales with Access Type:</label>
+
+        <p><label for="item">Change Access Type to (Leave Blank If Not Searching For it):</label>
             @Html.DropDownListFor(t => Model.AccessType, new SelectList(Model.access, "Value", "Text"), 
+            htmlAttributes: new { @class = "form-control", @id = "AccessType" })
+        </p>
+
+
+        <p><label for="item">For Sales with Ticket Type (Leave Blank If Not Searching For it):</label>
+            @Html.DropDownListFor(t => Model.TicketType, new SelectList(Model.ticket, "Value", "Text"), 
             htmlAttributes: new { @class = "form-control", @id = "AccessType" })       
         </p>
 
@@ -45,6 +53,7 @@
                             <td>@Data.DateFrom</td>
                             <td>@Data.DateTo</td>
                             <td>@Data.AccessType</td>
+                            <td>@Data.TicketType</td>
                             <td>@Data.TotalSales</td>
                             <td>@Data.TotalRevenue</td>
                         </tr>
