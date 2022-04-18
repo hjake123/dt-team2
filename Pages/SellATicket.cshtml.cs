@@ -30,7 +30,7 @@ public class SellATicketModel : PageModel
     //Functions------------------------------------------------------------
     public void OnPost(TicketTransactions tick){
         selectedAccess = tick.selectedAccess;
-        selectedTicket = tick.selecetedTicket;
+        selectedTicket = tick.selectedTicket;
         price = tick.price;
         expirationDate = tick.expirationDate;
 

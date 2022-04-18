@@ -32,14 +32,16 @@ public class Transactions{
     public float price{get; set;} = default!;
     public bool IsTicket{get; set;} = default!;
     public bool TicketID{get; set;} = default!;
+    public int transactionID{get; set;} = default!;
 }
 
 public class TicketTransactions{
     //TicketTransactions Entitiy attributes
     public int selectedAccess{get; set;} = default!; 
-    public int selecetedTicket{get; set;} = default!;
+    public int selectedTicket{get; set;} = default!;
     public float price{get; set;} = default!;
     public DateTime expirationDate{get; set;} = default!;
+    
 }
 
 
