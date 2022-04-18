@@ -33,8 +33,10 @@
         <p><label for="expirationdate">Sale Date:</label>
             @Html.TextBoxFor(t => t.date, new { @class = "form-control" })     
         </p>
+        
         <button type="submit">Complete Transaction</button>
-    </form>
 
+        <p><a asp-page="/Transactions" asp-area="" button type="button" class="btn btn-primary">See all Transactions</a></p>
+    </form>
 </body>
 

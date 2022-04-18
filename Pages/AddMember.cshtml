@@ -25,7 +25,8 @@
                 @Html.TextBoxFor(m => m.lastVisit, new { @class = "form-control" })        
             </p>            
 
-            <button type="submit">Add Member</button>              
-        </form>
+            <button type="submit">Add Member</button>
+            <p><a asp-page="/Members" asp-area="" button type="button" class="btn btn-primary">See all Members</a></p>           
+        </form>    
     </body>
 </html>
