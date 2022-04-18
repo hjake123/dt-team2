@@ -1,7 +1,7 @@
 ﻿@page
 @model ExhibitionsModel
 @{
-    ViewData["Title"] = "Exhibitions dashboard";
+    ViewData["Title"] = "Exhibitions Dashboard";
 }
 <h1>@ViewData["Title"]</h1>
 
@@ -10,18 +10,49 @@
         <div class="col-md-6 col-md-offset-3">
 
             <div class="wrap">
-                <div class="search">
+                @* <div class="search">
                     <input type="text" class="searchTerm" placeholder="Search for exhibitions">
                     <button type="submit" class="btn btn-secondary">Search</button>
-                </div>
+                </div> *@
             </div>
 
             <a asp-page="/AddExhibition" asp-area="" button type="button" class="btn btn-primary">New exhibition</a>
 
-            <br /><br />
-            <p>Add carousel, grid or whatever here to show all exhibitions.</p>
-            <p>Integrate edit/remove with entries.</p>
-
+        </div>
+        <br /><br />
+        
+        <div class = "table">
+            <table class ="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr> @{
+                            foreach(var col in new[]{"Exhibition", "Description", "Arranger", "Location", "Ending Date", ""}) { 
+                                <th> @col </th> }    
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                @{
+                    if (Model != null) {
+                        foreach(Exhibition exhibition in ExhibitionsModel.exhibitions) {
+                            <tr>
+                                <td>@exhibition.ExhibitionName</td>
+                                <td>@exhibition.Description</td>
+                                @* <td>@exhibition.ListOfPieces</td>*@
+                                <td>@exhibition.Arranger</td>
+                                <td>@exhibition.Location</td>
+                                <td>@exhibition.DateEnd.ToString("MMMM d, yyyy")</td>
+                                <td>
+                                    <div class="col">
+                                        <a asp-page="/AddExhibition" asp-area="" button type="button" class="btn btn-outline-warning m-1">Edit</a>
+                                        <a asp-page="/AddExhibition" asp-area="" button type="button" class="btn btn-outline-danger m-1">Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                }
+                </tbody>
+            </table>
         </div>
     </div>
 </body>
