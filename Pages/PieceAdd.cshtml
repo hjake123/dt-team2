@@ -40,17 +40,17 @@
                     @Html.TextBoxFor(t => t.source, new { @class = "form-control"})        
                 </p>
 
-                <p><label for="medium">Medium:</label>
-                    @Html.DropDownListFor(t => t.medium, new SelectList(Model.media, "Value", "Text"), 
-            htmlAttributes: new { @class = "form-control", @id = "MediumLabel" })       
-                </p>
-
                 <p><label for="datemade">Date Created:</label>
                     @Html.TextBoxFor(t => t.makedate, new { @class = "form-control", @TextMode = "DateTime"})        
                 </p>
 
                 <p><label for="dateget">Date Acquired:</label>
                     @Html.TextBoxFor(t => t.getdate, new { @class = "form-control", @TextMode = "DateTime"})        
+                </p>
+
+                <p><label for="medium">Medium:</label>
+                    @Html.DropDownListFor(t => t.medium, new SelectList(Model.media, "Value", "Text"), 
+            htmlAttributes: new { @class = "form-control", @id = "MediumLabel" })       
                 </p>
 
                <p><label for="collection">Collection:</label>
