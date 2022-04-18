@@ -1,15 +1,16 @@
-﻿@page
-@model AddCollectionModel
+@page
+@model EditCollectionModel
 @Html.ValidationSummary()
 @{
-    ViewData["Title"] = "Add Collection";
+    ViewData["Title"] = "Edit Collection";
 }
 <h1>@ViewData["Title"]</h1>
 </br>
 <body>
 
-@using (Html.BeginForm("OnPost", "AddCollection", FormMethod.Post, new { id = "COLL_DE" }))
+@using (Html.BeginForm("OnPost", "EditCollection", FormMethod.Post, new { id = "COLL_DE" }))
 {
+    <input type="hidden" name="OrigCollectionName" value=@Model.OrigCollectionName />
     <div class="row">
         <div class="col-lg-2">Collection Name</div>
         <div class="col-lg-10">
@@ -23,13 +24,6 @@
             @Html.TextBoxFor(a => a.Description, new { @class = "form-control" })
         </div>
     </div>
-    @* <br /> 
-    <div class="row">
-        <div class="col-lg-2">Pieces in Collection</div>
-        <div class="col-lg-10">
-            @Html.TextBoxFor(a => a.ListOfPieces, new { @class = "form-control" })
-        </div>
-    </div> *@
     <br />
     @* <div class="row"> *@
     <input type="submit" value="Submit" class="btn btn-primary">

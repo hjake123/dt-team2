@@ -1,0 +1,21 @@
+@page
+@model DeleteCollectionModel
+@{
+    ViewData["Title"] = "Delete Collection";
+}
+<h1>@ViewData["Title"]</h1>
+</br>
+<body>
+
+@using (Html.BeginForm("OnPost", "DeleteCollection", FormMethod.Post, new { id = "EXHIB_DEL" }))
+{
+    <br/>
+    <div class="row"> <p>Are you sure you'd like to delete the collection titled "<strong>@Model.CollectionName</strong>"?</p> </div>
+    <br />
+    <input type="hidden" name="CollectionName" value=@Model.CollectionName />
+    @* <div class="row"> *@
+    <input type="submit" value="Delete" class="btn btn-danger">
+    <a asp-page="/Collections" asp-area="" button type="button" class="btn btn-outline-secondary m-1">Nevermind</a>
+}
+
+</body>

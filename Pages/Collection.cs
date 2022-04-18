@@ -6,6 +6,7 @@ namespace dt_team2.Pages;
 public class Collection {
 
 	public void OnGet() {}
+    public string OrigCollectionName { get; set; } = default!;
     public string CollectionName { get; set; } = default!;
     public string Description { get; set; } = default!;
 }
