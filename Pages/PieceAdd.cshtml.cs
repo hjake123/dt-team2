@@ -21,17 +21,17 @@ public class PieceEntity{
 
 public class PageAddModel : PageModel
 {
-    public int pieceID;
-    public string title;
-    public string creator;
-    public string desc;
-    public string dim;
-    public string origin;
-    public DateTime makedate;
-    public DateTime getdate;
-    public string source;
-    public int medium;
-    public string collection;
+    public int pieceID = default!;
+    public string title = default!;
+    public string creator = default!;
+    public string desc = default!;
+    public string dim = default!;
+    public string origin = default!;
+    public DateTime makedate = default!;
+    public DateTime getdate = default!;
+    public string source = default!;
+    public int medium = default!;
+    public string collection = default!;
 
     public List<SelectListItem> media{get; set;} = new List<SelectListItem>();
 
