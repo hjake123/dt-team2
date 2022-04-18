@@ -13,7 +13,12 @@ public class DeleteCollectionModel : PageModel {
 
 	public void OnGet(string id) {
 		CollectionName = id;
-  }
+
+		if(Request.Cookies["session_user_role"] != "admin"){
+			// Only admins can delete items!
+            Response.Redirect("ForbiddenAction");
+        }
+	}
 
 	public string CollectionName {
 		get; set;

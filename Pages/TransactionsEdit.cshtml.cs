@@ -248,4 +248,11 @@ public class TransactionsEditModel : PageModel
             conn.Close();
         };            
     }
+
+    public void OnGet(string id) {
+		if(Request.Cookies["session_user_role"] != "admin"){
+			// Only admins can delete items!
+            Response.Redirect("ForbiddenAction");
+        }
+  	}
 }
