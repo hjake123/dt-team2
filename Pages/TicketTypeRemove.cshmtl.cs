@@ -19,7 +19,7 @@ public class TicketTypeRemoveModel : PageModel
     public void OnPost(LookUp_TicketType ticketTypeRemove) {
         ticketTypeID = ticketTypeRemove.ticketTypeID;
 
-        Console.WriteLine("Attemp to Remove Ticket Type ID: " + ticketTypeID);
+        Console.WriteLine("Attempt to Remove Ticket Type ID: " + ticketTypeID);
 
         //remove query database
     }
