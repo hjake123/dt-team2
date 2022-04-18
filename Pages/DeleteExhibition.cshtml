@@ -1,0 +1,20 @@
+@page
+@model DeleteExhibitionModel
+@{
+    ViewData["Title"] = "Delete Exhibition";
+}
+<h1>@ViewData["Title"]</h1>
+</br>
+<body>
+
+@using (Html.BeginForm("OnPost", "DeleteExhibition", FormMethod.Post, new { id = "EXHIB_DEL" }))
+{
+    <br/>
+    <div class="row"> <p>Are you sure you'd like to delete the exhibition titled "<strong>@Model.ExhibitionName</strong>"?</p> </div>
+    <br />
+    @* <div class="row"> *@
+    <input type="submit" value="Delete" class="btn btn-danger">
+    <a asp-page="/Exhibitions" asp-area="" button type="button" class="btn btn-outline-secondary m-1">Nevermind</a>
+}
+
+</body>

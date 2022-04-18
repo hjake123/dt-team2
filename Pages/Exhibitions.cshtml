@@ -43,8 +43,8 @@
                                 <td>@exhibition.DateEnd.ToString("MMMM d, yyyy")</td>
                                 <td>
                                     <div class="col">
-                                        <a asp-page="/AddExhibition" asp-area="" button type="button" class="btn btn-outline-warning m-1">Edit</a>
-                                        <a asp-page="/AddExhibition" asp-area="" button type="button" class="btn btn-outline-danger m-1">Delete</a>
+                                        <a asp-page="/EditExhibition" asp-area="" asp-route-id=@exhibition.ExhibitionName button type="button" class="btn btn-outline-warning m-1">Edit</a>
+                                        <a asp-page="/DeleteExhibition" asp-area="" asp-route-id=@exhibition.ExhibitionName button type="button" class="btn btn-outline-danger m-1">Delete</a>
                                     </div>
                                 </td>
                             </tr>
