@@ -1,0 +1,93 @@
+@page
+@model MuseumReportModel
+
+@{
+    ViewData["Title"] = "Museum Activity Report";
+    string[] TableHeaders = {"Date From", "Date To", "Total Transactions", "Total Pieces", "Total Exhibitions"};
+    string[] TableHeaders2 = {"Transactions Increased By", "Gained Pieces", "Exhibitions On Display Increased By" };  
+}
+
+<body>
+    <legend>@ViewData["Title"]</legend>
+
+    <form method = "post">
+        <p><label for="item">Compare Date From:</label>
+            @Html.TextBoxFor(m => m.CompareDateFrom, new { @class = "form-control" })        
+        </p>
+        <p><label for="item">To:</label>
+            @Html.TextBoxFor(m => m.CompareDateTo, new { @class = "form-control" })        
+        </p>
+        <p><label for="item">With Date From:</label>
+            @Html.TextBoxFor(m => m.WithDateFrom, new { @class = "form-control" })        
+        </p>
+        <p><label for="item">To:</label>
+            @Html.TextBoxFor(m => m.WithDateTo, new { @class = "form-control" })        
+        </p>
+
+        <button type="submit">Request Report</button>
+    </form>
+    <div class = "table">
+        <table class ="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    @{
+                        foreach(var head in TableHeaders)
+                        {
+                            <th>
+                                @head
+                            </th>
+                        }    
+                    }
+                </tr>
+            </thead>
+            <tbody>
+            @{
+                if (Model != null)
+                {
+                    foreach(MuseumReportOutput Data in MuseumReportModel.museum_output)
+                    {
+                        <tr>
+                            <td>@Data.DateFrom</td>
+                            <td>@Data.DateTo</td>
+                            <td>@Data.TotalTransactions</td>
+                            <td>@Data.TotalPieces</td>
+                            <td>@Data.TotalExhibitions</td>
+                        </tr>
+                    }
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+    <div class = "table">
+        <table class ="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    @{
+                        foreach(var head in TableHeaders2)
+                        {
+                            <th>
+                                @head
+                            </th>
+                        }    
+                    }
+                </tr>
+            </thead>
+            <tbody>
+            @{
+                if (Model != null)
+                {
+                    foreach(MuseumReportOutputChange Data in MuseumReportModel.museum_output_change)
+                    {
+                        <tr>
+                            <td>@Data.TransactionsGained</td>
+                            <td>@Data.TotalPiecesGained</td>
+                            <td>@Data.TotalExhibitionsGained</td>
+                        </tr>
+                    }
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+</body>
