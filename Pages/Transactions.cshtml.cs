@@ -112,27 +112,32 @@ public class TransactionsModel : PageModel
 
                 //Get Ticket Transactions entity info
                 if(Convert.ToBoolean(temp_tr[i].IsTicket) == false){
-                    temp_tr[i].expirationDate = "NOT A TICKET";
+                    temp_tr[i].expirationDate = "-------------------";
                     temp_tr[i].TicketID = "NOT A TICKET";
-                    temp_tr[i].accessType = "NOT A TICKET";
-                    temp_tr[i].ticketType = "NOT A TICKET";                
+                    temp_tr[i].accessType = "-------------------";
+                    temp_tr[i].ticketType = "-------------------";                
                 }
                 else if(Convert.ToBoolean(temp_tr[i].IsTicket) == true){
 
                     //select from accesstable and tickettable
-                    selectCommand = new SqlCommand("SELECT * FROM [dbo].[TransactionsTicket] " , conn);
+                    selectCommand = new SqlCommand("SELECT ExpirationDate, AccessType, TicketType FROM [dbo].[TransactionsTicket] WHERE TransactionID = " + temp_tr[i].TransactionID, conn);
                     results = selectCommand.ExecuteReader();   
 
                     while(results.Read()){
                         temp_tr[i].expirationDate = results["ExpirationDate"].ToString()!;                        
                         temp_tr[i].accessType = results["AccessType"].ToString()!;
                         temp_tr[i].ticketType = results["TicketType"].ToString()!;               
-                    }                 
-                    //get TicketLabel
-                    /*
-                    selectCommand = new SqlCommand("SELECT * FROM [dbo].[Lookup_TicketType],[dbo].[Lookup_TicketType] " , conn);
+                    }
+
+                    //get TicketLabel & access Table
+                    selectCommand = new SqlCommand("SELECT a.AccessTypeLabel, b.TicketTypeLabel FROM dbo.Lookup_AccessType AS a, dbo.Lookup_TicketType AS b WHERE AccessType = " + temp_tr[i].accessType + " AND TicketType = " + temp_tr[i].ticketType, conn);
                     results = selectCommand.ExecuteReader();
-                    */
+
+                    while(results.Read()){                       
+                        temp_tr[i].accessType = results["AccessTypeLabel"].ToString()!;
+                        temp_tr[i].ticketType = results["TicketTypeLabel"].ToString()!;               
+                    }                    
+                    
                 }         
             }
     

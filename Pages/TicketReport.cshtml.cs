@@ -45,13 +45,11 @@ public class TicketReportModel : PageModel
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                //            Console.WriteLine("Database open");
                 SqlCommand selectCommand = new SqlCommand("SELECT * FROM [dbo].[TransactionsTicket]", conn);
                 SqlDataReader results = selectCommand.ExecuteReader();
 
                 List<TicketReportOutput> temp_tr = new List<TicketReportOutput>();
 
-                //Get Main Transaction entity Info
                 while (results.Read())
                 {
                     temp_tr.Add(new TicketReportOutput
@@ -62,19 +60,6 @@ public class TicketReportModel : PageModel
                         TransID = int.Parse(results["TransactionID"].ToString()!)
                     });
                 }
-
-                //loop through transactions again to get all info needed
-                /*for (int i = 0; i < temp_tr.Count; i++)
-                {
-                    //Get Item Label
-                    int temp_colName = Convert.ToInt32(temp_tr[i].CollectionName);
-                    selectCommand = new SqlCommand("SELECT itemLabel FROM [dbo].[Lookup_Item] WHERE item = " + temp_colName, conn);
-                    results = selectCommand.ExecuteReader();
-                    while (results.Read())
-                    {
-                        temp_tr[i].CollectionName = results["CollectionName"].ToString();
-                    }
-                }*/
 
                 ticket_output = temp_tr;
 

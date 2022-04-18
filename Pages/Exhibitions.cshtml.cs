@@ -29,7 +29,7 @@ public class ExhibitionsModel : PageModel
                     list.Add(new Exhibition {
                         ExhibitionName = data["ExhibitionName"].ToString()!,
                         Description = data["Description"].ToString()!,
-                        ListOfPieces = data["ListOfPieces"].ToString()!,
+                        // ListOfPieces = data["ListOfPieces"].ToString()!,
                         Arranger = data["Arranger"].ToString()!,
                         Location = data["Location"].ToString()!,
                         DateEnd = (DateTime)data["DateEnd"],

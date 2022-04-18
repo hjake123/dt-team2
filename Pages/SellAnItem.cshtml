@@ -13,18 +13,18 @@
             htmlAttributes: new { @class = "form-control", @id = "Item" })
             <a asp-page="/ItemAdd" asp-area="" button type="button" class="btn btn-primary">Add an Item</a>
             <a asp-page="/ItemEdit" asp-area="" button type="button" class="btn btn-primary">Edit an Item</a>
-            <a asp-page="/ItemRemove" asp-area="" button type="button" class="btn btn-primary">Remove an Item (Admin)</a>
         </p>
 
         <p><label for="price">Price:</label>
             @Html.TextBoxFor(i => i.price, new { @class = "form-control" })
         </p>
 
-        <p><label for="date">Date:</label>
+        <p><label for="date">Sale Date:</label>
             @Html.TextBoxFor(i => i.date, new { @class = "form-control" })
         </p>
 
         <button type="submit">Complete Transaction</button>
+        <p><a asp-page="/Transactions" asp-area="" button type="button" class="btn btn-primary">See all Transactions</a></p>
     </form>
 </body>
 
