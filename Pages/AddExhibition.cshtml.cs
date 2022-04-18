@@ -19,21 +19,20 @@ public class AddExhibitionModel : PageModel
 
     public string ExhibitionName { get; set; } = default!;
     public string Description { get; set; } = default!;
-    public string PiecesIncluded { get; set; } = default!;
+    public string ListOfPieces { get; set; } = default!;
     public string Arranger { get; set; } = default!;
     public string Location { get; set; } = default!;
-    public string DatesOpen { get; set; } = default!;
+    public DateTime DateEnd { get; set; } = default!;
 
     // [HttpPost] 
     public ActionResult Exhibition_DE(Exhibition exhibition) {
 
         string ExhibitionName = exhibition.ExhibitionName;
         string Description = exhibition.Description;
-        string PiecesIncluded = exhibition.PiecesIncluded;
+        string ListOfPieces = exhibition.ListOfPieces;
         string Arranger = exhibition.Arranger;
         string Location = exhibition.Location;
-        string DatesOpen = exhibition.DatesOpen;
-
+        string DateEnd = exhibition.DateEnd.ToString("m y");
 
         return null;
     }
@@ -43,10 +42,10 @@ public class AddExhibitionModel : PageModel
 
         string ExhibitionName = exhibition.ExhibitionName;
         string Description = exhibition.Description;
-        string PiecesIncluded = exhibition.PiecesIncluded;
+        string ListOfPieces = exhibition.ListOfPieces;
         string Arranger = exhibition.Arranger;
         string Location = exhibition.Location;
-        string DatesOpen = exhibition.DatesOpen;
+        string DateEnd = exhibition.DateEnd.ToString("m y");
     }
 
 
