@@ -6,6 +6,7 @@ namespace dt_team2.Pages;
 public class Exhibition {
 
 	public void OnGet() {}
+    public string OrigExhibitionName { get; set; } = default!;
     public string ExhibitionName { get; set; } = default!;
     public string Description { get; set; } = default!;
     // public string ListOfPieces { get; set; } = default!;

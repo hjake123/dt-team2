@@ -12,11 +12,17 @@ public class EditExhibitionModel : PageModel {
 	}
 
 	public void OnGet(string id) {
+		OrigExhibitionName = id;
 
+		// sql fetch, populate fields
+		
     // POPULATE HERE
   }
 
 
+	public string OrigExhibitionName {
+		get; set;
+	} = default !;
 	public string ExhibitionName {
 		get; set;
 	} = default !;
@@ -38,6 +44,7 @@ public class EditExhibitionModel : PageModel {
 
 	// submit form to OnPost
 	public IActionResult OnPost(Exhibition exhibition) {
+		OrigExhibitionName = exhibition.OrigExhibitionName;
 		ExhibitionName = exhibition.ExhibitionName;
 		Description = exhibition.Description;
 		// ListOfPieces = exhibition.ListOfPieces;
@@ -51,7 +58,8 @@ public class EditExhibitionModel : PageModel {
 		else if ((new String[] {ExhibitionName, Description, Arranger, Location}.All(field => !String.IsNullOrEmpty(field)))) {
 			using (SqlConnection connection = new SqlConnection(CSHolder.GetConnectionString())) {
 				connection.Open();
-				SqlCommand select = new SqlCommand("INSERT INTO dbo.Exhibitions(ExhibitionName, Description, Arranger, Location, DateEnd) VALUES('" + ExhibitionName + d + Description + d + Arranger + d + Location + d + DateEnd + "')", connection);
+				SqlCommand select = new SqlCommand("UPDATE dbo.Exhibitions SET ExhibitionName = '" + ExhibitionName + "', Description = '" + Description + "', Arranger = '" + Arranger + "',Location = '" + Location + "', DateEnd = '" + DateEnd + "' WHERE ExhibitionName='" + OrigExhibitionName + "' ", connection);
+				Console.WriteLine(select.CommandText);
 				int rows_added = select.ExecuteNonQuery();
 				connection.Close();
 				Console.WriteLine(rows_added + " Exhibition added");

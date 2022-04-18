@@ -31,5 +31,4 @@ public class DeleteExhibitionModel : PageModel {
 		}
 			return RedirectToPage("/Exhibitions");
 	}
-
 }
