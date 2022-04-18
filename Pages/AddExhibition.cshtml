@@ -1,13 +1,14 @@
 ﻿@page
 @model AddExhibitionModel
+@Html.ValidationSummary()
 @{
     ViewData["Title"] = "Add Exhibition";
 }
 <h1>@ViewData["Title"]</h1>
-
+</br>
 <body>
 
-@using (Html.BeginForm("Exhibition_DE", "AddExhibition", FormMethod.Post, new { id = "EXHIB_DE" }))
+@using (Html.BeginForm("OnPost", "AddExhibition", FormMethod.Post, new { id = "EXHIB_DE" }))
 {
     <div class="row">
         <div class="col-lg-2">Exhibition Name</div>
@@ -22,13 +23,13 @@
             @Html.TextBoxFor(a => a.Description, new { @class = "form-control" })
         </div>
     </div>
-    <br />
+    @* <br /> 
     <div class="row">
         <div class="col-lg-2">Pieces in Exhibition</div>
         <div class="col-lg-10">
             @Html.TextBoxFor(a => a.ListOfPieces, new { @class = "form-control" })
         </div>
-    </div>
+    </div> *@
     <br/>
     <div class="row">
         <div class="col-lg-2">Arranger</div>
@@ -47,7 +48,7 @@
     <div class="row">
         <div class="col-lg-2">End Date</div>
         <div class="col-lg-10">
-            @Html.TextBoxFor(a => a.DateEnd, new { @class = "form-control" })
+            @Html.TextBoxFor(a => a.DateEnd, new { @type="date", @class = "form-control datepicker" } )
         </div>
     </div>
     <br />
