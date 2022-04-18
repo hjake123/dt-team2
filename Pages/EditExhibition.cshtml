@@ -1,14 +1,14 @@
-﻿@page
-@model AddExhibitionModel
+@page
+@model EditExhibitionModel
 @Html.ValidationSummary()
 @{
-    ViewData["Title"] = "Add Exhibition";
+    ViewData["Title"] = "Edit Exhibition";
 }
 <h1>@ViewData["Title"]</h1>
 </br>
 <body>
 
-@using (Html.BeginForm("OnPost", "AddExhibition", FormMethod.Post, new { id = "EXHIB_DE" }))
+@using (Html.BeginForm("OnPost", "EditExhibition", FormMethod.Post, new { id = "EXHIB_DE" }))
 {
     <div class="row">
         <div class="col-lg-2">Exhibition Name</div>
