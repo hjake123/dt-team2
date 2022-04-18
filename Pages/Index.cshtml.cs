@@ -6,8 +6,9 @@ namespace dt_team2.Pages;
 public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
-
     public string username = default!;
+    public string role = default!;
+    public int piece_count = default!;
 
     public IndexModel(ILogger<IndexModel> logger)
     {
@@ -21,6 +22,7 @@ public class IndexModel : PageModel
             Response.Redirect("Login");
         }else{
             username = Request.Cookies["session_user"]!;
+            role = Request.Cookies["session_user_role"]!;
         }
     }
 }

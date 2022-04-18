@@ -42,6 +42,11 @@ public class LoginModel : PageModel
                 if(results[0].ToString()==password)
                 {
                     Response.Cookies.Append("session_user", userName);
+                    SqlCommand selectCommand2 = new SqlCommand("SELECT USER_ROLE FROM [dbo].[tbl_login] WHERE USER_NAME =  '" + userName + "' " , conn);
+                    SqlDataReader results2 = selectCommand2.ExecuteReader(); 
+                    while(results2.Read()){
+                        Response.Cookies.Append("session_user_role", results2[0].ToString());
+                    }
                     Response.Redirect("Index");
                 }
         

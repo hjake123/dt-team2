@@ -15,9 +15,6 @@
         <body>
             
             <div class="grid-container">
-                <header class="header">
-                    <div class="header__search">Search...</div>
-                </header>
                 
                 <div class="sidenav">
                     <div class="sidenav a">
@@ -88,8 +85,7 @@
                     <div class="main-header">
                         <div class="main-header__heading", id = "greeting">Hello, @{
                             @this.Model.username;
-                        }</div>
-                        <div class="main-header__updates">Recent Items</div>
+                        }. <br>You are logged in with the role of @{@this.Model.role}.</div>
                     </div>
                     <!--<div class="main-overview">
                         <div class="overviewcard">
@@ -110,18 +106,13 @@
                         </div> 
                     </div>-->
 
-                    <div class="main-cards">
-                        <div class="card">This is the homepage of our website</div>
-                        <div class="card">
-                            <a asp-page="/DataReport" >Data Report</a>
-                                Data , Images , and figures can go here                                
-                        </div>
-                        <div class="card">Data , Images , and figures can go here</div>
-                    </div>
+                   <!-- <div class="main-cards">
+                        <div class="card">You are logged in with the role of @{@this.Model.role}.</div>
+                    </div>-->
         
             </div>
                 <footer class="footer">
-                    <div class="footer__copyright"> 3380 Database</div>
+                    <div class="footer__copyright"> 3380 Database Team 2 </div>
                     <div class="footer__signature">Made with blood sweat & tears</div>
                 </footer>
             </div>
