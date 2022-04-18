@@ -38,13 +38,13 @@ public class TransactionsEditModel : PageModel
     //ticket type change variable
     public int selectedTicket{get; set;} = default!;
     public void OnPost(Transactions tr, TicketTransactions tick) {
-        transactionID = tr.transactionID;
+        transactionID = 0;//tr.transactionID;
         itemID = tr.itemID;
         date = tr.date;
         price = tr.price;
         expirationDate = tick.expirationDate;
         selectedAccess = tick.selectedAccess;
-        selectedTicket = tick.selectedTicket;
+        selectedTicket = 0;//tick.selectedTicket;
 
 
         if(transactionID != 0){

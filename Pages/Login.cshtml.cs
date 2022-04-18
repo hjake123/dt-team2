@@ -41,6 +41,7 @@ public class LoginModel : PageModel
             {   
                 if(results[0].ToString()==password)
                 {
+                    Response.Cookies.Append("session", "1");
                     Response.Redirect("Index");
                 }
         
