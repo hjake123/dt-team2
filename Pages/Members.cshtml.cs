@@ -35,6 +35,14 @@ public class MembersModel : PageModel
     public int itemID = default!;
     public string itemLabel = default!;
 
+    public void OnGet()
+    {
+        if(Request.Cookies["session_user"] == null){
+            // Then no session cookie exists and they're not logged in! Get 'em out of here!
+            Response.Redirect("Login");
+        }
+    }
+
     private List<MembersOutput> GetMembers(){
         List<MembersOutput> tmp_members = new List<MembersOutput>();
 

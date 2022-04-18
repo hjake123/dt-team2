@@ -81,6 +81,7 @@ public class MemberEditModel : PageModel
             }
             Console.WriteLine("MemberID Edited: " + memberID);  
         }
+        Response.Redirect("Members");
     }   
 
     private List<MembersOutput> GetMembers(){

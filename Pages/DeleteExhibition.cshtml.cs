@@ -13,7 +13,11 @@ public class DeleteExhibitionModel : PageModel {
 
 	public void OnGet(string id) {
 		ExhibitionName = id;
-  }
+		if(Request.Cookies["session_user_role"] != "admin"){
+			// Only admins can delete items!
+            Response.Redirect("ForbiddenAction");
+        }
+  	}
 
 	public string ExhibitionName {
 		get; set;

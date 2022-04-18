@@ -13,6 +13,13 @@ public class TicketTypeRemoveModel : PageModel
         _logger = logger;
         tickets = GetTicket();
     }
+
+    public void OnGet(string id) {
+		if(Request.Cookies["session_user_role"] != "admin"){
+			// Only admins can delete items!
+            Response.Redirect("ForbiddenAction");
+        }
+  	}
     public static List<SelectListItem> tickets{get; set;} = new List<SelectListItem>();
     public int ticketTypeID = default!;
 
