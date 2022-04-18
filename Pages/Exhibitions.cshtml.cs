@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace dt_team2.Pages;
 
-public class ExhibitionsModel : PageModel {
+public class ExhibitionsModel : PageModel 
+{
     private readonly ILogger<ExhibitionsModel> _logger;
     public static List<Exhibition> exhibitions = new List<Exhibition>();
     private string c_string = CSHolder.GetConnectionString();

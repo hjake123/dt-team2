@@ -1,7 +1,7 @@
 ﻿@page
-@model ExhibitionsModel
+@model CollectionsModel
 @{
-    ViewData["Title"] = "Collections dashboard";
+    ViewData["Title"] = "Collections Dashboard";
 }
 <h1>@ViewData["Title"]</h1>
 
@@ -10,18 +10,39 @@
         <div class="col-md-6 col-md-offset-3">
 
             <div class="wrap">
-                <div class="search">
-                    <input type="text" class="searchTerm" placeholder="Search for collections">
+                @* <div class="search">
+                    <input type="text" class="searchTerm" placeholder="Search for exhibitions">
                     <button type="submit" class="btn btn-secondary">Search</button>
-                </div>
+                </div> *@
             </div>
 
-            <a asp-page="/PieceAdd" asp-area="" button type="button" class="btn btn-primary">Add a piece to a collection</a>
+            <a asp-page="/AddCollection" asp-area="" button type="button" class="btn btn-primary">New Collection</a>
 
-            <br /><br />
-            <p>Add carousel, grid or whatever here to show all collections.</p>
-            <p>Integrate edit/remove with entries.</p>
-
+        </div>
+        <br /><br />
+        
+        <div class = "table">
+            <table class ="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr> @{
+                            foreach(var col in new[]{"Collection Name", "Description"}) { 
+                                <th> @col </th> }    
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                @{
+                    if (Model != null) {
+                        foreach(Collection c in CollectionsModel.collections) {
+                            <tr>
+                                <td>@c.CollectionName</td>
+                                <td>@c.Description</td>
+                            </tr>
+                        }
+                    }
+                }
+                </tbody>
+            </table>
         </div>
     </div>
 </body>
