@@ -7,18 +7,34 @@ namespace dt_team2.Pages;
 public class EditExhibitionModel : PageModel {
 	private readonly ILogger<EditExhibitionModel> _logger;
 
+	public Exhibition exhibition = new Exhibition();
+
 	public EditExhibitionModel(ILogger<EditExhibitionModel> logger) {
 		_logger = logger;
 	}
 
 	public void OnGet(string id) {
+
 		OrigExhibitionName = id;
 
-		// sql fetch, populate fields
-		
-    // POPULATE HERE
-  }
+		using (SqlConnection connection = new SqlConnection(CSHolder.GetConnectionString())) {
+			connection.Open();
+			SqlCommand select = new SqlCommand("SELECT ExhibitionName, Description, Arranger, Location, DateEnd FROM dbo.Exhibitions WHERE ExhibitionName='" + OrigExhibitionName + "'", connection);
+			SqlDataReader data = select.ExecuteReader();
 
+			if (data.Read()) {
+				exhibition = new Exhibition {
+					ExhibitionName = data["ExhibitionName"].ToString() !,
+					Description = data["Description"].ToString() !,
+					// ListOfPieces = data["ListOfPieces"].ToString()!,
+					Arranger = data["Arranger"].ToString() !,
+					Location = data["Location"].ToString() !,
+					DateEnd = (DateTime)data["DateEnd"],
+				};
+			}
+			connection.Close();
+		}
+  }
 
 	public string OrigExhibitionName {
 		get; set;

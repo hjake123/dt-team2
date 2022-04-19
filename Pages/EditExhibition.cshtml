@@ -14,42 +14,42 @@
     <div class="row">
         <div class="col-lg-2">Exhibition Name</div>
         <div class="col-lg-10">
-            @Html.TextBoxFor(a => a.ExhibitionName, new { @class = "form-control" })
+            @Html.TextBoxFor(a => a.exhibition.ExhibitionName, new { @class = "form-control" })
         </div>
     </div>
     <br />
     <div class="row">
         <div class="col-lg-2">Description</div>
         <div class="col-lg-10">
-            @Html.TextBoxFor(a => a.Description, new { @class = "form-control" })
+            @Html.TextAreaFor(a => a.exhibition.Description, new { @class = "form-control", @rows = 3})
         </div>
     </div>
     @* <br /> 
     <div class="row">
         <div class="col-lg-2">Pieces in Exhibition</div>
         <div class="col-lg-10">
-            @Html.TextBoxFor(a => a.ListOfPieces, new { @class = "form-control" })
+            @Html.TextBoxFor(a => a.exhibition.ListOfPieces, new { @class = "form-control" })
         </div>
     </div> *@
     <br/>
     <div class="row">
         <div class="col-lg-2">Arranger</div>
         <div class="col-lg-10">
-            @Html.TextBoxFor(a => a.Arranger, new { @class = "form-control" })
+            @Html.TextBoxFor(a => a.exhibition.Arranger, new { @class = "form-control" })
         </div>
     </div>
     <br/>
     <div class="row">
         <div class="col-lg-2">Location</div>
         <div class="col-lg-10">
-            @Html.TextBoxFor(a => a.Location, new { @class = "form-control" })
+            @Html.TextBoxFor(a => a.exhibition.Location, new { @class = "form-control" })
         </div>
     </div>
     <br/>
     <div class="row">
         <div class="col-lg-2">End Date</div>
         <div class="col-lg-10">
-            @Html.TextBoxFor(a => a.DateEnd, new { @type="date", @class = "form-control datepicker" } )
+            @Html.TextBoxFor(a => a.exhibition.DateEnd, new { @type="date", @class = "form-control datepicker" } )
         </div>
     </div>
     <br />
