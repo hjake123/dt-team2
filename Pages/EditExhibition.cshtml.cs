@@ -24,6 +24,7 @@ public class EditExhibitionModel : PageModel {
 
 			if (data.Read()) {
 				exhibition = new Exhibition {
+					OrigExhibitionName = data["ExhibitionName"].ToString()!,
 					ExhibitionName = data["ExhibitionName"].ToString() !,
 					Description = data["Description"].ToString() !,
 					// ListOfPieces = data["ListOfPieces"].ToString()!,
@@ -74,10 +75,9 @@ public class EditExhibitionModel : PageModel {
 			using (SqlConnection connection = new SqlConnection(CSHolder.GetConnectionString())) {
 				connection.Open();
 				SqlCommand select = new SqlCommand("UPDATE dbo.Exhibitions SET ExhibitionName = '" + ExhibitionName + "', Description = '" + Description + "', Arranger = '" + Arranger + "',Location = '" + Location + "', DateEnd = '" + DateEnd + "' WHERE ExhibitionName='" + OrigExhibitionName + "' ", connection);
-				Console.WriteLine(select.CommandText);
 				int rows_added = select.ExecuteNonQuery();
 				connection.Close();
-				Console.WriteLine(rows_added + " Exhibition added");
+				Console.WriteLine(rows_added + " Exhibition edited");
 			}
 			return RedirectToPage("/Exhibitions");
 		}

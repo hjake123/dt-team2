@@ -10,7 +10,6 @@
 
 @using (Html.BeginForm("OnPost", "EditExhibition", FormMethod.Post, new { id = "EXHIB_DE" }))
 {
-    <input type="hidden" name="OrigExhibitionName" value="@Model.OrigExhibitionName" />
     <div class="row">
         <div class="col-lg-2">Exhibition Name</div>
         <div class="col-lg-10">
@@ -53,6 +52,7 @@
         </div>
     </div>
     <br />
+    @Html.HiddenFor(a => a.exhibition.OrigExhibitionName);
     @* <div class="row"> *@
     <input type="submit" value="Submit" class="btn btn-primary">
     <a asp-page="/Exhibitions" asp-area="" button type="button" class="btn btn-outline-danger m-1">Cancel</a>

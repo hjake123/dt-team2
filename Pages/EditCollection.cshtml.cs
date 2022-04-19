@@ -23,6 +23,7 @@ public class EditCollectionModel : PageModel {
 		
 			if (data.Read()) {
 				collection = new Collection {
+					OrigCollectionName = data["CollectionName"].ToString() !,
 					CollectionName = data["CollectionName"].ToString() !,
 					Description = data["Description"].ToString() !,
 				};
@@ -52,10 +53,9 @@ public class EditCollectionModel : PageModel {
 			using (SqlConnection connection = new SqlConnection(CSHolder.GetConnectionString())) {
 				connection.Open();
 				SqlCommand select = new SqlCommand("UPDATE dbo.Collections SET CollectionName = '" + CollectionName + "', Description = '" + Description + "' WHERE CollectionName='" + OrigCollectionName + "' ", connection);
-				Console.WriteLine(select.CommandText);
 				int rows_added = select.ExecuteNonQuery();
 				connection.Close();
-				Console.WriteLine(rows_added + " Collection added");
+				Console.WriteLine(rows_added + " Collection edited");
 			}
 			return RedirectToPage("/Collections");
 		}
