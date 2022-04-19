@@ -39,17 +39,17 @@
                                 <td>@artpiece.creator</td>
                                 <td>@artpiece.desc</td>
                                 <td>@artpiece.origin</td>
-                                <td>@artpiece.makedate</td>
+                                <td>@artpiece.makedate.ToString("MMMM d, yyyy")</td>
                                 <td>@artpiece.getdate</td>
                                 <td>@artpiece.source</td>
                                 <td>@artpiece.dim</td>
                                 <td>@artpiece.medium</td>
-                                @*<td>
+                                <td>
                                     <div class="col">
-                                        <a asp-page="/EditCollection" asp-area="" asp-route-id="@collection.CollectionName" button type="button" class="btn btn-outline-warning m-1">Edit</a>
-                                        <a asp-page="/DeleteCollection" asp-area="" asp-route-id="@collection.CollectionName" button type="button" class="btn btn-outline-danger m-1">Delete</a>
+                                        <a asp-page="/EditArtPiece" asp-area="" asp-route-id="@artpiece.title" button type="button" class="btn btn-outline-warning m-1">Edit</a>
+                                        <a asp-page="/DeleteArtPiece" asp-area="" asp-route-id="@artpiece.title" button type="button" class="btn btn-outline-danger m-1">Delete</a>
                                     </div>
-                                </td>*@
+                                </td>
                             </tr>
                         }
                     }

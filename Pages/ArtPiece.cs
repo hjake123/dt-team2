@@ -6,8 +6,8 @@ namespace dt_team2.Pages;
 public class ArtPiece
 {
 
-    public void OnGet() { }
-    public string OrigCollectionName { get; set; } = default!;
+    public void OnGet() {}
+    public string OrigPieceName { get; set; } = default!;
     //Art Piece Enitity Attributes
     public string title { get; set; } = default!;
     public string creator { get; set; } = default!;

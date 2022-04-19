@@ -1,0 +1,21 @@
+﻿@page
+@model DeleteArtPieceModel
+@{
+    ViewData["Title"] = "Delete Art Piece";
+}
+<h1>@ViewData["Title"]</h1>
+</br>
+<body>
+
+@using (Html.BeginForm("OnPost", "DeleteArtPiece", FormMethod.Post, new { id = "PIECE_DEL" }))
+{
+    <br/>
+    <div class="row"> <p>Are you sure you'd like to delete the art piece "<strong>@Model.Title</strong>"?</p> </div>
+    <br />
+    <input type="hidden" name="Title" value="@Model.Title" />
+    @* <div class="row"> *@
+    <input type="submit" value="Delete" class="btn btn-danger">
+    <a asp-page="/ArtPieces" asp-area="" button type="button" class="btn btn-outline-secondary m-1">Nevermind</a>
+}
+
+</body>

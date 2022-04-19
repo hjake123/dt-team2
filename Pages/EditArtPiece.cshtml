@@ -1,0 +1,88 @@
+﻿@page
+@model EditArtPieceModel
+@Html.ValidationSummary()
+@{
+    ViewData["Title"] = "Edit Art Piece";
+}
+<h1>@ViewData["Title"]</h1>
+</br>
+<body>
+@using (Html.BeginForm("OnPost", "EditArtPiece", FormMethod.Post, new { id = "PIECE_DE" }))
+{
+    <div class="row">
+        <div class="col-lg-2">Title</div>
+        <div class="col-lg-10">
+            @Html.TextBoxFor(a => a.piece.title, new { @class = "form-control" })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-2">Creator</div>
+        <div class="col-lg-10">
+            @Html.TextAreaFor(a => a.piece.creator, new { @class = "form-control", @rows = 3})
+        </div>
+    </div>
+    @* <br /> 
+    <div class="row">
+        <div class="col-lg-2">Pieces in Exhibition</div>
+        <div class="col-lg-10">
+            @Html.TextBoxFor(a => a.exhibition.ListOfPieces, new { @class = "form-control" })
+        </div>
+    </div> *@
+    <br/>
+    <div class="row">
+        <div class="col-lg-2">Description</div>
+        <div class="col-lg-10">
+            @Html.TextBoxFor(a => a.piece.desc, new { @class = "form-control" })
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-lg-2">Place of origin</div>
+        <div class="col-lg-10">
+            @Html.TextBoxFor(a => a.piece.origin, new { @class = "form-control" })
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-lg-2">Date created</div>
+        <div class="col-lg-10">
+            @Html.TextBoxFor(a => a.piece.makedate, new { @type="date", @class = "form-control datepicker" } )
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-lg-2">Date submitted</div>
+        <div class="col-lg-10">
+            @Html.TextBoxFor(a => a.piece.getdate, new { @type="date", @class = "form-control datepicker" } )
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-2">Dimensions</div>
+        <div class="col-lg-10">
+            @Html.TextBoxFor(a => a.piece.dim, new { @class = "form-control" })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-2">Source</div>
+        <div class="col-lg-10">
+            @Html.TextBoxFor(a => a.piece.source, new { @class = "form-control" })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-2">Medium</div>
+        <div class="col-lg-10">
+            @Html.TextBoxFor(a => a.piece.medium, new { @class = "form-control" })
+        </div>
+    </div>
+    <br />
+    @Html.HiddenFor(a => a.piece.OrigPieceName);
+    @* <div class="row"> *@
+    <input type="submit" value="Submit" class="btn btn-primary">
+    <a asp-page="/ArtPieces" asp-area="" button type="button" class="btn btn-outline-danger m-1">Cancel</a>
+}
+
+</body>
