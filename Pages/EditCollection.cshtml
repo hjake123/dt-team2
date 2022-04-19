@@ -14,14 +14,14 @@
     <div class="row">
         <div class="col-lg-2">Collection Name</div>
         <div class="col-lg-10">
-            @Html.TextBoxFor(a => a.CollectionName, new { @class = "form-control" })
+            @Html.TextBoxFor(a => a.collection.CollectionName, new { @class = "form-control"})
         </div>
     </div>
     <br />
     <div class="row">
         <div class="col-lg-2">Description</div>
         <div class="col-lg-10">
-            @Html.TextBoxFor(a => a.Description, new { @class = "form-control" })
+            @Html.TextAreaFor(a => a.collection.Description, new { @class = "form-control", @rows = 4})
         </div>
     </div>
     <br />

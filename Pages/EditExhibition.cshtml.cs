@@ -40,7 +40,6 @@ public class EditExhibitionModel : PageModel {
 		get; set;
 	} = default !;
 
-	string d = "', '";
 
 	// submit form to OnPost
 	public IActionResult OnPost(Exhibition exhibition) {
