@@ -19,7 +19,8 @@ public class EditExhibitionModel : PageModel {
 
 		using (SqlConnection connection = new SqlConnection(CSHolder.GetConnectionString())) {
 			connection.Open();
-			SqlCommand select = new SqlCommand("SELECT ExhibitionName, Description, Arranger, Location, DateEnd FROM dbo.Exhibitions WHERE ExhibitionName='" + OrigExhibitionName + "'", connection);
+			SqlCommand select = new SqlCommand("SELECT ExhibitionName, Description, Arranger, Location, DateEnd FROM dbo.Exhibitions WHERE ExhibitionName=@OrigExhibitionName", connection);
+			select.Parameters.Add(new SqlParameter("OrigExhibitionName", OrigExhibitionName));
 			SqlDataReader data = select.ExecuteReader();
 
 			if (data.Read()) {
@@ -68,13 +69,18 @@ public class EditExhibitionModel : PageModel {
 		Location = exhibition.Location;
 		DateEnd = exhibition.DateEnd;
 		String[] fields = {ExhibitionName, Description, Arranger, Location};
-		if (DateEnd == new DateTime(1,1,1)) {
-			ModelState.AddModelError("DateEnd", "Please set a date for the exhibition to end!");
-		}
+		if (DateEnd == new DateTime(1,1,1)) ModelState.AddModelError("DateEnd", "Please set a date for the exhibition to end!");
+		else if (DateEnd < DateTime.Today) ModelState.AddModelError("DateEnd", "Exhibition must end after today!");
 		else if ((new String[] {ExhibitionName, Description, Arranger, Location}.All(field => !String.IsNullOrEmpty(field)))) {
 			using (SqlConnection connection = new SqlConnection(CSHolder.GetConnectionString())) {
 				connection.Open();
-				SqlCommand select = new SqlCommand("UPDATE dbo.Exhibitions SET ExhibitionName = '" + ExhibitionName + "', Description = '" + Description + "', Arranger = '" + Arranger + "',Location = '" + Location + "', DateEnd = '" + DateEnd + "' WHERE ExhibitionName='" + OrigExhibitionName + "' ", connection);
+				SqlCommand select = new SqlCommand("UPDATE dbo.Exhibitions SET ExhibitionName = @ExhibitionName, Description = @Description, Arranger = @Arranger, Location = @Location, DateEnd = @DateEnd WHERE ExhibitionName=@OrigExhibitionName", connection);
+				select.Parameters.Add(new SqlParameter("OrigExhibitionName", OrigExhibitionName));
+				select.Parameters.Add(new SqlParameter("ExhibitionName", ExhibitionName));
+				select.Parameters.Add(new SqlParameter("Description", Description));
+				select.Parameters.Add(new SqlParameter("Arranger", Arranger));
+				select.Parameters.Add(new SqlParameter("Location", Location));
+				select.Parameters.Add(new SqlParameter("DateEnd", DateEnd));
 				int rows_added = select.ExecuteNonQuery();
 				connection.Close();
 				Console.WriteLine(rows_added + " Exhibition edited");

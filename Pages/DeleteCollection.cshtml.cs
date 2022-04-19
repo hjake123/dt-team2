@@ -29,8 +29,8 @@ public class DeleteCollectionModel : PageModel {
 		CollectionName = collection.CollectionName;
 		using (SqlConnection connection = new SqlConnection(CSHolder.GetConnectionString())) {
 			connection.Open();
-			SqlCommand select = new SqlCommand("DELETE FROM dbo.Collections WHERE CollectionName='" + CollectionName + "'", connection);
-			Console.WriteLine(select.CommandText);
+			SqlCommand select = new SqlCommand("DELETE FROM dbo.Collections WHERE CollectionName=@CollectionName", connection);
+			select.Parameters.Add(new SqlParameter("CollectionName", CollectionName));
 			int rows_deleted = select.ExecuteNonQuery();
 			connection.Close();
 			Console.WriteLine(rows_deleted + " Collection deleted");

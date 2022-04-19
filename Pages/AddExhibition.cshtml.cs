@@ -36,13 +36,17 @@ public class AddExhibitionModel : PageModel
 	    Location = exhibition.Location;
 	    DateEnd = exhibition.DateEnd;
 	    String[] fields = {ExhibitionName, Description, Arranger, Location};
-	    if (DateEnd == new DateTime(1,1,1)) {
-		    ModelState.AddModelError("DateEnd", "Please set a date for the exhibition to end!");
-	    }
+	    if (DateEnd == new DateTime(1,1,1)) ModelState.AddModelError("DateEnd", "Please set a date for the exhibition to end!");
+			else if (DateEnd < DateTime.Today) ModelState.AddModelError("DateEnd", "Exhibition must end after today!");
 	    else if ((new String[] {ExhibitionName, Description, Arranger, Location}.All(field => !String.IsNullOrEmpty(field)))) {
 		    using (SqlConnection connection = new SqlConnection(CSHolder.GetConnectionString())) {
 			    connection.Open();
-			    SqlCommand select = new SqlCommand("INSERT INTO dbo.Exhibitions(ExhibitionName, Description, Arranger, Location, DateEnd) VALUES('" + ExhibitionName + d + Description + d + Arranger + d + Location + d + DateEnd + "')", connection);
+			    SqlCommand select = new SqlCommand("INSERT INTO dbo.Exhibitions(ExhibitionName, Description, Arranger, Location, DateEnd) VALUES(@ExhibitionName ,@Description ,@Arranger ,@Location ,@DateEnd )", connection);
+					select.Parameters.Add(new SqlParameter("ExhibitionName",ExhibitionName));
+					select.Parameters.Add(new SqlParameter("Description",Description));
+					select.Parameters.Add(new SqlParameter("Arranger",Arranger));
+					select.Parameters.Add(new SqlParameter("Location",Location));
+					select.Parameters.Add(new SqlParameter("DateEnd",DateEnd));
 			    int rows_added = select.ExecuteNonQuery();
 			    connection.Close();
 			    Console.WriteLine(rows_added + " Exhibition added");

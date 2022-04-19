@@ -18,9 +18,10 @@ public class EditCollectionModel : PageModel {
 
 		using (SqlConnection connection = new SqlConnection(CSHolder.GetConnectionString())) {
 			connection.Open();
-			SqlCommand select = new SqlCommand("SELECT CollectionName, Description FROM dbo.Collections WHERE CollectionName='" + OrigCollectionName + "'", connection);
+			SqlCommand select = new SqlCommand("SELECT CollectionName, Description FROM dbo.Collections WHERE CollectionName=@CollectionName", connection);
+			select.Parameters.Add(new SqlParameter("CollectionName", OrigCollectionName));
+
 			SqlDataReader data = select.ExecuteReader();
-		
 			if (data.Read()) {
 				collection = new Collection {
 					OrigCollectionName = data["CollectionName"].ToString() !,
@@ -52,7 +53,10 @@ public class EditCollectionModel : PageModel {
 		if ((new String[] {CollectionName, Description}.All(field => !String.IsNullOrEmpty(field)))) {
 			using (SqlConnection connection = new SqlConnection(CSHolder.GetConnectionString())) {
 				connection.Open();
-				SqlCommand select = new SqlCommand("UPDATE dbo.Collections SET CollectionName = '" + CollectionName + "', Description = '" + Description + "' WHERE CollectionName='" + OrigCollectionName + "' ", connection);
+				SqlCommand select = new SqlCommand("UPDATE dbo.Collections SET CollectionName = @CollectionName, Description = @Description WHERE CollectionName=@OrigCollectionName", connection);
+				select.Parameters.Add(new SqlParameter("CollectionName", CollectionName));
+				select.Parameters.Add(new SqlParameter("Description", Description));
+				select.Parameters.Add(new SqlParameter("OrigCollectionName", OrigCollectionName));
 				int rows_added = select.ExecuteNonQuery();
 				connection.Close();
 				Console.WriteLine(rows_added + " Collection edited");

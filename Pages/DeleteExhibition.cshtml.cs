@@ -29,7 +29,8 @@ public class DeleteExhibitionModel : PageModel {
 		
 		using (SqlConnection connection = new SqlConnection(CSHolder.GetConnectionString())) {
 			connection.Open();
-			SqlCommand select = new SqlCommand("DELETE FROM dbo.Exhibitions WHERE ExhibitionName='" + ExhibitionName + "'", connection);
+			SqlCommand select = new SqlCommand("DELETE FROM dbo.Exhibitions WHERE ExhibitionName=@ExhibitionName", connection);
+			select.Parameters.Add(new SqlParameter("ExhibitionName", ExhibitionName));
 			int rows_deleted = select.ExecuteNonQuery();
 			connection.Close();
 			Console.WriteLine(rows_deleted + " Exhibition deleted");

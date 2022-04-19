@@ -29,7 +29,11 @@ public class AddCollectionModel : PageModel {
 		if ((new String[] {CollectionName, Description}.All(field => !String.IsNullOrEmpty(field)))) {
 			using (SqlConnection connection = new SqlConnection(CSHolder.GetConnectionString())) {
 				connection.Open();
-				SqlCommand select = new SqlCommand("INSERT INTO dbo.Collections(CollectionName, Description) VALUES('" + CollectionName + d + Description + "')", connection);
+				// SqlCommand select = new SqlCommand("INSERT INTO dbo.Collections(CollectionName, Description) VALUES('" + CollectionName + d + Description + "')", connection);
+				SqlCommand select = new SqlCommand("INSERT INTO dbo.Collections(CollectionName, Description) VALUES(@CollectionName, @Description)", connection);
+				select.Parameters.Add(new SqlParameter("CollectionName", CollectionName));
+				select.Parameters.Add(new SqlParameter("Description", Description));
+
 				int rows_added = select.ExecuteNonQuery();
 				connection.Close();
 				Console.WriteLine(rows_added + " Collection added");
