@@ -34,6 +34,7 @@ public class LoginModel : PageModel
         string connectionString = CSHolder.GetConnectionString();
         using (SqlConnection conn = new SqlConnection(connectionString))
         {
+            bool login = false;
             conn.Open();
             SqlCommand selectCommand = new SqlCommand("SELECT PASSWORD FROM [dbo].[tbl_login] WHERE USER_NAME =  '" + userName + "' " , conn);
             SqlDataReader results = selectCommand.ExecuteReader();          
@@ -42,16 +43,22 @@ public class LoginModel : PageModel
                 if(results[0].ToString()==password)
                 {
                     Response.Cookies.Append("session_user", userName);
-                    SqlCommand selectCommand2 = new SqlCommand("SELECT USER_ROLE FROM [dbo].[tbl_login] WHERE USER_NAME =  '" + userName + "' " , conn);
-                    SqlDataReader results2 = selectCommand2.ExecuteReader(); 
-                    while(results2.Read()){
-                        Response.Cookies.Append("session_user_role", results2[0].ToString());
-                    }
-                    Response.Redirect("Index");
+                    login = true;
                 }
         
             }
-
+            conn.Close();
+            conn.Open();
+            if(login){
+                SqlCommand selectCommand2 = new SqlCommand("SELECT USER_ROLE FROM [dbo].[tbl_login] WHERE USER_NAME =  '" + userName + "' " , conn);
+                SqlDataReader results2 = selectCommand2.ExecuteReader(); 
+                while(results2.Read()){
+                    Response.Cookies.Append("session_user_role", results2[0].ToString());
+                }
+                conn.Close();
+                Response.Redirect("Index");
+            }
+        conn.Close();
         }
     }
 }
