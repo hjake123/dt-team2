@@ -31,7 +31,9 @@ public class TicketTypeEditModel : PageModel
             
             using(SqlConnection conn = new SqlConnection(connectionString)){
                 conn.Open();
-                SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Lookup_TicketType SET TicketTypeLabel = '" + ticketTypeLabel + "' WHERE TicketType = " + ticketTypeID, conn);
+                SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Lookup_TicketType SET TicketTypeLabel = @ticketTypeLabel WHERE TicketType = @ticketTypeID", conn);
+                selectCommand.Parameters.Add(new SqlParameter("ticketTypeLabel", ticketTypeLabel));
+                selectCommand.Parameters.Add(new SqlParameter("ticketTypeID", ticketTypeID));
                 SqlDataReader results = selectCommand.ExecuteReader();                
                 conn.Close();
             }

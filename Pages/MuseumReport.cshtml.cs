@@ -60,15 +60,21 @@ public class MuseumReportModel : PageModel
             using(SqlConnection conn = new SqlConnection(connectionString)){
                 conn.Open();
                 //Get to transactions From and To
-                SqlCommand selectCommand = new SqlCommand("SELECT COUNT(*) FROM dbo.Transactions WHERE Date BETWEEN '" + CompareDateFrom +"' AND '" + CompareDateTo + "'", conn);
+                SqlCommand selectCommand = new SqlCommand("SELECT COUNT(*) FROM dbo.Transactions WHERE Date BETWEEN @CompareDateFrom AND @CompareDateTo", conn);
+                selectCommand.Parameters.Add(new SqlParameter("CompareDateFrom",CompareDateFrom));
+                selectCommand.Parameters.Add(new SqlParameter("CompareDateTo",CompareDateTo));
                 Console.WriteLine("Comparing Date From: " + CompareDateFrom);
                 Console.WriteLine("To: " + CompareDateTo);
                 string tmp_tAdded = selectCommand.ExecuteScalar().ToString()!;      
 
-                selectCommand = new SqlCommand("SELECT COUNT(*) FROM dbo.ArtPieces WHERE DateSubmitted BETWEEN '" + CompareDateFrom +"' AND '" + CompareDateTo + "'", conn);
+                selectCommand = new SqlCommand("SELECT COUNT(*) FROM dbo.ArtPieces WHERE DateSubmitted BETWEEN @CompareDateFrom AND @CompareDateTo", conn);
+                selectCommand.Parameters.Add(new SqlParameter("CompareDateFrom",CompareDateFrom));
+                selectCommand.Parameters.Add(new SqlParameter("CompareDateTo",CompareDateTo));
                 string tmp_pAdded = selectCommand.ExecuteScalar().ToString()!;   
 
-                selectCommand = new SqlCommand("SELECT COUNT(*) FROM dbo.Exhibitions WHERE DateEnd BETWEEN '" + CompareDateFrom +"' AND '" + CompareDateTo + "'", conn);
+                selectCommand = new SqlCommand("SELECT COUNT(*) FROM dbo.Exhibitions WHERE DateEnd BETWEEN @CompareDateFrom AND @CompareDateTo", conn);
+                selectCommand.Parameters.Add(new SqlParameter("CompareDateFrom",CompareDateFrom));
+                selectCommand.Parameters.Add(new SqlParameter("CompareDateTo",CompareDateTo));
                 string tmp_eAdded = selectCommand.ExecuteScalar().ToString()!;   
                 
                 museum_output.Add(new MuseumReportOutput{DateFrom = CompareDateFrom, DateTo = CompareDateTo, TotalTransactions = tmp_tAdded, TotalPieces = tmp_pAdded, TotalExhibitions = tmp_eAdded});        
@@ -77,15 +83,21 @@ public class MuseumReportModel : PageModel
                 Console.WriteLine("With Date From:" + WithDateFrom);
                 Console.WriteLine("To:" + WithDateTo);
 
-                selectCommand = new SqlCommand("SELECT COUNT(*) FROM dbo.Transactions WHERE Date BETWEEN '" + WithDateFrom +"' AND '" + WithDateTo + "'", conn);
+                selectCommand = new SqlCommand("SELECT COUNT(*) FROM dbo.Transactions WHERE Date BETWEEN @WithDateFrom AND @WithDateTo", conn);
+                selectCommand.Parameters.Add(new SqlParameter("WithDateFrom", WithDateFrom));
+                selectCommand.Parameters.Add(new SqlParameter("WithDateTo", WithDateTo));
                 Console.WriteLine("Comparing Date From: " + CompareDateFrom);
                 Console.WriteLine("To: " + CompareDateTo);
                 string tmp_tAdded_w = selectCommand.ExecuteScalar().ToString()!;  
 
-                selectCommand = new SqlCommand("SELECT COUNT(*) FROM dbo.ArtPieces WHERE DateSubmitted BETWEEN '" + WithDateFrom +"' AND '" + WithDateTo + "'", conn);
+                selectCommand = new SqlCommand("SELECT COUNT(*) FROM dbo.ArtPieces WHERE DateSubmitted BETWEEN @WithDateFrom AND @WithDateTo", conn);
+                selectCommand.Parameters.Add(new SqlParameter("WithDateFrom", WithDateFrom));
+                selectCommand.Parameters.Add(new SqlParameter("WithDateTo", WithDateTo));
                 string tmp_pAdded_w = selectCommand.ExecuteScalar().ToString()!;
 
-                selectCommand = new SqlCommand("SELECT COUNT(*) FROM dbo.Exhibitions WHERE DateEnd BETWEEN '" + WithDateFrom +"' AND '" + WithDateTo + "'", conn);
+                selectCommand = new SqlCommand("SELECT COUNT(*) FROM dbo.Exhibitions WHERE DateEnd BETWEEN @WithDateFrom AND @WithDateTo", conn);
+                selectCommand.Parameters.Add(new SqlParameter("WithDateFrom", WithDateFrom));
+                selectCommand.Parameters.Add(new SqlParameter("WithDateTo", WithDateTo));
                 string tmp_eAdded_w = selectCommand.ExecuteScalar().ToString()!;   
 
                 museum_output.Add(new MuseumReportOutput{DateFrom = WithDateFrom, DateTo = WithDateTo, TotalTransactions = tmp_tAdded_w, TotalPieces = tmp_pAdded_w, TotalExhibitions = tmp_eAdded_w});

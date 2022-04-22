@@ -32,7 +32,9 @@ public class AccessTypeEditModel : PageModel
             
             using(SqlConnection conn = new SqlConnection(connectionString)){
                 conn.Open();
-                SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Lookup_AccessType SET AccessTypeLabel = '" + accessTypeLabel + "' WHERE AccessType = " + accessTypeID, conn);
+                SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Lookup_AccessType SET AccessTypeLabel = @accessTypeLabel WHERE AccessType = accessTypeID", conn);
+                selectCommand.Parameters.Add(new SqlParameter("accessTypeLabel", accessTypeLabel));
+                selectCommand.Parameters.Add(new SqlParameter("accessTypeID", accessTypeID));
                 SqlDataReader results = selectCommand.ExecuteReader();                
                 conn.Close();
             }

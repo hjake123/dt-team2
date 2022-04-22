@@ -25,7 +25,9 @@ public class ItemAddModel : PageModel
             string connectionString = CSHolder.GetConnectionString();
             using(SqlConnection conn = new SqlConnection(connectionString)){
                 conn.Open();
-                SqlCommand selectCommand = new SqlCommand("INSERT INTO dbo.Lookup_Item(Item, ItemLabel) VALUES ('" + itemID + "', '" + itemLabel + "')", conn);      
+                SqlCommand selectCommand = new SqlCommand("INSERT INTO dbo.Lookup_Item(Item, ItemLabel) VALUES ( @itemID, @itemLabel)", conn);
+                selectCommand.Parameters.Add(new SqlParameter("itemID", itemID));
+                selectCommand.Parameters.Add(new SqlParameter("itemLabel", itemLabel));      
                 selectCommand.ExecuteNonQuery();
                 conn.Close();
             }

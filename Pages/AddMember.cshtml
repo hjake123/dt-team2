@@ -22,7 +22,7 @@
             </p>
 
             <p><label>Last Visit:</label>
-                @Html.TextBoxFor(m => m.lastVisit, new { @class = "form-control" })        
+                @Html.TextBoxFor(m => m.lastVisit, new { @type="date", @class = "form-control datepicker" })        
             </p>            
 
             <button type="submit">Add Member</button>

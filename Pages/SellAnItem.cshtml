@@ -20,7 +20,7 @@
         </p>
 
         <p><label for="date">Sale Date:</label>
-            @Html.TextBoxFor(i => i.date, new { @class = "form-control" })
+            @Html.TextBoxFor(i => i.date, new { @type="date", @class = "form-control datepicker"})
         </p>
 
         <button type="submit">Complete Transaction</button>

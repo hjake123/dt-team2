@@ -66,10 +66,6 @@ public class TransactionsModel : PageModel
         GetTransactions();
     }
 
-    private void SearchTransactions(){
-        //set up sql query to change based on search variable
-    }
-
     private void GetTransactions()
     {
         //default query (nothing searched)
@@ -129,8 +125,9 @@ public class TransactionsModel : PageModel
                         temp_tr[i].ticketType = results["TicketType"].ToString()!;               
                     }
 
+                    
                     //get TicketLabel & access Table
-                    selectCommand = new SqlCommand("SELECT a.AccessTypeLabel, b.TicketTypeLabel FROM dbo.Lookup_AccessType AS a, dbo.Lookup_TicketType AS b WHERE AccessType = " + temp_tr[i].accessType + " AND TicketType = " + temp_tr[i].ticketType, conn);
+                    selectCommand = new SqlCommand("SELECT a.AccessTypeLabel, b.TicketTypeLabel FROM dbo.Lookup_AccessType AS a, dbo.Lookup_TicketType AS b WHERE a.AccessType = '" + temp_tr[i].accessType + "' AND b.TicketType = '" + temp_tr[i].ticketType + "'", conn);
                     results = selectCommand.ExecuteReader();
 
                     while(results.Read()){                       

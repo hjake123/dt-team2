@@ -31,7 +31,9 @@ public class ItemEditModel : PageModel
             
             using(SqlConnection conn = new SqlConnection(connectionString)){
                 conn.Open();
-                SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Lookup_Item SET ItemLabel = '" + newItemLabel + "' WHERE Item = " + itemID, conn);
+                SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Lookup_Item SET ItemLabel = @newItemLabel WHERE Item = @itemID", conn);
+                selectCommand.Parameters.Add(new SqlParameter("newItemLabel", newItemLabel));
+                selectCommand.Parameters.Add(new SqlParameter("itemID", itemID));
                 SqlDataReader results = selectCommand.ExecuteReader();                
                 conn.Close();
             }

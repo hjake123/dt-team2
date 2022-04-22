@@ -27,7 +27,9 @@ public class TicketTypeAddModel : PageModel
             string connectionString = CSHolder.GetConnectionString();
             using(SqlConnection conn = new SqlConnection(connectionString)){
                 conn.Open();
-                SqlCommand selectCommand = new SqlCommand("INSERT INTO dbo.Lookup_TicketType(TicketType, TicketTypeLabel) VALUES ('" + ticketTypeID + "', '" + ticketTypeLabel + "')", conn);      
+                SqlCommand selectCommand = new SqlCommand("INSERT INTO dbo.Lookup_TicketType(TicketType, TicketTypeLabel) VALUES ( @ticketTypeID, @ticketTypeLabel)", conn);
+                selectCommand.Parameters.Add(new SqlParameter("ticketTypeID", ticketTypeID));
+                selectCommand.Parameters.Add(new SqlParameter("ticketTypeLabel", ticketTypeLabel));          
                 selectCommand.ExecuteNonQuery();
                 conn.Close();
             }

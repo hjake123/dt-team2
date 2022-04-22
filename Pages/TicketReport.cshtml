@@ -10,10 +10,10 @@
 <body>
     <form method = "post">
         <p><label for="item">Compare Date From:</label>
-            @Html.TextBoxFor(m => m.DateFrom, new { @class = "form-control" })        
+            @Html.TextBoxFor(m => m.DateFrom, new { @type="date", @class = "form-control datepicker" })        
         </p>
         <p><label for="item">To:</label>
-            @Html.TextBoxFor(m => m.DateTo, new { @class = "form-control" })        
+            @Html.TextBoxFor(m => m.DateTo, new { @type="date", @class = "form-control datepicker" })        
         </p>
 
         <p><label for="item">Change Access Type to (Leave Blank If Not Searching For it):</label>
@@ -24,7 +24,7 @@
 
         <p><label for="item">For Sales with Ticket Type (Leave Blank If Not Searching For it):</label>
             @Html.DropDownListFor(t => Model.TicketType, new SelectList(Model.ticket, "Value", "Text"), 
-            htmlAttributes: new { @class = "form-control", @id = "AccessType" })       
+            htmlAttributes: new { @class = "form-control", @id = "TicketType" })       
         </p>
 
         <button type="submit">Request Report</button>
@@ -55,7 +55,7 @@
                             <td>@Data.AccessType</td>
                             <td>@Data.TicketType</td>
                             <td>@Data.TotalSales</td>
-                            <td>@Data.TotalRevenue</td>
+                            <td>$@Data.TotalRevenue</td>
                         </tr>
                     }
                 }

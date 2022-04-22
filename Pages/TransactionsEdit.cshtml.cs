@@ -53,7 +53,9 @@ public class TransactionsEditModel : PageModel
                 //connect to database 
                 using(SqlConnection conn = new SqlConnection(connectionString)){
                     conn.Open();
-                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Transactions SET Item = " + itemID + " WHERE TransactionID = " + transactionID, conn);
+                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Transactions SET Item = @itemID WHERE TransactionID = @transactionID", conn);
+                    selectCommand.Parameters.Add(new SqlParameter("itemID", itemID));
+                    selectCommand.Parameters.Add(new SqlParameter("transactionID", transactionID));    
                     selectCommand.ExecuteNonQuery();
 
                     conn.Close();
@@ -65,7 +67,9 @@ public class TransactionsEditModel : PageModel
                 //connect to database
                 using(SqlConnection conn = new SqlConnection(connectionString)){
                     conn.Open();
-                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Transactions SET Date = '" + date + "' WHERE TransactionID = " + transactionID, conn);
+                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Transactions SET Date = @date WHERE TransactionID = @transactionID", conn);
+                    selectCommand.Parameters.Add(new SqlParameter("date", date));
+                    selectCommand.Parameters.Add(new SqlParameter("transactionID", transactionID));  
                     selectCommand.ExecuteNonQuery();
 
                     conn.Close();
@@ -76,7 +80,9 @@ public class TransactionsEditModel : PageModel
                 //connect to database
                 using(SqlConnection conn = new SqlConnection(connectionString)){
                     conn.Open();
-                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Transactions SET Price = " + price + " WHERE TransactionID = " + transactionID, conn);
+                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Transactions SET Price = @price WHERE TransactionID = @transactionID", conn);
+                    selectCommand.Parameters.Add(new SqlParameter("price", price));
+                    selectCommand.Parameters.Add(new SqlParameter("transactionID", transactionID));  
                     selectCommand.ExecuteNonQuery();
 
                     conn.Close();
@@ -87,7 +93,9 @@ public class TransactionsEditModel : PageModel
                 //connect to database
                 using(SqlConnection conn = new SqlConnection(connectionString)){
                     conn.Open();
-                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.TransactionsTicket SET ExpirationDate = '" + expirationDate + "' WHERE TransactionID = " + transactionID, conn);
+                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.TransactionsTicket SET ExpirationDate = @expirationDate WHERE TransactionID = @transactionID", conn);
+                    selectCommand.Parameters.Add(new SqlParameter("expirationDate", expirationDate));
+                    selectCommand.Parameters.Add(new SqlParameter("transactionID", transactionID));  
                     selectCommand.ExecuteNonQuery();
 
                     conn.Close();
@@ -98,7 +106,9 @@ public class TransactionsEditModel : PageModel
                 //connect to database
                 using(SqlConnection conn = new SqlConnection(connectionString)){
                     conn.Open();
-                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.TransactionsTicket SET AccessType = " + selectedAccess + " WHERE TransactionID = " + transactionID, conn);
+                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.TransactionsTicket SET AccessType = @selectedAccess WHERE TransactionID = @transactionID", conn);
+                    selectCommand.Parameters.Add(new SqlParameter("selectedAccess", selectedAccess));
+                    selectCommand.Parameters.Add(new SqlParameter("transactionID", transactionID));  
                     selectCommand.ExecuteNonQuery();
 
                     conn.Close();
@@ -109,13 +119,15 @@ public class TransactionsEditModel : PageModel
                 //connect to database
                 using(SqlConnection conn = new SqlConnection(connectionString)){
                     conn.Open();
-                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.TransactionsTicket SET TicketType = " + selectedTicket + " WHERE TransactionID = " + transactionID, conn);
+                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.TransactionsTicket SET TicketType = @selectedTicket WHERE TransactionID = @transactionID", conn);
+                    selectCommand.Parameters.Add(new SqlParameter("selectedTicket", selectedTicket));
+                    selectCommand.Parameters.Add(new SqlParameter("transactionID", transactionID));  
                     selectCommand.ExecuteNonQuery();
 
                     conn.Close();
                 }
                 Console.WriteLine("CHANGE TicketType: " + selectedTicket);
-            } 
+            }
         }
     }
     private List<SelectListItem> GetTicket(){

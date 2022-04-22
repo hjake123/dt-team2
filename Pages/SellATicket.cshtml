@@ -27,11 +27,11 @@
         </p>
 
         <p><label for="expirationdate">Ticket Expiration Date:</label>
-            @Html.TextBoxFor(t => t.expirationDate, new { @class = "form-control" })     
+            @Html.TextBoxFor(t => t.expirationDate, new { @type="date", @class = "form-control datepicker" })     
         </p>
 
         <p><label for="expirationdate">Sale Date:</label>
-            @Html.TextBoxFor(t => t.date, new { @class = "form-control" })     
+            @Html.TextBoxFor(t => t.date, new { @type="date", @class = "form-control datepicker" })     
         </p>
         
         <button type="submit">Complete Transaction</button>

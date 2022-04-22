@@ -37,7 +37,13 @@ public class AddMemberModel : PageModel
 
         using(SqlConnection conn = new SqlConnection(connectionString)){
             conn.Open();
-            SqlCommand selectCommand = new SqlCommand("INSERT INTO dbo.Members(MemberID, FirstName, LastName, CardNumber, LastVisit) VALUES("+tmpMemberID+", '"+firstName+"', '" +lastName + "', " + cardNumber + ", '" + lastVisit + "')", conn);        
+            SqlCommand selectCommand = new SqlCommand("INSERT INTO dbo.Members(MemberID, FirstName, LastName, CardNumber, LastVisit) VALUES( @tmpMemberID, @firstName, @lastName, @cardNumber, @lastVisit)", conn);
+            selectCommand.Parameters.Add(new SqlParameter("tmpMemberID", tmpMemberID));
+            selectCommand.Parameters.Add(new SqlParameter("firstName", firstName));
+            selectCommand.Parameters.Add(new SqlParameter("lastName", lastName));
+            selectCommand.Parameters.Add(new SqlParameter("cardNumber", cardNumber));
+            selectCommand.Parameters.Add(new SqlParameter("lastVisit", lastVisit)); 
+                            
             selectCommand.ExecuteNonQuery();
             conn.Close();
         }        

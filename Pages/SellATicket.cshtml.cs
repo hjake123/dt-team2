@@ -81,11 +81,20 @@ public class SellATicketModel : PageModel
 
 
             //insert into transaction
-            SqlCommand selectCommand = new SqlCommand("INSERT INTO dbo.Transactions (TransactionID, Item, Date, Price, IsTicket) VALUES(" + temp_transactionID + ", 1, '" + date + "', " + price + ", 'TRUE')", conn); 
+            SqlCommand selectCommand = new SqlCommand("INSERT INTO dbo.Transactions (TransactionID, Item, Date, Price, IsTicket) VALUES( @temp_transactionID, 1, @date, @price, 'TRUE')", conn);
+            selectCommand.Parameters.Add(new SqlParameter("temp_transactionID",temp_transactionID));
+            selectCommand.Parameters.Add(new SqlParameter("date",date));              
+            selectCommand.Parameters.Add(new SqlParameter("price",price));
+
             selectCommand.ExecuteNonQuery();
 
             //insert into Transactions Ticket
-            selectCommand = new SqlCommand("INSERT INTO dbo.TransactionsTicket (ExpirationDate, AccessType, TicketType, TransactionID) VALUES('" + expirationDate + "', " + selectedAccess + ", " + selectedTicket + ", " + temp_transactionID + ")", conn); 
+            selectCommand = new SqlCommand("INSERT INTO dbo.TransactionsTicket (ExpirationDate, AccessType, TicketType, TransactionID) VALUES( @expirationDate, @selectedAccess, @selectedTicket, @temp_transactionID)", conn);
+            selectCommand.Parameters.Add(new SqlParameter("expirationDate",expirationDate));
+            selectCommand.Parameters.Add(new SqlParameter("selectedAccess", selectedAccess));              
+            selectCommand.Parameters.Add(new SqlParameter("selectedTicket", selectedTicket));
+            selectCommand.Parameters.Add(new SqlParameter("temp_transactionID",temp_transactionID));
+
             selectCommand.ExecuteNonQuery();
 
             //get ticket ID for insertion into transactionsTicket
@@ -99,7 +108,10 @@ public class SellATicketModel : PageModel
             }
             
             //update transaction
-            selectCommand = new SqlCommand("UPDATE dbo.Transactions SET TicketID = " + tmp_ticketID + "WHERE TransactionID = " + temp_transactionID, conn);             
+            selectCommand = new SqlCommand("UPDATE dbo.Transactions SET TicketID = @tmp_ticketID WHERE TransactionID = @temp_transactionID", conn);
+            selectCommand.Parameters.Add(new SqlParameter("tmp_ticketID",tmp_ticketID));
+            selectCommand.Parameters.Add(new SqlParameter("temp_transactionID",temp_transactionID));
+
             selectCommand.ExecuteNonQuery();            
 
             conn.Close();

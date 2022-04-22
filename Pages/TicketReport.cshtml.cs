@@ -58,46 +58,61 @@ public class TicketReportModel : PageModel
 
             using(SqlConnection conn = new SqlConnection(connectionString)){ //Access Type chosen
                 conn.Open();
+                
                 if(AccessType != 0 && TicketType == 0){
 
-                    SqlCommand selectCommand = new SqlCommand("SELECT SUM(a.Price) FROM dbo.Transactions AS a, dbo.TransactionsTicket AS b WHERE b.TicketID = a.TicketID AND b.AccessType = " + AccessType, conn);
+                    SqlCommand selectCommand = new SqlCommand("SELECT SUM(a.Price) FROM dbo.Transactions AS a, dbo.TransactionsTicket AS b WHERE b.TicketID = a.TicketID AND b.AccessType = @AccessType", conn);
+                    selectCommand.Parameters.Add(new SqlParameter("AccessType", AccessType));
+
                     string tmp_totalRevenue  = selectCommand.ExecuteScalar().ToString()!; 
                     
-                    selectCommand = new SqlCommand("SELECT Count(*) FROM dbo.Transactions AS a, dbo.TransactionsTicket AS b WHERE b.TicketID = a.TicketID AND b.AccessType = " + AccessType, conn);
+                    selectCommand = new SqlCommand("SELECT Count(*) FROM dbo.Transactions AS a, dbo.TransactionsTicket AS b WHERE b.TicketID = a.TicketID AND b.AccessType = AccessType", conn);
+                    selectCommand.Parameters.Add(new SqlParameter("AccessType", AccessType)); 
+
                     string tmp_totalSales  = selectCommand.ExecuteScalar().ToString()!;    
 
-                    selectCommand = new SqlCommand("SELECT AccessTypeLabel FROM dbo.Lookup_AccessType WHERE AccessType = " + AccessType, conn);
+                    selectCommand = new SqlCommand("SELECT AccessTypeLabel FROM dbo.Lookup_AccessType WHERE AccessType = @AccessType", conn);
+                    selectCommand.Parameters.Add(new SqlParameter("AccessType", AccessType)); 
                     string tmp_AccessType  = selectCommand.ExecuteScalar().ToString()!;                  
 
                     ticket_output.Add(new TicketReportOutput{DateFrom = DateFrom.ToString(), DateTo = DateTo.ToString(), AccessType = tmp_AccessType, TicketType = "------", TotalSales = tmp_totalSales, TotalRevenue = tmp_totalRevenue});   
                 }
                 if(AccessType == 0 && TicketType != 0){ //Ticket Type Chosen
 
-                    SqlCommand selectCommand = new SqlCommand("SELECT SUM(a.Price) FROM dbo.Transactions AS a, dbo.TransactionsTicket AS b WHERE b.TicketID = a.TicketID AND b.TicketType = " + TicketType, conn);
+                    SqlCommand selectCommand = new SqlCommand("SELECT SUM(a.Price) FROM dbo.Transactions AS a, dbo.TransactionsTicket AS b WHERE b.TicketID = a.TicketID AND b.TicketType = @TicketType", conn);
+                    selectCommand.Parameters.Add(new SqlParameter("TicketType", TicketType)); 
                     string tmp_totalRevenue  = selectCommand.ExecuteScalar().ToString()!; 
                     
-                    selectCommand = new SqlCommand("SELECT Count(*) FROM dbo.Transactions AS a, dbo.TransactionsTicket AS b WHERE b.TicketID = a.TicketID AND b.TicketType = " + TicketType, conn);
+                    selectCommand = new SqlCommand("SELECT Count(*) FROM dbo.Transactions AS a, dbo.TransactionsTicket AS b WHERE b.TicketID = a.TicketID AND b.TicketType = @TicketType", conn);
+                    selectCommand.Parameters.Add(new SqlParameter("TicketType", TicketType)); 
                     string tmp_totalSales  = selectCommand.ExecuteScalar().ToString()!;    
 
-                    selectCommand = new SqlCommand("SELECT TicketTypeLabel FROM dbo.Lookup_TicketType WHERE TicketType = " + TicketType, conn);
+                    selectCommand = new SqlCommand("SELECT TicketTypeLabel FROM dbo.Lookup_TicketType WHERE TicketType = @TicketType", conn);
+                    selectCommand.Parameters.Add(new SqlParameter("TicketType", TicketType)); 
                     string tmp_TicketType  = selectCommand.ExecuteScalar().ToString()!;                  
 
                     ticket_output.Add(new TicketReportOutput{DateFrom = DateFrom.ToString(), DateTo = DateTo.ToString(), AccessType = "------", TicketType = tmp_TicketType, TotalSales = tmp_totalSales, TotalRevenue = tmp_totalRevenue});   
                 }
                 if(AccessType != 0 && TicketType != 0){
                     
-                    SqlCommand selectCommand = new SqlCommand("SELECT SUM(a.Price) FROM dbo.Transactions AS a, dbo.TransactionsTicket AS b WHERE b.TicketID = a.TicketID AND b.AccessType = " + AccessType + "AND b.TicketType = " + TicketType, conn);
+                    SqlCommand selectCommand = new SqlCommand("SELECT SUM(a.Price) FROM dbo.Transactions AS a, dbo.TransactionsTicket AS b WHERE b.TicketID = a.TicketID AND b.AccessType = @AccessType AND b.TicketType = @TicketType", conn);
+                    selectCommand.Parameters.Add(new SqlParameter("AccessType", AccessType));
+                    selectCommand.Parameters.Add(new SqlParameter("TicketType", TicketType));  
                     string tmp_totalRevenue  = selectCommand.ExecuteScalar().ToString()!; 
                     
-                    selectCommand = new SqlCommand("SELECT Count(*) FROM dbo.Transactions AS a, dbo.TransactionsTicket AS b WHERE b.TicketID = a.TicketID AND b.AccessType = " + AccessType + " AND b.TicketType = " + TicketType, conn);
+                    selectCommand = new SqlCommand("SELECT Count(*) FROM dbo.Transactions AS a, dbo.TransactionsTicket AS b WHERE b.TicketID = a.TicketID AND b.AccessType = @AccessType AND b.TicketType = @TicketType", conn);
+                    selectCommand.Parameters.Add(new SqlParameter("AccessType", AccessType));
+                    selectCommand.Parameters.Add(new SqlParameter("TicketType", TicketType)); 
                     string tmp_totalSales  = selectCommand.ExecuteScalar().ToString()!;    
 
 
                     //change into one query later
-                    selectCommand = new SqlCommand("SELECT AccessTypeLabel FROM dbo.Lookup_AccessType WHERE AccessType = " + AccessType, conn);
+                    selectCommand = new SqlCommand("SELECT AccessTypeLabel FROM dbo.Lookup_AccessType WHERE AccessType = @AccessType", conn);
+                    selectCommand.Parameters.Add(new SqlParameter("AccessType", AccessType)); 
                     string tmp_AccessType  = selectCommand.ExecuteScalar().ToString()!; 
 
-                    selectCommand = new SqlCommand("SELECT TicketTypeLabel FROM dbo.Lookup_TicketType WHERE TicketType = " + TicketType, conn);
+                    selectCommand = new SqlCommand("SELECT TicketTypeLabel FROM dbo.Lookup_TicketType WHERE TicketType = @TicketType", conn);
+                    selectCommand.Parameters.Add(new SqlParameter("TicketType", TicketType));
                     string tmp_TicketType  = selectCommand.ExecuteScalar().ToString()!;                     
 
                     ticket_output.Add(new TicketReportOutput{DateFrom = DateFrom.ToString(), DateTo = DateTo.ToString(), AccessType = tmp_AccessType, TicketType = tmp_TicketType, TotalSales = tmp_totalSales, TotalRevenue = tmp_totalRevenue});   

@@ -22,7 +22,8 @@ public class SellAnItemModel : PageModel
 
         using(SqlConnection conn = new SqlConnection(connectionString)){
             conn.Open();
-            SqlCommand selectCommand = new SqlCommand("SELECT TransactionID FROM dbo.Transactions WHERE TransactionID = " + T_ID, conn); 
+            SqlCommand selectCommand = new SqlCommand("SELECT TransactionID FROM dbo.Transactions WHERE TransactionID = @T_ID", conn); 
+            selectCommand.Parameters.Add(new SqlParameter("T_ID",T_ID));
             SqlDataReader results = selectCommand.ExecuteReader();  
 
             while(results.Read()){
@@ -66,7 +67,12 @@ public class SellAnItemModel : PageModel
 
             using(SqlConnection conn = new SqlConnection(connectionString)){
                 conn.Open();   
-                SqlCommand selectCommand = new SqlCommand("INSERT INTO dbo.Transactions(TransactionID, Item, Date, Price, IsTicket) VALUES ('" + tmp_transactionID + "', '" + itemID + "', '" + date + "' , '" + price + "', 'FALSE')", conn);      
+                SqlCommand selectCommand = new SqlCommand("INSERT INTO dbo.Transactions(TransactionID, Item, Date, Price, IsTicket) VALUES (@tmp_transactionID, @itemID, @date, @price, 'FALSE')", conn);
+                selectCommand.Parameters.Add(new SqlParameter("tmp_transactionID",tmp_transactionID));
+                selectCommand.Parameters.Add(new SqlParameter("itemID",itemID));
+                selectCommand.Parameters.Add(new SqlParameter("date",date));                
+                selectCommand.Parameters.Add(new SqlParameter("price",price)); 
+
                 selectCommand.ExecuteNonQuery();
                 conn.Close();
             }

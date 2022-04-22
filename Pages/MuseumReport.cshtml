@@ -12,16 +12,16 @@
 
     <form method = "post">
         <p><label for="item">Compare Date From:</label>
-            @Html.TextBoxFor(m => m.CompareDateFrom, new { @class = "form-control" })        
+            @Html.TextBoxFor(m => m.CompareDateFrom, new { @type="date", @class = "form-control datepicker" })        
         </p>
         <p><label for="item">To:</label>
-            @Html.TextBoxFor(m => m.CompareDateTo, new { @class = "form-control" })        
+            @Html.TextBoxFor(m => m.CompareDateTo, new { @type="date", @class = "form-control datepicker" })        
         </p>
         <p><label for="item">With Date From:</label>
-            @Html.TextBoxFor(m => m.WithDateFrom, new { @class = "form-control" })        
+            @Html.TextBoxFor(m => m.WithDateFrom, new { @type="date", @class = "form-control datepicker" })        
         </p>
         <p><label for="item">To:</label>
-            @Html.TextBoxFor(m => m.WithDateTo, new { @class = "form-control" })        
+            @Html.TextBoxFor(m => m.WithDateTo, new { @type="date", @class = "form-control datepicker" })        
         </p>
 
         <button type="submit">Request Report</button>

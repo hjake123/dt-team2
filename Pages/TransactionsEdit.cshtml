@@ -53,7 +53,7 @@
 
         <div id="DateDIV" style= "display: none;">
             <p><label for="item">Change Date to:</label>
-                @Html.TextBoxFor(t => t.date, new { @class = "form-control" })                
+                @Html.TextBoxFor(t => t.date, new { @type="date", @class = "form-control datepicker" })                
             </p>
         </div>
 
@@ -65,7 +65,7 @@
         
         <div id="ExpirationDateDIV" style= "display: none;">
             <p><label for="item">Change Expiration Date to:</label> 
-                @Html.TextBoxFor(t => t.expirationDate, new { @class = "form-control" })
+                @Html.TextBoxFor(t => t.expirationDate, new { @type="date", @class = "form-control datepicker" })
             </p>
         </div>
 

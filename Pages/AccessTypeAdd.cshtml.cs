@@ -29,7 +29,9 @@ public class AccessTypeAddModel : PageModel
             string connectionString = CSHolder.GetConnectionString();
             using(SqlConnection conn = new SqlConnection(connectionString)){
                 conn.Open();
-                SqlCommand selectCommand = new SqlCommand("INSERT INTO dbo.Lookup_AccessType(AccessType, AccessTypeLabel) VALUES ('" + accessTypeID + "', '" + accessTypeLabel + "')", conn);      
+                SqlCommand selectCommand = new SqlCommand("INSERT INTO dbo.Lookup_AccessType(AccessType, AccessTypeLabel) VALUES (@accessTypeID, @accessTypeLabel)", conn);
+                selectCommand.Parameters.Add(new SqlParameter("accessTypeID", accessTypeID));
+                selectCommand.Parameters.Add(new SqlParameter("accessTypeLabel", accessTypeLabel));      
                 selectCommand.ExecuteNonQuery();
                 conn.Close();
             }
