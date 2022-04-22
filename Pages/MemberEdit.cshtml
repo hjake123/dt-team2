@@ -49,7 +49,7 @@
 
         <div id="LastVisitDIV" style= "display: none;">
             <p><label>Change Last Visit to:</label>
-                @Html.TextBoxFor(m => m.lastVisit, new { @class = "form-control" })        
+                @Html.TextBoxFor(m => m.lastVisit, new {@type="date", @class = "form-control datepicker" })        
             </p>    
         </div>
 

@@ -38,6 +38,7 @@ public class TicketTypeEditModel : PageModel
                 conn.Close();
             }
             Console.WriteLine("Ticket Type Label Edited!");
+            Response.Redirect("SellATicket");
         }
     }
 

@@ -32,6 +32,7 @@ public class ItemAddModel : PageModel
                 conn.Close();
             }
             Console.WriteLine("Item Added");
+            Response.Redirect("SellAnItem");
         }
         else{
             Console.WriteLine("Invalid Item ID:" + itemID);

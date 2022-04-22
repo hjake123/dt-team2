@@ -39,6 +39,7 @@ public class AccessTypeEditModel : PageModel
                 conn.Close();
             }
             Console.WriteLine("Access Type Label Edited!");
+            Response.Redirect("SellATicket");
         }
     }
     private List<SelectListItem> GetAccess(){

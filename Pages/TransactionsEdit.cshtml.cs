@@ -61,7 +61,8 @@ public class TransactionsEditModel : PageModel
                     conn.Close();
                 }
 
-                Console.WriteLine("CHANGE ITEM ID: " + itemID);                
+                Console.WriteLine("CHANGE ITEM ID: " + itemID);
+                Response.Redirect("Transactions");                
             }
             if(date != default!){
                 //connect to database
@@ -75,6 +76,7 @@ public class TransactionsEditModel : PageModel
                     conn.Close();
                 }
                 Console.WriteLine("CHANGE Date: " + date);
+                Response.Redirect("Transactions");
             }
             if(price != default!){
                 //connect to database
@@ -88,6 +90,7 @@ public class TransactionsEditModel : PageModel
                     conn.Close();
                 }
                 Console.WriteLine("CHANGE Price: " + price);
+                Response.Redirect("Transactions");
             }
             if(expirationDate != default!){
                 //connect to database
@@ -101,6 +104,7 @@ public class TransactionsEditModel : PageModel
                     conn.Close();
                 }
                 Console.WriteLine("CHANGE ExpirationDate: " + expirationDate);
+                Response.Redirect("Transactions");
             }
             if(selectedAccess != 0){
                 //connect to database
@@ -114,6 +118,7 @@ public class TransactionsEditModel : PageModel
                     conn.Close();
                 }
                 Console.WriteLine("CHANGE AccessType: " + selectedAccess);
+                Response.Redirect("Transactions");
             }
             if(selectedTicket != 0){
                 //connect to database
@@ -127,6 +132,7 @@ public class TransactionsEditModel : PageModel
                     conn.Close();
                 }
                 Console.WriteLine("CHANGE TicketType: " + selectedTicket);
+                Response.Redirect("Transactions");
             }
         }
     }

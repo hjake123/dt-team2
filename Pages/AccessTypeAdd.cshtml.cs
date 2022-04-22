@@ -36,6 +36,7 @@ public class AccessTypeAddModel : PageModel
                 conn.Close();
             }
             Console.WriteLine("Access Type Added");
+            Response.Redirect("SellATicket");
         }
         else{
             Console.WriteLine("Invalid Access Type ID:" + accessTypeID);

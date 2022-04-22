@@ -34,6 +34,7 @@ public class TicketTypeAddModel : PageModel
                 conn.Close();
             }
             Console.WriteLine("Ticket Type Added");
+            Response.Redirect("SellATicket");
         }
         else{
             Console.WriteLine("Invalid Ticket Type ID:" + ticketTypeID);

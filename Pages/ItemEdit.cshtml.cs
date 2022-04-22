@@ -38,7 +38,7 @@ public class ItemEditModel : PageModel
                 conn.Close();
             }
             Console.WriteLine("Item Label Edited!");
-            
+            Response.Redirect("SellAnItem");
         }
     }
 

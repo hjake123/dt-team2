@@ -35,7 +35,9 @@ public class MemberEditModel : PageModel
                 
                 using(SqlConnection conn = new SqlConnection(connectionString)){
                     conn.Open();
-                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Members SET FirstName = '" + firstName + "' WHERE MemberID = " + memberID, conn);
+                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Members SET FirstName = @firstName WHERE MemberID = @memberID", conn);
+                    selectCommand.Parameters.Add(new SqlParameter("firstName", firstName));
+                    selectCommand.Parameters.Add(new SqlParameter("memberID", memberID));
                     selectCommand.ExecuteNonQuery();
                     
                     conn.Close();
@@ -47,7 +49,9 @@ public class MemberEditModel : PageModel
                 
                 using(SqlConnection conn = new SqlConnection(connectionString)){
                     conn.Open();
-                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Members SET LastName = '" + lastName + "' WHERE MemberID = " + memberID, conn);
+                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Members SET LastName = @lastName WHERE MemberID = @memberID", conn);
+                    selectCommand.Parameters.Add(new SqlParameter("lastName", lastName));
+                    selectCommand.Parameters.Add(new SqlParameter("memberID", memberID));
                     selectCommand.ExecuteNonQuery();
                     
                     conn.Close();
@@ -59,7 +63,9 @@ public class MemberEditModel : PageModel
                 
                 using(SqlConnection conn = new SqlConnection(connectionString)){
                     conn.Open();
-                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Members SET CardNumber = '" + cardNumber + "' WHERE MemberID = " + memberID, conn);
+                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Members SET CardNumber = @cardNumber WHERE MemberID = @memberID", conn);
+                    selectCommand.Parameters.Add(new SqlParameter("cardNumber", cardNumber));
+                    selectCommand.Parameters.Add(new SqlParameter("memberID", memberID));
                     selectCommand.ExecuteNonQuery();
                     
                     conn.Close();
@@ -72,7 +78,9 @@ public class MemberEditModel : PageModel
                 
                 using(SqlConnection conn = new SqlConnection(connectionString)){
                     conn.Open();
-                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Members SET LastVisit = '" + lastVisit + "' WHERE MemberID = " + memberID, conn);
+                    SqlCommand selectCommand = new SqlCommand("UPDATE dbo.Members SET LastVisit = @lastVisit WHERE MemberID = @memberID", conn);
+                    selectCommand.Parameters.Add(new SqlParameter("lastVisit", lastVisit));
+                    selectCommand.Parameters.Add(new SqlParameter("memberID", memberID));
                     selectCommand.ExecuteNonQuery();
                     
                     conn.Close();
