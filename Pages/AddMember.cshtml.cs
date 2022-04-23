@@ -18,7 +18,7 @@ public class AddMemberModel : PageModel
     public string lastName{get; set;} = default!;
     public int cardNumber{get; set;} = default!;
     public DateTime lastVisit{get; set;} = default!;    
-
+    public string output_msg = default!;
     public void OnPost(Members m){
         memberID = m.memberID;
         firstName = m.firstName;
@@ -44,7 +44,12 @@ public class AddMemberModel : PageModel
             selectCommand.Parameters.Add(new SqlParameter("cardNumber", cardNumber));
             selectCommand.Parameters.Add(new SqlParameter("lastVisit", lastVisit)); 
                             
-            selectCommand.ExecuteNonQuery();
+            try{
+                selectCommand.ExecuteNonQuery();
+            } catch(SqlException e)
+            {
+                output_msg = e.Message.ToString();
+            }
             conn.Close();
         }        
 
