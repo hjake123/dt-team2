@@ -90,4 +90,11 @@ public class AddMemberModel : PageModel
         Console.WriteLine("Success Generating ID " + M_ID);    
         return M_ID;
     }
+    public void OnGet()
+    {
+        if(Request.Cookies["session_user"] == null){
+            // Then no session cookie exists and they're not logged in! Get 'em out of here!
+            Response.Redirect("Login");
+        }
+    }
 }

@@ -11,8 +11,13 @@ public class AddCollectionModel : PageModel {
 		_logger = logger;
 	}
 
-	public void OnGet() {}
-
+    public void OnGet()
+    {
+        if(Request.Cookies["session_user"] == null){
+            // Then no session cookie exists and they're not logged in! Get 'em out of here!
+            Response.Redirect("Login");
+        }
+    }
 
 	public string CollectionName {
 		get; set;
@@ -42,5 +47,4 @@ public class AddCollectionModel : PageModel {
 		}
 		return Page();
 	}
-
 }
