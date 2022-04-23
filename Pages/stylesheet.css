@@ -144,3 +144,7 @@
                 background-color: #D4CCCC;
                 font-family: Verdana, Geneva, Tahoma, sans-serif;
             }
+
+            .error {
+                color:crimson;
+            }

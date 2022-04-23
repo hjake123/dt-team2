@@ -33,6 +33,8 @@ public class PageAddModel : PageModel
     public int medium = default!;
     public string collection = default!;
 
+    public string output_msg = default!;
+
     public List<SelectListItem> media{get; set;} = new List<SelectListItem>();
 
     public List<SelectListItem> collections{get; set;} = new List<SelectListItem>();
@@ -86,8 +88,7 @@ public class PageAddModel : PageModel
                 command.ExecuteNonQuery();
             } catch(SqlException e)
             {
-                Console.WriteLine(e.ToString());
-                Console.WriteLine(command.CommandText);
+                output_msg = e.Message.ToString();
             }
 {}          conn.Close();
         }
