@@ -41,11 +41,11 @@
                 </p>
 
                 <p><label for="datemade">Date Created:</label>
-                    @Html.TextBoxFor(t => t.makedate, new { @class = "form-control", @TextMode = "DateTime"})        
+                    @Html.TextBoxFor(t => t.makedate, new { @type="date", @class = "form-control datepicker"})        
                 </p>
 
                 <p><label for="dateget">Date Acquired:</label>
-                    @Html.TextBoxFor(t => t.getdate, new { @class = "form-control", @TextMode = "DateTime"})        
+                    @Html.TextBoxFor(t => t.getdate, new { @type="date", @class = "form-control datepicker"})        
                 </p>
 
                 <p><label for="medium">Medium:</label>
