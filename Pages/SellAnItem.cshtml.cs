@@ -93,7 +93,9 @@ public class SellAnItemModel : PageModel
             SqlCommand selectCommand = new SqlCommand("SELECT * FROM [dbo].[Lookup_Item]", conn);
             SqlDataReader results = selectCommand.ExecuteReader();                
             while(results.Read()){
-                tempItems.Add(new SelectListItem{Value = results["Item"].ToString(), Text = results["ItemLabel"].ToString() + "// Item ID: " + results["Item"].ToString()});  
+                if(results["Item"].ToString() != "1"){
+                    tempItems.Add(new SelectListItem{Value = results["Item"].ToString(), Text = results["ItemLabel"].ToString() + "// Item ID: " + results["Item"].ToString()});  
+                }
             }
             
             conn.Close();

@@ -1,21 +1,21 @@
-@page
-@model MembersModel
-@{
-    ViewData["Title"] = "See All Members";
-    string[] TableHeaders = {"Member ID", "First Name", "Last Name", "Card Number", "Last Visit"};
 
+@page
+@model MemberRemoveModel
+@{
+    ViewData["Title"] = "Remove a Member";
+    string[] TableHeaders = {"Member ID", "First Name", "Last Name", "Card Number", "Last Visit"};
 }
 
 <body>
-    <legend>@ViewData["Title"]</legend>
-    <div class="container">
-        <div class="col-md-6 col-md-offset-3">
-            <a asp-page="/AddMember" asp-area="" button type="button" class="btn btn-primary">Add a Member</a>
-            <a asp-page="/MemberEdit" asp-area="" button type="button" class="btn btn-primary">Edit a Member</a>
-            <a asp-page="/MemberRemove" asp-area="" button type="button" class="btn btn-primary">Remove a Member</a>
-        </div>
-    </div>
-   
+    <form name = "MemberRemove" method = "post">
+        <legend>@ViewData["Title"]</legend>
+        <p><label for="item">Enter Member ID of Item to Delete:</label>
+             @Html.TextBoxFor(i => i.memberID, new { @class = "form-control" })                 
+        </p>
+
+        <input type="submit" onclick="submitFunction()" value = "Remove Member"></input>
+    </form>
+
     <div class = "table">
         <table class ="table table-bordered table-hover">
             <thead>
@@ -34,7 +34,7 @@
             @{
                 if (Model != null)
                 {
-                    foreach(MembersOutput Data in MembersModel.members_output)
+                    foreach(MembersOutput Data in MemberRemoveModel.members_output)
                     {
                         <tr>
                             <td>@Data.memberID</td>
@@ -49,4 +49,9 @@
             </tbody>
         </table>
     </div>
+    <script>
+        function submitFunction(){
+            
+        }
+    </script>
 </body>
