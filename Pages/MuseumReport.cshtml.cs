@@ -37,6 +37,10 @@ public class MuseumReportModel : PageModel
     public void OnGet(){
         museum_output = new List<MuseumReportOutput>();
         museum_output_change = new List<MuseumReportOutputChange>();
+        if(Request.Cookies["session_user"] == null){
+            // Then no session cookie exists and they're not logged in! Get 'em out of here!
+            Response.Redirect("Login");
+        }
     }
     public static List<MuseumReportOutput> museum_output{get; set;} = new List<MuseumReportOutput>();   
     public static List<MuseumReportOutputChange> museum_output_change{get; set;} = new List<MuseumReportOutputChange>();   
