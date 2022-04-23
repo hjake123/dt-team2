@@ -68,5 +68,10 @@ public class MemberRemoveModel : PageModel
             // Then no session cookie exists and they're not logged in! Get 'em out of here!
             Response.Redirect("Login");
         }
+        
+		if(Request.Cookies["session_user_role"] != "admin"){
+			// Only admins can delete items!
+            Response.Redirect("ForbiddenAction");
+        }
     }
 }
