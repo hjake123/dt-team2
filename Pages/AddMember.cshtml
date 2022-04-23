@@ -5,7 +5,30 @@
     ViewData["Title"] = "Add Member";
 }
 
+<!DOCTYPE html>
 <html>
+ <head>
+    <style>
+        .error{
+            background-color: grey;
+            border-radius: 20px ;
+            font-family: "Roboto", sans-serif;
+            text-transform: uppercase;
+            outline: 0;
+            background-color: #A98787;
+            border-radius: 15px;
+            
+            width: 100%;
+            border: 0;
+            padding: 15px;
+            color: #FFFFFF;
+            font-size: 14px;
+            -webkit-transition: all 0.3 ease;
+            transition: all 0.3 ease;
+        }
+    </style>
+</head>
+
     <body>
         <div class=error>@Model.output_msg</div>
         <form method = "post">
