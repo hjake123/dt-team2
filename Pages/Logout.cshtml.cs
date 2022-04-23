@@ -19,6 +19,7 @@ public class LogoutModel : PageModel
     public void OnGet()
     {
         Response.Cookies.Delete("session_user");
+        Response.Cookies.Delete("session_user_role");
         Response.Redirect("Login");
     }
 }
