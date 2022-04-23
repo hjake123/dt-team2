@@ -13,4 +13,4 @@ Members list:
 
 1. Install [.NET SDK 6.0](https://dotnet.microsoft.com/en-us/download) for your system.
 2. Clone the repository.
-3. Open the cloned repo in a command prompt and type ```dotnet run``` to test.
+3. Open the cloned repo in a command prompt and type ```dotnet run``` to launch the local version.
